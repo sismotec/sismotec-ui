@@ -3,9 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
+    "history": "^4.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.13"
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-redux": "next",
+    "react-scripts": "1.0.13",
+    "redux": "^3.7.2",
+    "redux-observable": "^0.16.0",
+    "redux-observable-crud": "git+https://github.com/alexhenkel/redux-observable-crud.git",
+    "reduxsauce": "^0.7.0",
+    "reduxsauce-polymer": "git+https://github.com/alexhenkel/reduxsauce-crud.git",
+    "rxjs": "^5.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
