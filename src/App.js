@@ -7,6 +7,8 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 
 import createStore from './Data/Redux';
 import Home from './Containers/Home';
+import Orders from './Containers/Orders';
+import CreateOrder from './Containers/CreateOrder';
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -19,8 +21,11 @@ const App = _ => (
   <Provider store={store}>
     { /* ConnectedRouter will use the store from Provider automatically */ }
     <ConnectedRouter history={history}>
-      <Route exact path="/" component={Home} />
-      {/* <Route path="/about" component={About}/> */}
+      <div>
+        <Route exact path="/" component={Home} />
+        <Route path="/orders/" component={Orders} />
+        <Route path="/createorder/" component={CreateOrder} />
+      </div>
     </ConnectedRouter>
   </Provider>
 );
