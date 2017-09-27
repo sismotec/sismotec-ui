@@ -1,6 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
+
+import {
+	Table,
+	TableBody,
+	TableHeader,
+	TableHeaderColumn,
+	TableRow,
+	TableRowColumn,
+} from 'material-ui/Table';
+
 
 class Water extends React.Component {
 	constructor(props) {
@@ -18,23 +34,23 @@ class Water extends React.Component {
 		}
 	}
 
-	changeUnit(e) {
-		this.props.changeUnit(e.target.value);
-	}
+	changeUnit = (event, index, value) => this.props.changeUnit( value );
 
 	render() {
 		return (
-			<tr>
-				<td>Agua</td>
-				<td><input type="number" min="1" name="waterLabel" onChange={this.changeVal} defaultValue="1" /></td>
-				<td>
-					<select onChange={this.changeUnit} value={this.props.unit} selected="selected">
-						<option value="Mililitros">Mililitros</option>
-						<option value="Litros">Litros</option>
-						<option value="Galones">Galones</option>
-					</select>
-				</td>
-			</tr>
+			<MuiThemeProvider>
+			<TableRow>
+					<TableRowColumn>Agua</TableRowColumn>
+					<TableRowColumn><TextField type="number" min="1" name="waterLabel" onChange={this.changeVal} defaultValue="1"></TextField></TableRowColumn>
+				<TableRowColumn>
+					<DropDownMenu onChange={this.changeUnit} value={this.props.unit} selected="selected">
+						<MenuItem value="Mililitros" primaryText="Mililitros" />
+						<MenuItem value="Litros" primaryText="Litros" />
+						<MenuItem value="Galones" primaryText="Galones" />
+					</DropDownMenu>
+				</TableRowColumn>
+			</TableRow>
+			</MuiThemeProvider>
 		);
 	}
 }
@@ -55,22 +71,20 @@ class Atun extends React.Component {
 		}
 	}
 
-	changeUnit(e) {
-		this.props.changeUnit(e.target.value);
-	}
+	changeUnit = (event, index, value) => this.props.changeUnit(value);
 
 	render() {
 		return (
-			<tr>
-				<td>Atun</td>
-				<td><input type="number" min="1" name="atunLabel" onChange={this.changeVal} defaultValue="1" /></td>
-				<td>
-					<select onChange={this.changeUnit} value={this.props.unit} selected="selected">
-						<option value="Gramos">Gramos</option>
-						<option value="Kilogramos">Kilogramos</option>
-					</select>
-				</td>
-			</tr>
+			<TableRow>
+				<TableRowColumn>Atun</TableRowColumn>
+				<TableRowColumn><TextField type="number" min="1" name="atunLabel" onChange={this.changeVal} defaultValue="1"></TextField></TableRowColumn>
+				<TableRowColumn>
+					<DropDownMenu onChange={this.changeUnit} value={this.props.unit} selected="selected">
+						<MenuItem value="Gramos" primaryText="Gramos" />
+						<MenuItem value="Kilogramos" primaryText="Kilogramos" />
+					</DropDownMenu>
+				</TableRowColumn>
+			</TableRow>
 		);
 	}
 }
@@ -91,6 +105,50 @@ class Order extends React.Component {
 		this.waterUnit = this.waterUnit.bind(this)
 		this.atunUnit = this.atunUnit.bind(this)
 		this.readDB = this.readDB.bind(this)
+	}
+
+	get styles() {
+		return {
+			table: {
+				fixedHeader: false,
+				fixedFooter: false,
+				stripedRows: false,
+				showRowHover: true,
+				selectable: false,
+				multiSelectable: false,
+				enableSelectAll: false,
+				deselectOnClickaway: false,
+				displaySelectAll: false,
+				adjustForCheckbox:false,
+				height: '200px',
+				width: '1400px',
+				marginLeft: '15px',
+				textAlign: 'center',
+				fontSize:'20px'
+			},
+			div: {
+				marginTop: '50px',
+				border: 'solid 1px black',
+				borderRadius: '10px',
+				width: '1425px',
+				marginLeft:'50px',
+				height: '600px'
+			},
+			button: {
+				height: 50,
+				width: 200,
+				marginTop: 150,
+				marginLeft: 1200,
+				borderRadius: 10,
+				textAlign: 'center'
+			},
+			container: {
+				flex: '1 1 100%;',
+				display: 'flex',
+				flexDirection: 'column',
+				overflowY: 'auto'
+			}
+		};
 	}
 
 	waterUnit(str) {
@@ -121,14 +179,14 @@ class Order extends React.Component {
 	readDB() {
 		/*
 		for (var i = 0; i < needs; i++) {
-			switch (needs.getName()) {
+			switch (needs.name) {
 				case "water":
-					changeWater(needs.getAmount());
-					changeWaterUnit(needs.getUnit());
+					changeWater(needs.amount);
+					changeWaterUnit(needs.unit);
 					break;
 				case "atun":
-					changeAtun(needs.getAmount());
-					changeAtunUnit(needs.getUnit());
+					changeAtun(needs.amount);
+					changeAtunUnit(needs.unit);
 					break;
 			}
 		}
@@ -137,33 +195,33 @@ class Order extends React.Component {
 
 	render() {
 		return (
-			<div id="div1">
+			<MuiThemeProvider>
+				<div style={this.styles.div} >
 				{
 					this.readDB()
 				}
 				<h1 id="header">{this.state.name}</h1>
-				<table>
-					<thead>
-						<tr>
-							<th>Necesidad</th>
-							<th>Cantidad</th>
-							<th>Unidad</th>
-						</tr>
-					</thead>
-					<tbody>
+				<Table style={this.styles.table} >
+						<TableHeader>
+							<TableRow>
+							<TableHeaderColumn>Necesidad</TableHeaderColumn>
+							<TableHeaderColumn>Cantidad</TableHeaderColumn>
+							<TableHeaderColumn>Unidad</TableHeaderColumn>
+						</TableRow>
+					</TableHeader>
+					<TableBody>
 						{
 							this.state.atun > 0 ? <Atun changeAtun={this.changeAtun.bind(this)} changeUnit={this.atunUnit.bind(this)} unit={this.state.atunUnit} /> : null
 						}
 						{
 							this.state.water > 0 ? <Water changeWater={this.changeWater.bind(this)} changeUnit={this.waterUnit.bind(this)} unit={this.state.waterUnit} /> : null
 						}
-					</tbody>
-				</table>
+						</TableBody>
+				</Table>
 
-				<button onClick={this.newOrder}>
-					Generar Orden
-			  </button>
+				<RaisedButton onClick={this.newOrder} primary={true} label="Generar Orden" style={this.styles.button} />
 			</div>
+			</MuiThemeProvider>
 		);
 	}
 }
