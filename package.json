@@ -16,7 +16,7 @@
     "redux-observable": "^0.16.0",
     "redux-observable-crud": "git+https://github.com/alexhenkel/redux-observable-crud.git",
     "reduxsauce": "^0.7.0",
-    "reduxsauce-polymer": "git+https://github.com/alexhenkel/reduxsauce-crud.git",
+    "reduxsauce-crud": "git+https://github.com/alexhenkel/reduxsauce-crud.git",
     "rxjs": "^5.4.3"
   },
   "scripts": {

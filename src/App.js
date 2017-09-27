@@ -1,14 +1,26 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-
 import createHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
-
 import createStore from './Data/Redux';
-import Home from './Containers/Home';
-import Orders from './Containers/Orders';
-import CreateOrder from './Containers/CreateOrder';
+
+// Import views
+import Layout from './Containers/Layout';
+import HomeView from './Containers/Home';
+import LoginView from './Containers/Login';
+import RegisterView from './Containers/Register';
+import HelpView from './Containers/Help';
+import CreateOrderView from './Containers/CreateOrder';
+import OrdersView from './Containers/Orders';
+
+// Build layout components for router
+const Home = () => <Layout slot={<HomeView />} />;
+const Login = () => <Layout slot={<LoginView />} />;
+const Register = () => <Layout slot={<RegisterView />} />;
+const Help = () => <Layout slot={<HelpView />} />;
+const CreateOrder = () => <Layout slot={<CreateOrder />} />;
+const Orders = () => <Layout slot={<Orders />} />;
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -23,8 +35,14 @@ const App = _ => (
     <ConnectedRouter history={history}>
       <div>
         <Route exact path="/" component={Home} />
-        <Route path="/orders/" component={Orders} />
-        <Route path="/createorder/" component={CreateOrder} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/registro" component={Register} />
+        <Route exact path="/ayuda" component={Help} />
+        <Route path="/dashboard/orders" component={Orders} />
+        <Route exact path="/dashboard/crearOrden" component={CreateOrder} />
+        {/* <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dashboard/agregar" component={NeedCreate} />
+        <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}
       </div>
     </ConnectedRouter>
   </Provider>
