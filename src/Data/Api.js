@@ -15,6 +15,9 @@ const api = create({
  * of the api layer, by providing nicer functions rather than get, post, etc.
  */
 
+const loginRequest = data => api.post('login', data)
+const registerRequest = data => api.post('register', data)
+
 const getNeeds = id => api.get(`needs/${id}`)
 const createNeed = (id, data) => api.post(`needs/${id}`, data)
 const updateNeed = (id, data) => api.patch(`needs/${id}`, data)
@@ -24,6 +27,10 @@ const removeNeed = id => api.delete(`needs/${id}`)
  * Create a collection of the previous functions to be exposed
  */
 export default {
+  login: {
+    loginRequest,
+    registerRequest,
+  },
   needs: {
     get: getNeeds,
     getOne: getNeed,
