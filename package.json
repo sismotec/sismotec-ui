@@ -11,6 +11,7 @@
     "react-router": "^4.2.0",
     "react-router-redux": "next",
     "react-scripts": "1.0.13",
+    "react-table": "^6.5.3",
     "redux": "^3.7.2",
     "redux-observable": "^0.16.0",
     "redux-observable-crud": "git+https://github.com/alexhenkel/redux-observable-crud.git",
