@@ -1,9 +1,10 @@
-import { combineEpics } from 'redux-observable'
-import { LoginRedux } from '../Redux/LoginRedux'
+import { combineEpics } from 'redux-observable';
+import { LoginRedux } from '../Redux/LoginRedux';
+import 'rxjs/add/operator/mergeMap';
 
 const loginRequestEpic = (action$, store, { Api }) =>
   action$
-    .ofType(LoginRedux.loginRequest)
+    .ofType(LoginRedux.Types.loginRequest)
     .mergeMap(({ data }) => (
       Api.login.loginRequest(data)
         .then(response => response)
@@ -13,7 +14,7 @@ const loginRequestEpic = (action$, store, { Api }) =>
 
 const registerRequestEpic = (action$, store, { Api }) =>
   action$
-    .ofType(LoginRedux.registerRequest)
+    .ofType(LoginRedux.Types.registerRequest)
     .mergeMap(({ data }) => (
       Api.login.registerRequest(data)
         .then(response => response)
@@ -27,7 +28,7 @@ export const observable = Object.assign({}, {
   registerRequestEpic,
 })
 
-export const epic = combineEpics(
+export default combineEpics(
   loginRequestEpic,
   registerRequestEpic,
 )

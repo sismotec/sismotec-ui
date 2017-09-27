@@ -1,8 +1,9 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import Api from '../Api';
+import Api from '../Api'
+import LoginEpic from './LoginObservable'
 
 const rootEpic = combineEpics(
-  require('./LoginObservable').epic,
+  LoginEpic,
 );
 
 export default createEpicMiddleware(rootEpic, {
