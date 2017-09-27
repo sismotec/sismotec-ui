@@ -6,10 +6,16 @@ class Layout extends Component {
   static propTypes = {
     slot: PropTypes.node.isRequired,
     isAuth: PropTypes.bool,
+    needsAuth: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isAuth: false,
+    needsAuth: false,
   }
 
   render() {
-    const { slot, isAuth } = this.props;
+    const { slot, isAuth, needsAuth } = this.props;
     return (
       <div>
         <div>
@@ -20,7 +26,10 @@ class Layout extends Component {
             Navbar(Not logged in)
           </div>}
         </div>
-        {slot}
+        {needsAuth && !isAuth && <div>
+          No autorizado
+        </div>}
+        {(!needsAuth || (needsAuth && isAuth)) && slot}
       </div>
     )
   }
