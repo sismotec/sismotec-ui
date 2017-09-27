@@ -31,7 +31,7 @@ export const INITIAL_STATE = createState({
 /* ------------- Reducers ------------- */
 
 const request = state => state.merge({ fetching: true });
-const success = (state, { userId, isOrganization }) => state.merge({ fetching: false, userId, isCollectionCenter, error: null });
+const success = (state, { userId, isCollectionCenter }) => state.merge({ fetching: false, userId, isCollectionCenter, error: null });
 const error = (state, { error }) => state.merge({ fetching: false, error });
 const logout = state => state.merge({ userId: null, });
 
