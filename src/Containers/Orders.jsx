@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import NeedCard from "../Presentational/NeedCard";
 
 function ViewOrdersBtn() {
     return <button>Mis ordenes</button>
@@ -47,8 +48,15 @@ export default class Orders extends Component {
   }
   render() {
     const { data } = this.state;
+
     return (
       <div>
+        <NeedCard 
+          name="Gaby Paez"
+          mapsurl="http://maps.google.com"
+          address="Valle de la Esperanza 543 Col. Roma, Monterrey, Nuevo León, México."
+          tags={["Alimentos", "Medicamentos", "Voluntariados"]}/>
+          
         <ViewOrdersBtn />
 
         <ReactTable
