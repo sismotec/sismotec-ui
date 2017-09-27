@@ -23,7 +23,7 @@ export default Creators;
 export const INITIAL_STATE = createState({
   fetching: false,
   userId: null,
-  isCollectionCenter: false,
+  userType: 'guest',
   authToken: null,
   error: null,
 });
@@ -31,7 +31,12 @@ export const INITIAL_STATE = createState({
 /* ------------- Reducers ------------- */
 
 const request = state => state.merge({ fetching: true });
-const success = (state, { userId, isOrganization }) => state.merge({ fetching: false, userId, isCollectionCenter, error: null });
+const success = (state, { result }) => state.merge({ 
+  fetching: false, 
+  userId: result.id, 
+  userType: result.type === 'Centro de acopio' ? 'collectionCenter' : 'beneficiary',
+  error: null 
+});
 const error = (state, { error }) => state.merge({ fetching: false, error });
 const logout = state => state.merge({ userId: null, });
 
