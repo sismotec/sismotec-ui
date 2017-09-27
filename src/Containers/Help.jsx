@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
 
-class Login extends Component {
+class Help extends Component {
   static propTypes = {
     isAuth: PropTypes.bool,
-    loginRequest: PropTypes.func,
+    registerRequest: PropTypes.func,
     navigateToDashboard: PropTypes.func,
   }
 
@@ -29,7 +29,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        Login
+        Help
       </div>
     )
   }
@@ -40,8 +40,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: data => dispatch(LoginActions.loginRequest(data)),
+  registerRequest: data => dispatch(LoginActions.registerRequest(data)),
   navigateToDashboard: () => dispatch(push('/dashboard')),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Help);

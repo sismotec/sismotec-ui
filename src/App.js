@@ -8,11 +8,15 @@ import createStore from './Data/Redux';
 // Import views
 import Layout from './Containers/Layout';
 import HomeView from './Containers/Home';
-import LoginView from './Containers/Login'
+import LoginView from './Containers/Login';
+import RegisterView from './Containers/Register';
+import HelpView from './Containers/Help';
 
 // Build layout components for router
-const Home = () => <Layout slot={<HomeView />} />
-const Login = () => <Layout slot={<LoginView />} />
+const Home = () => <Layout slot={<HomeView />} />;
+const Login = () => <Layout slot={<LoginView />} />;
+const Register = () => <Layout slot={<RegisterView />} />;
+const Help = () => <Layout slot={<HelpView />} />;
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -28,8 +32,9 @@ const App = _ => (
       <div>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        {/* <Route exact path="/registro" component={Register} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/registro" component={Register} />
+        <Route exact path="/ayuda" component={Help} />
+        {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
         <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}
       </div>
