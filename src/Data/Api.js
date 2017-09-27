@@ -23,6 +23,11 @@ const createNeed = (id, data) => api.post(`needs/${id}`, data)
 const updateNeed = (id, data) => api.patch(`needs/${id}`, data)
 const removeNeed = id => api.delete(`needs/${id}`)
 
+const getOrders = id => api.get(`orders/${id}`)
+const createOrder = (id, data) => api.post(`orders/${id}`, data)
+const updateOrder = (id, data) => api.patch(`orders/${id}`, data)
+const removeOrder = id => api.delete(`orders/${id}`)
+
 /**
  * Create a collection of the previous functions to be exposed
  */
@@ -33,9 +38,14 @@ export default {
   },
   needs: {
     get: getNeeds,
-    getOne: getNeed,
     create: createNeed,
     update: updateNeed,
     remove: removeNeed,
+  },
+  orders: {
+    get: getOrders,
+    create: createOrder,
+    update: updateOrder,
+    remove: removeOrder,
   },
 }
