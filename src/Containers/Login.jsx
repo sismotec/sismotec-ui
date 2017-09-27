@@ -54,7 +54,7 @@ class Login extends Component {
         console.log(this.state);
         event.preventDefault();
         this.props.loginRequest({
-            username: this.state.username,
+            responsibleEmail: this.state.username,
             password: this.state.password
         })
     }
