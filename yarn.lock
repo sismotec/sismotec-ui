@@ -5388,9 +5388,9 @@ redux@^3.7.1, redux@^3.7.2:
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
 
-"reduxsauce-polymer@git+https://github.com/alexhenkel/reduxsauce-crud.git":
+"reduxsauce-crud@git+https://github.com/alexhenkel/reduxsauce-crud.git", "reduxsauce-polymer@git+https://github.com/alexhenkel/reduxsauce-crud.git":
   version "1.0.0"
-  resolved "git+https://github.com/alexhenkel/reduxsauce-crud.git#55e0a6cbbc053214c4d074dc42e2243d2f4ac27a"
+  resolved "git+https://github.com/alexhenkel/reduxsauce-crud.git#3485ddd1cec7b6436310971b7cf5ee3302a12753"
   dependencies:
     ramda "^0.24.1"
     ramdasauce "^2.0.0"
