@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getNeeds: id => dispatch(NeedsActions.getRequest(id)),
-  createNeed: data => dispatch(NeedsActions.createRequest(id, data)),
+  createNeed: data => dispatch(NeedsActions.createRequest(data)),
   updateNeed: (id, data) => dispatch(NeedsActions.updateRequest(id, data)),
 });
 
