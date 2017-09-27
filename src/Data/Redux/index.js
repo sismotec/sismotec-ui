@@ -5,7 +5,7 @@ import configureStore from './CreateStore'
 export default (middlewares) => {
   /* ------------- Assemble The Reducers ------------- */
   const rootReducer = combineReducers({
-    login: require('./LoginRedux').reducer,
+    user: require('./LoginRedux').reducer,
   })
   
   // return configureStore(rootReducer, [epicMiddleware, ...middlewares])
