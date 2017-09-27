@@ -18,7 +18,6 @@ class Help extends Component {
     }    
   }
   
-
   componentWillReceiveProps(nextProps) {
     if(nextProps.isAuth) {
       // Redirect to dashboard
