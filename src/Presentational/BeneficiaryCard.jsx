@@ -9,7 +9,7 @@ const Tag = ({tags}) => (
   </div>
 );
 
-export default class NeedCard extends Component {
+export default class BeneficiaryCard extends Component {
   render() {
     return (
       <div className="needCard"> 
