@@ -19,7 +19,7 @@ const Home = () => <Layout slot={<HomeView />} />;
 const Login = () => <Layout slot={<LoginView />} />;
 const Register = () => <Layout slot={<RegisterView />} />;
 const Help = () => <Layout slot={<HelpView />} />;
-const Orders = () => <Layout slot={<Orders />} />;
+const Orders = () => <Layout slot={<OrdersView />} />;
 const MyNeeds = () => <Layout slot={<MyNeedsView />} needsAuth />;
 
 // Create a browser history, and it's middleware
