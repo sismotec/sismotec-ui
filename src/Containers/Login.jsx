@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
+import { withStyles } from 'material-ui/styles';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from 'material-ui/Dialog';
 
 class Login extends Component {
   static propTypes = {
@@ -29,13 +39,14 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        username: 'benis',
-        password: 'benis'
+        username: '',
+        password: ''
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleCreate = this.handleCreate.bind(this);
+      this.handleAyuda = this.handleAyuda.bind(this);
+      this.handleAcopio = this.handleAcopio.bind(this);
     }
 
     handleChange(event) {
@@ -59,60 +70,80 @@ class Login extends Component {
         })
     }
 
-    handleCreate(event) {
-        alert('Create new account');
+    handleAyuda(event) {
+        alert('Ayuda');
+        event.preventDefault();
+    }
+
+    handleAcopio(event) {
+        alert('Centro de Acopio');
         event.preventDefault();
     }
   
   render() {
     return (
         <div>
-            <h1>Entrar a mi cuenta</h1>
-            <form>
-                <div>
-                    <h2>Correo electrónico</h2>
-                    <input
-                        name='username'
-                        ref='username'
-                        type='text'
-                        label='Username'
-                        id='username'
-                        placeholder='semanai@itesm.mx'
-                        autoCorrect='off'
-                        autoCapitalize='off'
-                        spellCheck='false'
-                        defaultValue={this.state.username}
-                        onChange={this.handleChange}/>
-                </div>
-                <div>
-                    <h2>Contraseña</h2>
-                    <input
-                        name='password'
-                        ref='password'
-                        label='Password'
-                        id='password'
-                        type='password'
-                        placeholder='*********'
-                        defaultValue={this.state.password}
-                        onChange={this.handleChange}/>
-                </div>
-                <div>
+            <Dialog open>
+                <DialogTitle>Login</DialogTitle>
+                <form>
+                    <div>
+                        <TextField
+                            name='username'
+                            ref='username'
+                            type='text'
+                            label='Correo'
+                            id='username'
+                            placeholder='semanai@itesm.mx'
+                            autoCorrect='off'
+                            autoCapitalize='off'
+                            spellCheck='false'
+                            defaultValue={this.state.username}
+                            onChange={this.handleChange}/>
+                    </div>
+                    <div>
+                        <TextField
+                            name='password'
+                            ref='password'
+                            label='Contraseña'
+                            id='password'
+                            type='password'
+                            placeholder='*********'
+                            defaultValue={this.state.password}
+                            onChange={this.handleChange}/>
+                    </div>
                     <br></br>
-                    <button
-                        type='submit'
-                        onSubmit={this.handleSubmit}>
-                    Entrar
-                    </button>
-                </div>
-                <div>
-                    <h2>¿Aún no tienes cuenta?</h2>
-                    <button
-                        type='submit'
-                        onSubmit={this.handleCreate}>
-                        Crear una cuenta
-                    </button>
-                </div>
-            </form>
+                    <div>
+                        <Button
+                            raised
+                            type='submit'
+                            onSubmit={this.handleSubmit}>
+                        Entrar
+                        </Button>
+                    </div>
+                    <br></br>
+                    <div>
+                        <h2>¿Aún no tienes cuenta?</h2>
+                        <h2>¡Registrate!</h2>
+                        <div>
+                            <Button
+                                raised
+                                type='submit'
+                                onSubmit={this.handleAyuda}>
+                                Ayuda
+                            </Button>
+                        </div>
+                        <br></br>
+                        <div>
+                            <Button
+                                raised
+                                type='submit'
+                                onSubmit={this.handleAcopio}>
+                                Soy un centro de acopio
+                            </Button>
+                        </div>
+                    </div>
+                </form>
+            </Dialog>
         </div>
     )
   }
