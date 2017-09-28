@@ -15,7 +15,7 @@ export default class Guest extends Component {
         <Toolbar className="header-div">
           <Button flat className="header-button" color="contrast" onClick={() => this.props.navigateTo('/registroAyuda')}>Solicitar ayuda</Button>
           <Button flat className="header-button" color="contrast" onClick={() => this.props.navigateTo('/registroCentroAcopio')}>Soy centro de acopio</Button>
-          <Button flat className="header-button" color="contrast" onClick={() => this.props.navigateTo('/login')}>Entrar a mi cuenta</Button>
+          <Button flat className="header-button" color="contrast" onClick={this.props.openLogin}>Entrar a mi cuenta</Button>
         </Toolbar>
       </AppBar>
     )

@@ -13,17 +13,17 @@ import Dialog, {
 export default class LoginView extends Component {
   render() {
     return (
-      <Dialog open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle>Login</DialogTitle>
+      <Dialog className="dialog" open={this.props.open} onRequestClose={this.props.closeLogin}>
+        <DialogTitle className="dialog-title">ENTRAR A MI CUENTA</DialogTitle>
         <form>
             <div>
-                <TextField
+                <TextField 
+                    className="dialog-textfield"
                     name='username'
                     ref='username'
                     type='text'
                     label='Correo'
                     id='username'
-                    placeholder='semanai@itesm.mx'
                     autoCorrect='off'
                     autoCapitalize='off'
                     spellCheck='false'
@@ -32,44 +32,46 @@ export default class LoginView extends Component {
             </div>
             <div>
                 <TextField
+                    className="dialog-textfield"
                     name='password'
                     ref='password'
                     label='Contraseña'
                     id='password'
                     type='password'
-                    placeholder='*********'
                     defaultValue={this.props.password}
                     onChange={() => this.props.handleChange}/>
             </div>
             <br></br>
             <div>
                 <Button
+                    className="dialog-button"
                     raised
                     type='submit'
+                    color="primary"
                     onSubmit={() => this.props.handleSubmit}>
-                Entrar
+                ENTRAR
                 </Button>
             </div>
             <br></br>
             <div>
-                ¿Aún no tienes cuenta?
-                <br></br>
-                ¡Registrate!
+                <p className="p-caption"> ¿Aún no tienes cuenta? </p>
                 <div>
                     <Button
+                        className="dialog-button"
                         raised
                         type='submit'
+                        color="primary"
                         onSubmit={() => this.props.handleAyuda}>
-                        Ayuda
+                        SOLICITAR AYUDA
                     </Button>
-                </div>
-                <br></br>
-                <div>
+                    <br></br>
                     <Button
+                        className="dialog-button"
                         raised
                         type='submit'
+                        color="primary"
                         onSubmit={() => this.props.handleAcopio}>
-                        Soy un centro de acopio
+                        SOY CENTRO DE ACOPIO
                     </Button>
                 </div>
             </div>

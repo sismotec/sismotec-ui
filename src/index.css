@@ -1,7 +1,21 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+form, .dialog-title{
+	padding-left: 2em !important;
+	padding-right: 2em !important;
+	padding-bottom: 2em !important;
+}
+
+.dialog-title h2{
+	color: #00BCD4 !important;
+}
+
+.caption{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .header-image{
@@ -19,4 +33,26 @@ body {
 
 .header-button{
 	width: 17em;
+}
+
+.dialog{
+	margin: 0 auto;
+}
+
+.dialog-textfield{
+	width: 100%;
+}
+
+.dialog-button{
+	background-color: #00BCD4 !important;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+}
+
+.p-caption{
+	color: #424242 !important;
+	margin: 2px;
+	font-size: 14px;
 }
