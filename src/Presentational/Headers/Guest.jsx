@@ -12,9 +12,9 @@ export default class Guest extends Component {
       <AppBar position="static">
         <Title />
         <Toolbar>
-          <Button>Ayuda</Button>
-          <Button>Soy Centro de Acopio</Button>
-          <Button>Login</Button>
+          <Button onClick={() => this.props.clickedHelp('/registroAyuda')}>Ayuda</Button>
+          <Button onClick={() => this.props.clickedHelp('/registroCentroAcopio')}>Soy Centro de Acopio</Button>
+          <Button onClick={() => this.props.clickedHelp('/login')}>Login</Button>
         </Toolbar>
       </AppBar>
     )
