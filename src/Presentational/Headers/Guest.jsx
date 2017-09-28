@@ -10,12 +10,12 @@ import Colors from 'material-ui/colors';
 export default class Guest extends Component {
   render() {
     return (
-      <AppBar position="static">
+      <AppBar position="static" className="header-color">
         <Title />
-        <Toolbar>
-          <Button onClick={this.props.openBeneficiary}>Ayuda</Button>
-          <Button onClick={this.props.openCenter}>Soy Centro de Acopio</Button>
-          <Button onClick={this.props.openLogin}>Login</Button>
+        <Toolbar className="header-div">
+          <Button flat className="header-button" onClick={this.props.openBeneficiary}>Ayuda</Button>
+          <Button flat className="header-button" onClick={this.props.openCenter}>Soy Centro de Acopio</Button>
+          <Button flat className="header-button" onClick={this.props.openLogin}>Login</Button>
         </Toolbar>
       </AppBar>
     )

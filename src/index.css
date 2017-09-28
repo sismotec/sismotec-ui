@@ -32,7 +32,7 @@ form, .dialog-title{
 }
 
 .header-button{
-	width: 17em;
+  color: #fff !important;
 }
 
 .dialog{
