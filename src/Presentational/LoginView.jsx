@@ -50,7 +50,7 @@ export default class LoginView extends Component {
                     type='submit'
                     color="primary"
                     onSubmit={() => this.props.handleSubmit}>
-                ENTRAR
+                Entrar
                 </Button>
             </div>
             <br></br>
@@ -63,7 +63,7 @@ export default class LoginView extends Component {
                         type='submit'
                         color="primary"
                         onSubmit={() => this.props.handleAyuda}>
-                        SOLICITAR AYUDA
+                        Solicitar ayuda
                     </Button>
                     <br></br>
                     <Button
@@ -72,7 +72,7 @@ export default class LoginView extends Component {
                         type='submit'
                         color="primary"
                         onSubmit={() => this.props.handleAcopio}>
-                        SOY CENTRO DE ACOPIO
+                        Soy centro de acopio
                     </Button>
                 </div>
             </div>
