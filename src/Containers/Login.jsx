@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
+import LoginView from '../Presentational/LoginView'
 
 class Login extends Component {
   static propTypes = {
@@ -79,7 +80,9 @@ class Login extends Component {
             handleAcopio={this.handleAcopio} 
             handleAyuda={this.handleAyuda}
             username={this.state.username}
-            password={this.state.password}/>
+            password={this.state.password}
+            open={this.props.open}
+            closeLogin={this.props.closeLogin}/>
     )
   }
 
