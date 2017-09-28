@@ -1,6 +1,6 @@
 import { create } from 'axios'
 
-const baseURL = 'http://sismo-api.herokuapp.com/'
+const baseURL = 'http://private-58094-sismotecapi.apiary-mock.com/'
 
 /**
  * Create a new API instance
@@ -15,8 +15,8 @@ const api = create({
  * of the api layer, by providing nicer functions rather than get, post, etc.
  */
 
-const loginRequest = data => api.post('login', data)
-const registerRequest = data => api.post('register', data)
+const loginRequest = data => api.post('log-in', data)
+const registerRequest = data => api.post('sign-up', data)
 
 const getNeeds = id => api.get(`needs/${id}`)
 const createNeed = (id, data) => api.post(`needs/${id}`, data)
