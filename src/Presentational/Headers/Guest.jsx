@@ -13,9 +13,11 @@ export default class Guest extends Component {
       <AppBar position="static" className="header-color">
         <Title/>
         <Toolbar className="header-div">
+
           <Button flat className="header-button" color="contrast" onClick={this.props.openBeneficiary}>Solicitar ayuda</Button>
           <Button flat className="header-button" color="contrast" onClick={this.props.openCenter}>Soy centro de acopio</Button>
           <Button flat className="header-button" color="contrast" onClick={this.props.openLogin}>Entrar a mi cuenta</Button>
+
         </Toolbar>
       </AppBar>
     )

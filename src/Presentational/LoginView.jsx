@@ -14,7 +14,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <Dialog className="dialog" open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle className="dialog-title">ENTRAR A MI CUENTA</DialogTitle>
+        <DialogTitle className="dialog-title">Iniciar sesión</DialogTitle>
         <form>
             <div>
                 <TextField 
@@ -50,7 +50,7 @@ export default class LoginView extends Component {
                     type='submit'
                     color="primary"
                     onSubmit={() => this.props.handleSubmit}>
-                ENTRAR
+                Entrar
                 </Button>
             </div>
             <br></br>
@@ -63,7 +63,7 @@ export default class LoginView extends Component {
                         type='submit'
                         color="primary"
                         onSubmit={() => this.props.handleAyuda}>
-                        SOLICITAR AYUDA
+                        Solicitar ayuda
                     </Button>
                     <br></br>
                     <Button
@@ -72,7 +72,7 @@ export default class LoginView extends Component {
                         type='submit'
                         color="primary"
                         onSubmit={() => this.props.handleAcopio}>
-                        SOY CENTRO DE ACOPIO
+                        Soy centro de acopio
                     </Button>
                 </div>
             </div>
