@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
+import LoginView from '../Presentational/LoginView';
 
 class Login extends Component {
   static propTypes = {
@@ -65,54 +66,7 @@ class Login extends Component {
   
   render() {
     return (
-        <div>
-            <h1>Entrar a mi cuenta</h1>
-            <form>
-                <div>
-                    <h2>Correo electrónico</h2>
-                    <input
-                        name='username'
-                        ref='username'
-                        type='text'
-                        label='Username'
-                        id='username'
-                        placeholder='semanai@itesm.mx'
-                        autoCorrect='off'
-                        autoCapitalize='off'
-                        spellCheck='false'
-                        defaultValue={this.state.username}
-                        onChange={this.handleChange}/>
-                </div>
-                <div>
-                    <h2>Contraseña</h2>
-                    <input
-                        name='password'
-                        ref='password'
-                        label='Password'
-                        id='password'
-                        type='password'
-                        placeholder='*********'
-                        defaultValue={this.state.password}
-                        onChange={this.handleChange}/>
-                </div>
-                <div>
-                    <br></br>
-                    <button
-                        type='submit'
-                        onClick={this.handleSubmit}>
-                    Entrar
-                    </button>
-                </div>
-                <div>
-                    <h2>¿Aún no tienes cuenta?</h2>
-                    <button
-                        type='submit'
-                        onSubmit={this.handleCreate}>
-                        Crear una cuenta
-                    </button>
-                </div>
-            </form>
-        </div>
+        <LoginView username={this.state.username} password={this.state.password} handleChange={this.handleChange} handleCreate={this.handleCreate} handleSubmit={this.handleSubmit}/>
     )
   }
 
