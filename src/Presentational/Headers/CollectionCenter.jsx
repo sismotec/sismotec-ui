@@ -13,7 +13,7 @@ export default class CollectionCenter extends Component {
         <Title />
         <Toolbar>
           <Button onClick={() => this.props.navigateTo('/tengo')}>Tengo</Button>
-          <Button onClick={() => this.props.navigateTo('/pinned')}>Donaciones</Button>
+          <Button onClick={() => this.props.navigateTo('/donaciones')}>Donaciones</Button>
           <Button onClick={() => this.props.navigateTo('/necesito')}>Necesito</Button>
           <Button onClick={() => this.props.navigateTo('/pedidos')}>Mis pedidos</Button>
         </Toolbar>
