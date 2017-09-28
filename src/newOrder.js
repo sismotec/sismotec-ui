@@ -9,11 +9,13 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Select from 'material-ui/Select';
-import { red, purple, blue, grey } from 'material-ui/colors';
+import { red, purple, blue, grey, green } from 'material-ui/colors';
 import 'typeface-roboto'
 import Typography from 'material-ui/Typography';
 import Dialog, { DialogTitle } from 'material-ui/Dialog';
 import Icon from 'material-ui/Icon';
+import CheckIcon from 'material-ui-icons/Check';
+import Avatar from 'material-ui/Avatar';
 
 const styles = {
 	avatar: {
@@ -100,6 +102,11 @@ class DialogG extends React.Component {
 			input: {
 				textAlign: 'center',
 				width: '50px',
+			},
+			greenAvatar: {
+				marginLeft: 110,
+				color: '#fff',
+				backgroundColor: green[500],
 			}
 		};
 	}
@@ -133,7 +140,7 @@ class DialogG extends React.Component {
 			<Dialog onRequestClose={this.handleRequestClose}  {...other}>
 				<DialogTitle>Gracias por su donativo</DialogTitle>
 				<div style={this.styles.buttons}>
-					<Icon backgroundColor="primary"></Icon>
+					<Avatar style={this.styles.greenAvatar}> <CheckIcon /></Avatar>
 				</div>
 				<Button raised onClick={this.define} color='primary' style={this.styles.defButton}>Gracias</Button>
 			</Dialog>
