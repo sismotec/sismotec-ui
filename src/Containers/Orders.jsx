@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import ReactTable from "react-table";
-import "react-table/react-table.css";
+import { connect } from 'react-redux';
 import BeneficiaryCard from "../Presentational/BeneficiaryCard";
 import EnhancedTable from "../Presentational/OrdersTable";
+import OrdersActions from '../Data/Redux/OrdersRedux';
 
-export default class Orders extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [
+function getDummyData() {
+  return [
         {
           id: '823648',
           date: '19/07/17', 
@@ -48,10 +45,15 @@ export default class Orders extends Component {
             name: "Agua", qty: "150", unit: "L"
           }]
         }
-      ],
+      ]
+}
 
-    };
+class Orders extends Component {
+  componentDidMount() {
+    const { userId, ordersRequest } = this.props;
+    ordersRequest(userId);
   }
+  
   render() {
     const { data } = this.state;
 
@@ -65,9 +67,20 @@ export default class Orders extends Component {
 
         <br></br>
 
-        <EnhancedTable type="SENDER" data={data} />
+        <EnhancedTable type="SENDER" data={getDummyData()} />
         
       </div>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  userId: state.user.userId,
+  orders: state.orders.get.results,
+});
+
+const mapDispatchToProps = dispatch => ({
+  ordersRequest: id => dispatch(OrdersActions.getOneRequest(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
