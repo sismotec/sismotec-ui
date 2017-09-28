@@ -10,7 +10,6 @@ import { withStyles } from 'material-ui/styles';
 // Import views
 import Layout from './Containers/Layout';
 import HomeView from './Containers/Home';
-import LoginView from './Containers/Login';
 import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
 import OrdersView from './Containers/Orders';
@@ -18,11 +17,10 @@ import MyNeedsView from './Containers/MyNeeds';
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
-const Login = () => <Layout slot={<LoginView />} />;
 const Register = ({ match }) => <Layout slot={<RegisterView match={match} />} />;
 const Help = () => <Layout slot={<HelpView />} />;
 const Orders = () => <Layout slot={<OrdersView />} needsAuth />;
-const MyNeeds = () => <Layout slot={<MyNeedsView />} needsAuth />;
+const MyNeeds = () => <Layout slot={<MyNeedsView />} />;
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -53,7 +51,6 @@ const App = _ => (
     <ConnectedRouter history={history}>
       <div>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
         <Route path="/registro/:type" component={Register} />
         <Route path="/ayuda" component={Help} />
         <Route path="/donaciones" component={Orders} needsAuth />
