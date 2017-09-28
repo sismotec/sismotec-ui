@@ -1,15 +1,22 @@
-import createCRUDObservable from 'redux-observable-crud'
-import { combineEpics } from 'redux-observable'
-import { OrdersRedux } from '../Redux/OrdersRedux'
+import { combineEpics } from 'redux-observable';
+import { OrdersRedux } from '../Redux/OrdersRedux';
+import 'rxjs/add/operator/mergeMap';
 
-const crudObservable = createCRUDObservable({
-  mainRedux: OrdersRedux,
-  reduxPath: 'orders',
-})
+const ordersRequestEpic = (action$, store, { Api }) =>
+  action$
+    .ofType(OrdersRedux.Types.getOneRequest)
+    .mergeMap(({ id }) => (
+      Api.orders.getOne(id)
+        .then(response => response.data)
+        .then(result => OrdersRedux.Creators.getOneSuccess(result))
+        .catch(error => OrdersRedux.Creators.getOneError(error))
+    ))
 
 // For testing
-export const observables = Object.assign({}, crudObservable.observables, {})
+export const observable = Object.assign({}, {
+  ordersRequestEpic,
+})
 
 export default combineEpics(
-  crudObservable.epic,
+  ordersRequestEpic,
 )

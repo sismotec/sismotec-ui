@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ResourcesActions from '../Data/Redux/ResourcesRedux';
 
-export default class Home extends Component {
+class Home extends Component {
+
+  componentDidMount() {
+    this.props.getResources();  
+  }
+  
   render() {
     return (
       <div>
@@ -9,3 +16,10 @@ export default class Home extends Component {
     )
   }
 }
+const mapStateToProps = (state, ownProps) => ({})
+
+const mapDispatchToProps = dispatch => ({
+  getResources: () => dispatch(ResourcesActions.getRequest()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

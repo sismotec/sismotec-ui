@@ -1,15 +1,39 @@
-import createCRUDObservable from 'redux-observable-crud'
-import { combineEpics } from 'redux-observable'
-import { NeedsRedux } from '../Redux/NeedsRedux'
+import { combineEpics } from 'redux-observable';
+import { NeedsRedux } from '../Redux/NeedsRedux';
+import 'rxjs/add/operator/mergeMap';
 
-const crudObservable = createCRUDObservable({
-  mainRedux: NeedsRedux,
-  reduxPath: 'needs',
-})
+const needsRequestEpic = (action$, store, { Api }) =>
+  action$
+    .ofType(NeedsRedux.Types.getOneRequest)
+    .mergeMap(({ id }) => (
+      Api.needs.getOne(id)
+        .then(response => response.data)
+        .then(result => NeedsRedux.Creators.getOneSuccess(result))
+        .catch(error => NeedsRedux.Creators.getOneError(error))
+    ))
 
-// For testing
-export const observables = Object.assign({}, crudObservable.observables, {})
+const needsCreateEpic = (action$, store, { Api }) =>
+  action$
+    .ofType(NeedsRedux.Types.createRequest)
+    .mergeMap(({ id, data }) => (
+      Api.needs.create(id, data)
+        .then(response => response.data)
+        .then(result => NeedsRedux.Creators.createSuccess(result))
+        .catch(error => NeedsRedux.Creators.createError(error))
+    ))
+
+const needsUpdateEpic = (action$, store, { Api }) =>
+  action$
+    .ofType(NeedsRedux.Types.updateRequest)
+    .mergeMap(({ id, data }) => (
+      Api.needs.update(id, data)
+        .then(response => response.data)
+        .then(result => NeedsRedux.Creators.updateSuccess(result))
+        .catch(error => NeedsRedux.Creators.updateError(error))
+    ))
 
 export default combineEpics(
-  crudObservable.epic,
+  needsRequestEpic,
+  needsCreateEpic,
+  needsUpdateEpic,
 )
