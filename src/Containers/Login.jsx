@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
+import LoginView from '../Presentational/LoginView'
 
 class Login extends Component {
   static propTypes = {
