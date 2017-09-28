@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
 import "../index.css";
-
-const Tag = ({tags}) => (
-  <div>
-    {tags.map(tag => (
-      <div>{tag}</div>
-    ))}
-  </div>
-);
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 export default class BeneficiaryCard extends Component {
   render() {
     return (
-      <div className="needCard"> 
-        <label className="needCard title">{this.props.name}</label>
-        <label className="needCard content">¿Dónde?</label>
-        <label className="needCard content">
-          <a href="{this.props.mapsurl}">{this.props.address}</a>
-        </label>
-        <label className="needCard content">¿Qué necesita?</label>
+      <div> 
+        <Card>
+          <CardContent>
+            <Typography type="headline" component="h2">
+              {this.props.name}
+            </Typography>
+            <Typography type="body1" component="h2">
+              ¿Dónde?
+            </Typography>
+            <Typography type="body1">
+              {this.props.address}
+            </Typography>
+            <Typography component="p">
+              ¿Qué necesita?
+            </Typography>
 
-        <Tag tags={["Alimentos", "Medicamentos", "Voluntarios"]} />
-
-        <button className="needCard btn">Detalles</button>
+            <div>
+              {this.props.tags.map(tag => <div>{tag}</div>)}
+            </div>
+          </CardContent>
+          <CardActions>
+            <Button color="primary">
+              Default
+            </Button>
+          </CardActions>
+        </Card>
       </div>
     )
   }

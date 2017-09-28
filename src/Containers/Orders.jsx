@@ -4,10 +4,6 @@ import "react-table/react-table.css";
 import BeneficiaryCard from "../Presentational/BeneficiaryCard";
 import OrdersTable from "../Presentational/OrdersTable";
 
-function ViewOrdersBtn() {
-    return <button>Mis ordenes</button>
-}
-
 export default class Orders extends Component {
   constructor() {
     super();
@@ -68,8 +64,6 @@ export default class Orders extends Component {
           tags={["Alimentos", "Medicamentos", "Voluntariados"]}/>
 
         <OrdersTable type="SENDER" data={data} />
-          
-        <ViewOrdersBtn />
         
       </div>
     )
