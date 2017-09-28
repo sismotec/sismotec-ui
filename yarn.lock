@@ -5634,7 +5634,7 @@ reduce-function-call@^1.0.1:
 
 "redux-observable-crud@git+https://github.com/alexhenkel/redux-observable-crud.git":
   version "1.0.0"
-  resolved "git+https://github.com/alexhenkel/redux-observable-crud.git#42425364e3151118ccb2356a141a01f05cc1900f"
+  resolved "git+https://github.com/alexhenkel/redux-observable-crud.git#a7411608f4b3bdf6a8a34b01b63d26f9c259638b"
   dependencies:
     ramda "^0.24.1"
     redux "^3.7.2"

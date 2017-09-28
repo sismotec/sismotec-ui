@@ -56,6 +56,12 @@ class Orders extends Component {
 
     };
   }
+  
+  componentDidMount() {
+    const { userId, ordersRequest } = this.props;
+    ordersRequest(userId);
+  }
+  
   render() {
     const { data } = this.state;
 
@@ -82,7 +88,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  ordersRequest: id => dispatch(OrdersActions.ordersRequest(id)),
+  ordersRequest: id => dispatch(OrdersActions.getOneRequest(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);
