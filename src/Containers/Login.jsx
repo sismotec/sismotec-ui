@@ -82,7 +82,9 @@ class Login extends Component {
             handleAcopio={this.handleAcopio} 
             handleAyuda={this.handleAyuda}
             username={this.state.username}
-            password={this.state.password}/>
+            password={this.state.password}
+            open={this.props.open}
+            closeLogin={this.props.closeLogin}/>
     )
   }
 
