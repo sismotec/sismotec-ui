@@ -13,11 +13,11 @@ export default class CollectionCenter extends Component {
         <Title />
         <Toolbar>
           <Button onClick={() => this.props.navigateTo('/tengo')}>Tengo</Button>
-          <Button onClick={() => this.props.clickedHelp('/pinned')}>Pinned</Button>
-          <Button onClick={() => this.props.clickedHelp('/sent')}>Sent</Button>
-          <Button onClick={() => this.props.clickedHelp('/necesito')}>Necesito</Button>
-          <Button onClick={() => this.props.clickedHelp('/pedidos')}>Mis pedidos</Button>
-          <Button onClick={() => this.props.clickedHelp('/ayudaEnCamino')}>Ayuda en camino</Button>
+          <Button onClick={() => this.props.navigateTo('/pinned')}>Pinned</Button>
+          <Button onClick={() => this.props.navigateTo('/sent')}>Sent</Button>
+          <Button onClick={() => this.props.navigateTo('/necesito')}>Necesito</Button>
+          <Button onClick={() => this.props.navigateTo('/pedidos')}>Mis pedidos</Button>
+          <Button onClick={() => this.props.navigateTo('/ayudaEnCamino')}>Ayuda en camino</Button>
         </Toolbar>
       </AppBar>
     )

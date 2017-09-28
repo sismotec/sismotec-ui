@@ -25,7 +25,7 @@ class Layout extends Component {
         <div>
           {userType == 'collectionCenter' && <CollectionCenter navigateTo={this.props.navigateTo}/>}
           {userType == 'guest' && <Guest navigateTo={this.props.navigateTo}/>}
-          {userType == 'beneficiary' && <Beneficiary/>}
+          {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
         </div>
         {needsAuth && userType == 'guest' && <div>
           No autorizado
