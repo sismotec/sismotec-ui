@@ -12,9 +12,8 @@ export default class Beneficiary extends Component {
       <AppBar position="static">
         <Title />
         <Toolbar>
-          <Button onClick={() => this.props.clickedHelp('/necesito')}>Necesito</Button>
-          <Button onClick={() => this.props.clickedHelp('/misPedidos')}>Mis Pedidos</Button>
-          <Button onClick={() => this.props.clickedHelp('/ayudaEnCamino')}>Ayuda En Camino</Button>
+          <Button onClick={() => this.props.navigateTo('/necesito')}>Necesito</Button>
+          <Button onClick={() => this.props.navigateTo('/misPedidos')}>Mis Pedidos</Button>
         </Toolbar>
       </AppBar>
     )
