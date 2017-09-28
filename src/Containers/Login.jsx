@@ -69,7 +69,13 @@ class Login extends Component {
         })
     }
 
-    handleCreate(event) {
+    handleAyuda(event) {
+        alert('Create new account');
+        event.preventDefault();
+        alert('Create new account');
+    }
+
+    handleAcopio(event) {
         alert('Create new account');
         event.preventDefault();
         alert('Create new account');
@@ -117,8 +123,9 @@ class Login extends Component {
                     </div>
                     <br></br>
                     <div>
-                        <h2>¿Aún no tienes cuenta?</h2>
-                        <h2>¡Registrate!</h2>
+                        ¿Aún no tienes cuenta?
+                        <br></br>
+                        ¡Registrate!
                         <div>
                             <Button
                                 raised
