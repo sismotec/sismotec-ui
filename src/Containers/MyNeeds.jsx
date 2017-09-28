@@ -117,7 +117,7 @@ class MyNeeds extends Component {
     <Table >
         <TableBody>
           {
-            this.fields.map((n, index) => <CustomRow need={n} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
+            this.fields.map((field, index) => <CustomRow need={field} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
           }
         </TableBody>
       </Table>
