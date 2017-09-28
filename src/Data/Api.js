@@ -23,7 +23,9 @@ const createNeed = (id, data) => api.post(`needs/${id}`, data)
 const updateNeed = (id, data) => api.patch(`needs/${id}`, data)
 const removeNeed = id => api.delete(`needs/${id}`)
 
-const getOrders = id => api.get(`orders/${id}`)
+const getOrders = id => api.post(`centros-acopio/ordenes-envio`, {
+  centerID: id,
+})
 const createOrder = (id, data) => api.post(`orders/${id}`, data)
 const updateOrder = (id, data) => api.patch(`orders/${id}`, data)
 const removeOrder = id => api.delete(`orders/${id}`)

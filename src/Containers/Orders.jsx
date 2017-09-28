@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import ReactTable from "react-table";
-import "react-table/react-table.css";
+import { connect } from 'react-redux';
 import BeneficiaryCard from "../Presentational/BeneficiaryCard";
 import OrdersTable from "../Presentational/OrdersTable";
+import OrdersActions from '../Data/Redux/OrdersRedux';
 
 function ViewOrdersBtn() {
     return <button>Mis ordenes</button>
 }
 
-export default class Orders extends Component {
+class Orders extends Component {
   constructor() {
     super();
     this.state = {
@@ -75,3 +75,14 @@ export default class Orders extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  userId: state.user.userId,
+  orders: state.orders.get.results,
+});
+
+const mapDispatchToProps = dispatch => ({
+  ordersRequest: id => dispatch(OrdersActions.ordersRequest(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
