@@ -46,13 +46,13 @@ class Layout extends Component {
     )
   }
 
-  handleCloseLogin() {
+  handleCloseLogin = () => {
     this.setState({
       loginIsOpen: false
     });
   }
 
-  handleOpenLogin() {
+  handleOpenLogin = () => {
     this.setState({
       loginIsOpen: true
     });
