@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
-
-import {
-	Table,
-	TableBody,
-	TableHeader,
-	TableHeaderColumn,
-	TableRow,
-	TableRowColumn,
-} from 'material-ui/Table';
-
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Input, { InputLabel } from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import { FormControl, FormHelperText } from 'material-ui/Form';
+import Select from 'material-ui/Select';
 
 class Water extends React.Component {
+	get styles() {
+		return {
+			select: {
+				width:100
+			}
+		}
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -34,35 +34,43 @@ class Water extends React.Component {
 		}
 	}
 
-	changeUnit = (event, index, value) => this.props.changeUnit( value );
+	changeUnit = name => event => {
+		this.props.changeUnit(event.target.value);
+	};
 
 	render() {
 		return (
-			<MuiThemeProvider>
 			<TableRow>
-					<TableRowColumn>Agua</TableRowColumn>
-					<TableRowColumn><TextField type="number" min="1" name="waterLabel" onChange={this.changeVal} defaultValue="1"></TextField></TableRowColumn>
-				<TableRowColumn>
-					<DropDownMenu onChange={this.changeUnit} value={this.props.unit} selected="selected">
-						<MenuItem value="Mililitros" primaryText="Mililitros" />
-						<MenuItem value="Litros" primaryText="Litros" />
-						<MenuItem value="Galones" primaryText="Galones" />
-					</DropDownMenu>
-				</TableRowColumn>
+				<TableCell>Agua</TableCell>
+				<TableCell><Input type="number" min="1" name="waterLabel" onChange={this.changeVal} defaultValue="1"/></TableCell>
+					<TableCell>
+						<Select onChange={this.changeUnit()} value={this.props.unit} style={this.styles.select}>
+							<MenuItem value="Mililitros">Mililitros</MenuItem>
+							<MenuItem value="Litros">Litros</MenuItem>
+						<MenuItem value="Galones">Galones</MenuItem>
+					</Select>
+				</TableCell>
 			</TableRow>
-			</MuiThemeProvider>
 		);
 	}
 }
 
 class Atun extends React.Component {
+	get styles() {
+		return {
+			select: {
+				width: 100
+			}
+		}
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			amount: 1
 		}
 		this.changeVal = this.changeVal.bind(this)
-		this.changeUnit = this.changeUnit.bind(this)
+		this.changeUnit2 = this.changeUnit2.bind(this)
 	}
 
 	changeVal(evt) {
@@ -71,19 +79,21 @@ class Atun extends React.Component {
 		}
 	}
 
-	changeUnit = (event, index, value) => this.props.changeUnit(value);
+	changeUnit2 = name => event => {
+		this.props.changeUnit(event.target.value);
+	};
 
 	render() {
 		return (
 			<TableRow>
-				<TableRowColumn>Atun</TableRowColumn>
-				<TableRowColumn><TextField type="number" min="1" name="atunLabel" onChange={this.changeVal} defaultValue="1"></TextField></TableRowColumn>
-				<TableRowColumn>
-					<DropDownMenu onChange={this.changeUnit} value={this.props.unit} selected="selected">
-						<MenuItem value="Gramos" primaryText="Gramos" />
-						<MenuItem value="Kilogramos" primaryText="Kilogramos" />
-					</DropDownMenu>
-				</TableRowColumn>
+				<TableCell>Atun</TableCell>
+				<TableCell><Input type="number" min={1} name="atunLabel" onChange={this.changeVal} defaultValue="1" /></TableCell>
+				<TableCell>
+					<Select onChange={this.changeUnit2()} value={this.props.unit} selected="selected" style={this.styles.select}>
+						<MenuItem value="Gramos">Gramos</MenuItem>
+						<MenuItem value="Kilogramos">Kilogramos</MenuItem>
+					</Select>
+				</TableCell>
 			</TableRow>
 		);
 	}
@@ -113,32 +123,36 @@ class Order extends React.Component {
 				fixedHeader: false,
 				fixedFooter: false,
 				stripedRows: false,
-				showRowHover: true,
+				showRowHover: false,
 				selectable: false,
 				multiSelectable: false,
 				enableSelectAll: false,
 				deselectOnClickaway: false,
 				displaySelectAll: false,
-				adjustForCheckbox:false,
+				adjustForCheckbox: false,
+				showCheckboxes: true,
+				enableSelectAll: false,
+				displayRowCheckbox: false,
 				height: '200px',
-				width: '1400px',
-				marginLeft: '15px',
+				width: '1000px',
+				marginLeft: '100px',
 				textAlign: 'center',
-				fontSize:'20px'
+				fontSize: '20px',
+				colSpan: "3"
 			},
 			div: {
 				marginTop: '50px',
 				border: 'solid 1px black',
 				borderRadius: '10px',
-				width: '1425px',
-				marginLeft:'50px',
+				width: '1200px',
+				marginLeft:'150px',
 				height: '600px'
 			},
 			button: {
 				height: 50,
 				width: 200,
 				marginTop: 150,
-				marginLeft: 1200,
+				marginLeft: 950,
 				borderRadius: 10,
 				textAlign: 'center'
 			},
@@ -147,6 +161,9 @@ class Order extends React.Component {
 				display: 'flex',
 				flexDirection: 'column',
 				overflowY: 'auto'
+			},
+			h1: {
+				marginLeft: 100
 			}
 		};
 	}
@@ -195,33 +212,31 @@ class Order extends React.Component {
 
 	render() {
 		return (
-			<MuiThemeProvider>
 				<div style={this.styles.div} >
 				{
 					this.readDB()
 				}
-				<h1 id="header">{this.state.name}</h1>
+				<h1 style={this.styles.h1}>{this.state.name}</h1>
 				<Table style={this.styles.table} >
-						<TableHeader>
+						<TableHead>
 							<TableRow>
-							<TableHeaderColumn>Necesidad</TableHeaderColumn>
-							<TableHeaderColumn>Cantidad</TableHeaderColumn>
-							<TableHeaderColumn>Unidad</TableHeaderColumn>
+							<TableCell>Necesidad</TableCell>
+							<TableCell>Cantidad</TableCell>
+							<TableCell>Unidad</TableCell>
 						</TableRow>
-					</TableHeader>
+					</TableHead>
 					<TableBody>
 						{
-							this.state.atun > 0 ? <Atun changeAtun={this.changeAtun.bind(this)} changeUnit={this.atunUnit.bind(this)} unit={this.state.atunUnit} /> : null
+							this.state.water > 0 ? <Water changeWater={this.changeWater.bind(this)} changeUnit={this.waterUnit.bind(this)} unit={this.state.waterUnit} /> : null
 						}
 						{
-							this.state.water > 0 ? <Water changeWater={this.changeWater.bind(this)} changeUnit={this.waterUnit.bind(this)} unit={this.state.waterUnit} /> : null
+							this.state.atun > 0 ? <Atun changeAtun={this.changeAtun.bind(this)} changeUnit={this.atunUnit.bind(this)} unit={this.state.atunUnit} /> : null
 						}
 						</TableBody>
 				</Table>
 
-				<RaisedButton onClick={this.newOrder} primary={true} label="Generar Orden" style={this.styles.button} />
+				<Button raised onClick={this.newOrder} color='primary' style={this.styles.button}>Generar Orden</Button>
 			</div>
-			</MuiThemeProvider>
 		);
 	}
 }
