@@ -13,11 +13,9 @@ export default class CollectionCenter extends Component {
         <Title />
         <Toolbar>
           <Button onClick={() => this.props.navigateTo('/tengo')}>Tengo</Button>
-          <Button onClick={() => this.props.navigateTo('/pinned')}>Pinned</Button>
-          <Button onClick={() => this.props.navigateTo('/sent')}>Sent</Button>
+          <Button onClick={() => this.props.navigateTo('/pinned')}>Donaciones</Button>
           <Button onClick={() => this.props.navigateTo('/necesito')}>Necesito</Button>
           <Button onClick={() => this.props.navigateTo('/pedidos')}>Mis pedidos</Button>
-          <Button onClick={() => this.props.navigateTo('/ayudaEnCamino')}>Ayuda en camino</Button>
         </Toolbar>
       </AppBar>
     )
