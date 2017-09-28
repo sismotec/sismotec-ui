@@ -15,18 +15,26 @@ const api = create({
  * of the api layer, by providing nicer functions rather than get, post, etc.
  */
 
-const loginRequest = data => api.post('log-in', data)
-const registerRequest = data => api.post('sign-up', data)
+const loginRequest = data => api.post('iniciar-sesion', data)
+const registerRequest = data => api.post('crear-cuenta', data)
 
 const getNeeds = id => api.get(`needs/${id}`)
-const createNeed = (id, data) => api.post(`needs/${id}`, data)
-const updateNeed = (id, data) => api.patch(`needs/${id}`, data)
-const removeNeed = id => api.delete(`needs/${id}`)
+const createNeed = (id, data) => api.post(`beneficiarios/necesidades`, {
+  id_beneficiarios: id,
+  recursos: data,
+})
+const updateNeed = (id, data) => api.put(`beneficiarios/necesidades`, {
+  id_beneficiarios: id,
+  recursos: data,
+})
 
-const getOrders = id => api.get(`orders/${id}`)
-const createOrder = (id, data) => api.post(`orders/${id}`, data)
-const updateOrder = (id, data) => api.patch(`orders/${id}`, data)
-const removeOrder = id => api.delete(`orders/${id}`)
+const getOneOrders = id => api.get(`centros-acopio/ordenes-envio/${id}`)
+const createOrder = (id, data) => api.post(`centros-acopio/ordenes-envio`, data)
+const removeOrder = id => api.delete(`centros-acopio/ordenes-envio/`, {
+  id_orden: id,
+})
+
+const getResources = () => api.get('recursos')
 
 /**
  * Create a collection of the previous functions to be exposed
@@ -40,12 +48,13 @@ export default {
     get: getNeeds,
     create: createNeed,
     update: updateNeed,
-    remove: removeNeed,
   },
   orders: {
-    get: getOrders,
+    getOne: getOneOrders,
     create: createOrder,
-    update: updateOrder,
     remove: removeOrder,
+  },
+  resources: {
+    get: getResources,
   },
 }

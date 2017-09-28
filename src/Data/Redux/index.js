@@ -8,6 +8,7 @@ export default (middlewares) => {
     user: require('./LoginRedux').reducer,
     needs: require('./NeedsRedux').reducer,
     orders: require('./OrdersRedux').reducer,
+    resources: require('./ResourcesRedux').reducer,
   })
   
   return configureStore(rootReducer, [epicMiddleware, ...middlewares])
