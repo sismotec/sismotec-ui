@@ -28,7 +28,8 @@ export default class LoginView extends Component {
                     autoCapitalize='off'
                     spellCheck='false'
                     defaultValue={this.props.username}
-                    onChange={() => this.props.handleChange}/>
+                    onChange={() => this.props.handleChange}
+                    type="email"/>
             </div>
             <div>
                 <TextField
