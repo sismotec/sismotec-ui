@@ -14,7 +14,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <Dialog className="dialog" open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle className="dialog-title">ENTRAR A MI CUENTA</DialogTitle>
+        <DialogTitle className="dialog-title">Iniciar sesión</DialogTitle>
         <form>
             <div>
                 <TextField 

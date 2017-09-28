@@ -15,7 +15,7 @@ export default class Guest extends Component {
         <Toolbar className="header-div">
           <Button flat className="header-button" onClick={this.props.openBeneficiary}>Ayuda</Button>
           <Button flat className="header-button" onClick={this.props.openCenter}>Soy Centro de Acopio</Button>
-          <Button flat className="header-button" onClick={this.props.openLogin}>Login</Button>
+          <Button flat className="header-button" onClick={this.props.openLogin}>Entrar a mi cuenta</Button>
         </Toolbar>
       </AppBar>
     )
