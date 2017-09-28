@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+
+import Guest from '../Presentational/Headers/Guest';
+import Beneficiary from '../Presentational/Headers/Beneficiary';
+import CollectionCenter from '../Presentational/Headers/CollectionCenter';
 
 class Layout extends Component {
   static propTypes = {
@@ -10,33 +15,33 @@ class Layout extends Component {
   }
 
   static defaultProps = {
-    isAuth: false,
     needsAuth: false,
   }
 
   render() {
-    const { slot, isAuth, needsAuth } = this.props;
+    const { slot, userType, needsAuth } = this.props;
     return (
       <div>
         <div>
-          {isAuth && <div>
-            Navbar(Logged in)
-          </div>}
-          {!isAuth && <div>
-            Navbar(Not logged in)
-          </div>}
+          {userType == 'collectionCenter' && <CollectionCenter navigateTo={this.props.navigateTo}/>}
+          {userType == 'guest' && <Guest navigateTo={this.props.navigateTo}/>}
+          {userType == 'beneficiary' && <Beneficiary/>}
         </div>
-        {needsAuth && !isAuth && <div>
+        {needsAuth && userType == 'guest' && <div>
           No autorizado
         </div>}
-        {(!needsAuth || (needsAuth && isAuth)) && slot}
+        {(!needsAuth || (needsAuth && userType != 'guest')) && slot}
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  isAuth: !!state.user.userId,
+  userType: state.user.userType
 });
 
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = dispatch => ({
+  navigateTo: route => dispatch(push(route))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

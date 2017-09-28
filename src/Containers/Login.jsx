@@ -62,7 +62,6 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
         event.preventDefault();
         this.props.loginRequest({
             responsibleEmail: this.state.username,
@@ -70,14 +69,10 @@ class Login extends Component {
         })
     }
 
-    handleAyuda(event) {
-        alert('Ayuda');
+    handleCreate(event) {
+        alert('Create new account');
         event.preventDefault();
-    }
-
-    handleAcopio(event) {
-        alert('Centro de Acopio');
-        event.preventDefault();
+        alert('Create new account');
     }
   
   render() {
@@ -156,7 +151,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loginRequest: data => dispatch(LoginActions.loginRequest(data)),
-  navigateToDashboard: () => dispatch(push('/dashboard')),
+  navigateToDashboard: () => dispatch(push('/')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
