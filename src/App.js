@@ -12,6 +12,7 @@ import LoginView from './Containers/Login';
 import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
 import MyNeedsView from './Containers/MyNeeds';
+import BeneficiaryView from './Containers/Beneficiary';
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
@@ -19,6 +20,8 @@ const Login = () => <Layout slot={<LoginView />} />;
 const Register = () => <Layout slot={<RegisterView />} />;
 const Help = () => <Layout slot={<HelpView />} />;
 const MyNeeds = () => <Layout slot={<MyNeedsView />} needsAuth />;
+const Beneficiary = () => <Layout slot = {< BeneficiaryView />} />;
+
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -37,6 +40,7 @@ const App = _ => (
         <Route exact path="/registro" component={Register} />
         <Route exact path="/ayuda" component={Help} />
         <Route exact path="/misNecesidades" component={MyNeeds} />
+        <Route exact path="/beneficiary" component={Beneficiary} />
         {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
         <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}
