@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
-
 export default class Title extends Component {
   render() {
     return (

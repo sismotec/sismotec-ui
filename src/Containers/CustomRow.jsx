@@ -12,9 +12,6 @@ export default class CustomRow extends Component {
   constructor(props) {
     super(props);
     this.data = {};
-    this.props.need.map(n => {
-      this.data[n.key] = n.value;
-    });
   }
 
   handleChange(value, key) {
