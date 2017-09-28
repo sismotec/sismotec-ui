@@ -13,6 +13,7 @@ import { red, purple, blue, grey } from 'material-ui/colors';
 import 'typeface-roboto'
 import Typography from 'material-ui/Typography';
 import Dialog, { DialogTitle } from 'material-ui/Dialog';
+import Icon from 'material-ui/Icon';
 
 const styles = {
 	avatar: {
@@ -76,6 +77,71 @@ class CustomTableRow extends React.Component {
 	}
 }
 
+class DialogG extends React.Component {
+	get styles() {
+		return {
+			buttons: {
+				display: 'inline-block',
+				marginTop: '10px'
+			},
+			addButton: {
+				width: '50px',
+				height: '50px'
+
+			},
+			subButton: {
+				width: '50px',
+				height: '50px',
+				marginLeft: '30px'
+			},
+			defButton: {
+				marginTop: '30px'
+			},
+			input: {
+				textAlign: 'center',
+				width: '50px',
+			}
+		};
+	}
+	constructor(props) {
+		super(props);
+		this.state = {
+			hours: 0,
+			open: false
+		}
+		this.handleListItemClick = this.handleListItemClick.bind(this)
+		this.handleRequestClose = this.handleRequestClose.bind(this)
+		this.define = this.define.bind(this)
+	}
+
+	handleRequestClose = () => {
+		this.props.onRequestClose(this.props.selectedValue);
+	};
+
+	handleListItemClick = value => {
+		this.props.onRequestClose(value);
+	};
+
+	define() {
+		this.handleRequestClose();
+	}
+
+	render() {
+		const { classes, onRequestClose, selectedValue, ...other } = this.props;
+
+		return (
+			<Dialog onRequestClose={this.handleRequestClose}  {...other}>
+				<DialogTitle>Gracias por su donativo</DialogTitle>
+				<div style={this.styles.buttons}>
+					<Icon backgroundColor="primary"></Icon>
+				</div>
+				<Button raised onClick={this.define} color='primary' style={this.styles.defButton}>Gracias</Button>
+			</Dialog>
+		);
+	}
+}
+
+
 class DialogHours extends React.Component {
 	get styles () {
 		return {
@@ -86,10 +152,12 @@ class DialogHours extends React.Component {
 			addButton: {
 				width: '50px',
 				height: '50px'
+				
 			},
 			subButton: {
 				width: '50px',
-				height: '50px'
+				height: '50px',
+				marginLeft: '30px'
 			},
 			defButton: {
 				marginTop: '30px'
@@ -103,13 +171,15 @@ class DialogHours extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			hours:0
+			hours: 0,
+			open: false
 		}
 		this.handleListItemClick = this.handleListItemClick.bind(this)
 		this.handleRequestClose = this.handleRequestClose.bind(this)
 		this.sub = this.sub.bind(this)
 		this.add = this.add.bind(this)
 		this.changeVal = this.changeVal.bind(this)
+		this.define = this.define.bind(this)
 	}
 
 	handleRequestClose = () => {
@@ -133,8 +203,12 @@ class DialogHours extends React.Component {
 	}
 
 	define() {
-
+		this.setState({ open: true });
 	}
+
+	handleRequestClose2 = value => {
+		this.setState({ selectedValue: value, open: false });
+	};
 
 	render() {
 		const { classes, onRequestClose, selectedValue, ...other } = this.props;
@@ -144,10 +218,15 @@ class DialogHours extends React.Component {
 				<DialogTitle>Tiempo Estimado de Envio</DialogTitle>
 				<div style={this.styles.buttons}>
 					<Button raised onClick={this.sub} color='primary' style={this.styles.subButton}>-</Button>
-					<Input style={this.styles.input} type="number" min={1} name="hoursLabel" onChange={this.changeVal} value={this.state.hours} />
+					<Input style={this.styles.input} type="number" min={1} name="hoursLabel" onChange={this.changeVal} value={this.state.hours} disabled/>
 					<Button raised onClick={this.add} color='primary' style={this.styles.addButton}>+</Button>
 				</div>
-				<Button raised onClick={this.define} color='primary' style={this.styles.defButton}>Definir</Button>
+				<Button raised onClick={this.define} color='primary' style={this.styles.defButton}>Continuar</Button>
+				<SimpleDialogWrapped2
+					selectedValue={this.state.selectedValue}
+					open={this.state.open}
+					onRequestClose={this.handleRequestClose2}
+				/>
 			</Dialog>
 		);
 	}
@@ -159,7 +238,14 @@ DialogHours.propTypes = {
 	selectedValue: PropTypes.string,
 };
 
+DialogG.propTypes = {
+	classes: PropTypes.object.isRequired,
+	onRequestClose: PropTypes.func,
+	selectedValue: PropTypes.string,
+};
+
 const SimpleDialogWrapped = withStyles(styles)(DialogHours);
+const SimpleDialogWrapped2 = withStyles(styles)(DialogG);
 
 class Order extends React.Component {
 	constructor(props) {
@@ -340,7 +426,10 @@ class Order extends React.Component {
 							open={this.state.open}
 							onRequestClose={this.handleRequestClose}
 						/>
-				<Button raised onClick={this.newOrder} color='primary' style={this.styles.generarButton}>Generar Orden</Button>
+						{
+
+						}
+						<Button raised onClick={this.newOrder} color='primary' style={this.styles.generarButton}>Generar Orden</Button>
 						</div>
 			</div>
 				</div>
