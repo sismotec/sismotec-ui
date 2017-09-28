@@ -9,20 +9,36 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Select from 'material-ui/Select';
+import { red, purple, blue, grey } from 'material-ui/colors';
+import 'typeface-roboto'
+import Typography from 'material-ui/Typography';
+import Dialog, { DialogTitle } from 'material-ui/Dialog';
 
-class Water extends React.Component {
+const styles = {
+	avatar: {
+		background: blue[100],
+		color: blue[600],
+	},
+};
+
+class CustomTableRow extends React.Component {
 	get styles() {
 		return {
 			select: {
-				width:100
+				width: 100,
+				color: grey[50],
+			},
+			table: {
+				color: grey[50]
 			}
 		}
 	}
 
+
 	constructor(props) {
 		super(props);
 		this.state = {
-			amount: 1
+			amount: 0,
 		}
 		this.changeVal = this.changeVal.bind(this)
 		this.changeUnit = this.changeUnit.bind(this)
@@ -30,7 +46,7 @@ class Water extends React.Component {
 
 	changeVal(evt) {
 		if (evt.target.value > 0) {
-			this.props.changeWater(evt.target.value);
+			this.props.changeItem(evt.target.value);
 		}
 	}
 
@@ -40,64 +56,110 @@ class Water extends React.Component {
 
 	render() {
 		return (
-			<TableRow>
-				<TableCell>Agua</TableCell>
-				<TableCell><Input type="number" min="1" name="waterLabel" onChange={this.changeVal} defaultValue="1"/></TableCell>
-					<TableCell>
-						<Select onChange={this.changeUnit()} value={this.props.unit} style={this.styles.select}>
+			<TableRow style={this.styles.table}>
+				<TableCell style={this.styles.table}>{this.props.name}</TableCell>
+				<TableCell style={this.styles.table}><Input type="number" min="1" name="itemLabel" onChange={this.changeVal} defaultValue="1" style={this.styles.table} /></TableCell>
+				<TableCell style={this.styles.table}>
+					{
+						this.props.type === "liquid" ? < Select onChange={this.changeUnit()} value={this.props.unit} style={this.styles.select}>
 							<MenuItem value="Mililitros">Mililitros</MenuItem>
 							<MenuItem value="Litros">Litros</MenuItem>
-						<MenuItem value="Galones">Galones</MenuItem>
-					</Select>
+							<MenuItem value="Galones">Galones</MenuItem>
+						</Select> : <Select style={this.styles.table} onChange={this.changeUnit()} value={this.props.unit} selected="selected" style={this.styles.select}>
+								<MenuItem value="Gramos">Gramos</MenuItem>
+								<MenuItem value="Kilogramos">Kilogramos</MenuItem>
+							</Select>
+					}
 				</TableCell>
 			</TableRow>
 		);
 	}
 }
 
-class Atun extends React.Component {
-	get styles() {
+class DialogHours extends React.Component {
+	get styles () {
 		return {
-			select: {
-				width: 100
+			buttons: {
+				display: 'inline-block',
+				marginTop: '10px'
+			},
+			addButton: {
+				width: '50px',
+				height: '50px'
+			},
+			subButton: {
+				width: '50px',
+				height: '50px'
+			},
+			defButton: {
+				marginTop: '30px'
+			},
+			input: {
+				textAlign: 'center',
+				width: '50px', 
 			}
-		}
+		};
 	}
-
 	constructor(props) {
 		super(props);
 		this.state = {
-			amount: 1
+			hours:0
 		}
+		this.handleListItemClick = this.handleListItemClick.bind(this)
+		this.handleRequestClose = this.handleRequestClose.bind(this)
+		this.sub = this.sub.bind(this)
+		this.add = this.add.bind(this)
 		this.changeVal = this.changeVal.bind(this)
-		this.changeUnit2 = this.changeUnit2.bind(this)
 	}
 
-	changeVal(evt) {
-		if (evt.target.value > 0) {
-			this.props.changeAtun(evt.target.value);
-		}
-	}
-
-	changeUnit2 = name => event => {
-		this.props.changeUnit(event.target.value);
+	handleRequestClose = () => {
+		this.props.onRequestClose(this.props.selectedValue);
 	};
 
+	handleListItemClick = value => {
+		this.props.onRequestClose(value);
+	};
+
+	changeVal(evt) {
+		this.setState({ hours: evt });
+	}
+
+	add() {
+		this.setState({ hours: this.state.hours + 1 })
+	}
+
+	sub() {
+		this.setState({ hours: this.state.hours - 1 })
+	}
+
+	define() {
+
+	}
+
 	render() {
+		const { classes, onRequestClose, selectedValue, ...other } = this.props;
+
 		return (
-			<TableRow>
-				<TableCell>Atun</TableCell>
-				<TableCell><Input type="number" min={1} name="atunLabel" onChange={this.changeVal} defaultValue="1" /></TableCell>
-				<TableCell>
-					<Select onChange={this.changeUnit2()} value={this.props.unit} selected="selected" style={this.styles.select}>
-						<MenuItem value="Gramos">Gramos</MenuItem>
-						<MenuItem value="Kilogramos">Kilogramos</MenuItem>
-					</Select>
-				</TableCell>
-			</TableRow>
+			<Dialog onRequestClose={this.handleRequestClose}  {...other}>
+				<DialogTitle>Tiempo Estimado de Envio</DialogTitle>
+				<div style={this.styles.buttons}>
+					<Button raised onClick={this.sub} color='primary' style={this.styles.subButton}>-</Button>
+					<Input style={this.styles.input} type="number" min={1} name="hoursLabel" onChange={this.changeVal} value={this.state.hours} />
+					<Button raised onClick={this.add} color='primary' style={this.styles.addButton}>+</Button>
+				</div>
+				<Button raised onClick={this.define} color='primary' style={this.styles.defButton}>Definir</Button>
+			</Dialog>
 		);
 	}
 }
+
+DialogHours.propTypes = {
+	classes: PropTypes.object.isRequired,
+	onRequestClose: PropTypes.func,
+	selectedValue: PropTypes.string,
+};
+
+const SimpleDialogWrapped = withStyles(styles)(DialogHours);
 
 class Order extends React.Component {
 	constructor(props) {
@@ -107,7 +169,9 @@ class Order extends React.Component {
 			atun: 1,
 			waterUnit: "Litros",
 			atunUnit: "Kilogramos",
-			name: "JuanCa"
+			name: "JuanCa",
+			open: false,
+			selectedValue: 0
 		}
 		this.changeWater = this.changeWater.bind(this)
 		this.changeAtun = this.changeAtun.bind(this)
@@ -115,6 +179,7 @@ class Order extends React.Component {
 		this.waterUnit = this.waterUnit.bind(this)
 		this.atunUnit = this.atunUnit.bind(this)
 		this.readDB = this.readDB.bind(this)
+		this.handleRequestClose = this.handleRequestClose.bind(this)
 	}
 
 	get styles() {
@@ -138,23 +203,37 @@ class Order extends React.Component {
 				marginLeft: '100px',
 				textAlign: 'center',
 				fontSize: '20px',
-				colSpan: "3"
+				colSpan: "3",
+				color: grey[50],
+				marginTop: '30px'
 			},
 			div: {
 				marginTop: '50px',
-				border: 'solid 1px black',
 				borderRadius: '10px',
 				width: '1200px',
 				marginLeft:'150px',
-				height: '600px'
+				height: '600px',
+				backgroundColor: blue[600],
+				color: grey[50],
+				position: 'fixed'
 			},
-			button: {
+			enviarButton: {
 				height: 50,
 				width: 200,
-				marginTop: 150,
+				borderRadius: 10,
+				marginLeft: 500,
+				textAlign: 'center',
+				display: 'inline-block',
+				position: 'fixed'
+			},
+			generarButton: {
+				height: 50,
+				width: 200,
 				marginLeft: 950,
 				borderRadius: 10,
-				textAlign: 'center'
+				textAlign: 'center',
+				display: 'inline-block',
+				position: 'fixed'
 			},
 			container: {
 				flex: '1 1 100%;',
@@ -162,8 +241,17 @@ class Order extends React.Component {
 				flexDirection: 'column',
 				overflowY: 'auto'
 			},
+			buttons: {
+				display: 'inline-block',
+				marginTop: '100px'
+			},
 			h1: {
-				marginLeft: 100
+				marginTop:50,
+				marginLeft: 100,
+				color: grey[50]
+			},
+			body: {
+				backgroundColor: purple[500],
 			}
 		};
 	}
@@ -189,8 +277,8 @@ class Order extends React.Component {
 	}
 
 	newOrder() {
-		console.log(this.state.atun + " " + this.state.atunUnit);
 		console.log(this.state.water + " " + this.state.waterUnit);
+		console.log(this.state.atun + " " + this.state.atunUnit);
 	}
 
 	readDB() {
@@ -210,15 +298,26 @@ class Order extends React.Component {
 		*/
 	}
 
+	handleClickOpen = () => {
+		this.setState({
+			open: true,
+		});
+	};
+
+	handleRequestClose = value => {
+		this.setState({ selectedValue: value, open: false });
+	};
+
 	render() {
 		return (
-				<div style={this.styles.div} >
+			<div style={this.styles.body}>
+			<div style={this.styles.div}>
 				{
 					this.readDB()
 				}
-				<h1 style={this.styles.h1}>{this.state.name}</h1>
+				<Typography type="display2" style={this.styles.h1}>{this.state.name}</Typography>
 				<Table style={this.styles.table} >
-						<TableHead>
+					<TableHead style={this.styles.table}>
 							<TableRow>
 							<TableCell>Necesidad</TableCell>
 							<TableCell>Cantidad</TableCell>
@@ -226,17 +325,25 @@ class Order extends React.Component {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{
-							this.state.water > 0 ? <Water changeWater={this.changeWater.bind(this)} changeUnit={this.waterUnit.bind(this)} unit={this.state.waterUnit} /> : null
+							{
+								this.state.water > 0 ? <CustomTableRow changeItem={this.changeWater.bind(this)} changeUnit={this.waterUnit.bind(this)} unit={this.state.waterUnit} name="Agua" type="liquid"/> : null
 						}
 						{
-							this.state.atun > 0 ? <Atun changeAtun={this.changeAtun.bind(this)} changeUnit={this.atunUnit.bind(this)} unit={this.state.atunUnit} /> : null
+								this.state.atun > 0 ? <CustomTableRow changeAtun={this.changeAtun.bind(this)} changeUnit={this.atunUnit.bind(this)} unit={this.state.atunUnit} name="Atun" type="solid"/> : null
 						}
 						</TableBody>
 				</Table>
-
-				<Button raised onClick={this.newOrder} color='primary' style={this.styles.button}>Generar Orden</Button>
+				<div style={this.styles.buttons}>
+					<Button raised onClick={this.handleClickOpen} color='primary' style={this.styles.enviarButton}>Enviar Orden</Button>
+						<SimpleDialogWrapped
+							selectedValue={this.state.selectedValue}
+							open={this.state.open}
+							onRequestClose={this.handleRequestClose}
+						/>
+				<Button raised onClick={this.newOrder} color='primary' style={this.styles.generarButton}>Generar Orden</Button>
+						</div>
 			</div>
+				</div>
 		);
 	}
 }
