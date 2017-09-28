@@ -13,7 +13,7 @@ import Dialog, {
 export default class LoginView extends Component {
   render() {
     return (
-      <Dialog open>
+      <Dialog open={this.props.open} onRequestClose={this.props.closeLogin}>
         <DialogTitle>Login</DialogTitle>
         <form>
             <div>
