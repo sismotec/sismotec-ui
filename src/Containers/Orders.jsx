@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import BeneficiaryCard from "../Presentational/BeneficiaryCard";
-import OrdersTable from "../Presentational/OrdersTable";
+import EnhancedTable from "../Presentational/OrdersTable";
 
 export default class Orders extends Component {
   constructor() {
@@ -63,7 +63,9 @@ export default class Orders extends Component {
           address="Valle de la Esperanza 543 Col. Roma, Monterrey, Nuevo León, México."
           tags={["Alimentos", "Medicamentos", "Voluntariados"]}/>
 
-        <OrdersTable type="SENDER" data={data} />
+        <br></br>
+
+        <EnhancedTable type="SENDER" data={data} />
         
       </div>
     )
