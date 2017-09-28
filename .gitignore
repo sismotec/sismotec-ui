@@ -91,5 +91,6 @@ fabric.properties
 
 # Sonarlint plugin
 .idea/sonarlint
+.idea/
 
 # End of https://www.gitignore.io/api/code,phpstorm

@@ -7,9 +7,9 @@ const loginRequestEpic = (action$, store, { Api }) =>
     .ofType(LoginRedux.Types.loginRequest)
     .mergeMap(({ data }) => (
       Api.login.loginRequest(data)
-        .then(response => response)
-        .then(result => LoginRedux.loginSuccess(result))
-        .catch(error => LoginRedux.loginError(error))
+        .then(response => response.data)
+        .then(result => LoginRedux.Creators.loginSuccess(result))
+        .catch(error => LoginRedux.Creators.loginError(error))
     ))
 
 const registerRequestEpic = (action$, store, { Api }) =>
@@ -18,8 +18,8 @@ const registerRequestEpic = (action$, store, { Api }) =>
     .mergeMap(({ data }) => (
       Api.login.registerRequest(data)
         .then(response => response)
-        .then(result => LoginRedux.registerSuccess(result))
-        .catch(error => LoginRedux.registerError(error))
+        .then(result => LoginRedux.Creators.registerSuccess(result))
+        .catch(error => LoginRedux.Creators.registerError(error))
     ))
 
 // For testing
