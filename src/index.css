@@ -48,11 +48,28 @@ form, .dialog-title{
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 5px;
-
 }
 
 .p-caption{
 	color: #424242 !important;
 	margin: 2px;
 	font-size: 14px;
+}
+
+.table-div{
+	padding: 3em 2em 3em 2em;
+}
+
+.table-button{
+	background-color: #f4b624 !important;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	text-transform: none !important;
+	float: right;
+}
+
+.delete-button{
+	border-radius: 100%;
+	background-color: #F22613;
+	color: white;
 }

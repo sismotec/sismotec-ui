@@ -12,14 +12,14 @@ import Layout from './Containers/Layout';
 import HomeView from './Containers/Home';
 import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
-import OrdersView from './Containers/Orders';
+//import OrdersView from './Containers/Orders';
 import MyNeedsView from './Containers/MyNeeds';
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
 const Register = ({ match }) => <Layout slot={<RegisterView match={match} />} />;
 const Help = () => <Layout slot={<HelpView />} />;
-const Orders = () => <Layout slot={<OrdersView />} needsAuth />;
+//const Orders = () => <Layout slot={<OrdersView />} needsAuth />;
 const MyNeeds = () => <Layout slot={<MyNeedsView />} />;
 
 // Create a browser history, and it's middleware
@@ -53,7 +53,7 @@ const App = _ => (
         <Route exact path="/" component={Home} />
         <Route path="/registro/:type" component={Register} />
         <Route path="/ayuda" component={Help} />
-        <Route path="/donaciones" component={Orders} needsAuth />
+        {/*<Route path="/donaciones" component={Orders} needsAuth /> */}
         <Route path="/misNecesidades" component={MyNeeds} />
         {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
