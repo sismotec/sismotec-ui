@@ -10,14 +10,12 @@ import { withStyles } from 'material-ui/styles';
 // Import views
 import Layout from './Containers/Layout';
 import HomeView from './Containers/Home';
-import LoginView from './Containers/Login';
 import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
 import MyNeedsView from './Containers/MyNeeds';
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
-const Login = () => <Layout slot={<LoginView />} />;
 const Register = ({ match }) => <Layout slot={<RegisterView match={match} />} />;
 const Help = () => <Layout slot={<HelpView />} />;
 const MyNeeds = () => <Layout slot={<MyNeedsView />} needsAuth />;
@@ -51,7 +49,6 @@ const App = _ => (
     <ConnectedRouter history={history}>
       <div>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
         <Route path="/registro/:type" component={Register} />
         <Route path="/ayuda" component={Help} />
         <Route path="/misNecesidades" component={MyNeeds} />
