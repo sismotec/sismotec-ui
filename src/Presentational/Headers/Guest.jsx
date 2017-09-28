@@ -14,7 +14,7 @@ export default class Guest extends Component {
         <Toolbar>
           <Button onClick={() => this.props.clickedHelp('/registroAyuda')}>Ayuda</Button>
           <Button onClick={() => this.props.clickedHelp('/registroCentroAcopio')}>Soy Centro de Acopio</Button>
-          <Button onClick={() => this.props.clickedHelp('/login')}>Login</Button>
+          <Button onClick={() => this.props.clickedHelp('/login')}>Ya me registré</Button>
         </Toolbar>
       </AppBar>
     )
