@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
-import LoginView from '../Presentational/LoginView';
 
 class Login extends Component {
   static propTypes = {
@@ -30,13 +29,14 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        username: 'benis',
-        password: 'benis'
+        username: '',
+        password: ''
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleCreate = this.handleCreate.bind(this);
+      this.handleAyuda = this.handleAyuda.bind(this);
+      this.handleAcopio = this.handleAcopio.bind(this);
     }
 
     handleChange(event) {
@@ -59,14 +59,27 @@ class Login extends Component {
         })
     }
 
-    handleCreate(event) {
+    handleAyuda(event) {
+        alert('Create new account');
+        event.preventDefault();
+        alert('Create new account');
+    }
+
+    handleAcopio(event) {
+        alert('Create new account');
         event.preventDefault();
         alert('Create new account');
     }
   
   render() {
     return (
-        <LoginView username={this.state.username} password={this.state.password} handleChange={this.handleChange} handleCreate={this.handleCreate} handleSubmit={this.handleSubmit}/>
+        <LoginView 
+            handleChange={this.handleChange} 
+            handleSubmit={this.handleSubmit} 
+            handleAcopio={this.handleAcopio} 
+            handleAyuda={this.handleAyuda}
+            username={this.state.username}
+            password={this.state.password}/>
     )
   }
 
