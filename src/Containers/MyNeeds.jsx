@@ -5,7 +5,10 @@ import Table, { TableBody } from 'material-ui/Table';
 // import { push } from 'react-router-redux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
+import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
+import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
+import '../index.css';
 
 class MyNeeds extends Component {
   constructor(props) {
@@ -29,55 +32,68 @@ class MyNeeds extends Component {
     //this.props.deleteNeed(this.data[index].id);
   }
 
-  componentWillMount() {
-    // const { userId, getNeeds } = this.props
-    // getNeeds(userId)
-    this.needs = [
-      {
-        id: 1,
-        nombre: "agua",
-        cantidad: 3,
-        unidad: "litros",
-      },
-      {
-        id: 2,
-        nombre: "atun",
-        cantidad: 100,
-        unidad: "gramos",
-      },
-      {
-        id: 3,
-        nombre: "cobijas",
-        cantidad: 3,
-        unidad: "cobijas",
-      }
-    ];
-
-    this.data = this.needs;
-
-    this.fields = this.data.map(d => [
+    componentWillMount() {
+      // const { userId, getNeeds } = this.props
+      // getNeeds(userId)
+      this.needs = [
         {
-          type: "Label",
-          value: d.nombre,
-          key: "nombre"
+          id: 1,
+          nombre: "agua",
+          cantidad: 3,
+          unidad: "litros",
         },
         {
-          type: "NumberField",
-          value: d.cantidad,
-          key: "cantidad"
+          id: 2,
+          nombre: "atun",
+          cantidad: 100,
+          unidad: "gramos",
         },
         {
-          type: "FuzzySearch",
-          value: d.unidad,
-          options: [d.unidad],
-          key: "unidad"
+          id: 3,
+          nombre: "cobijas",
+          cantidad: 3,
+          unidad: "cobijas",
         },
         {
           type: "Delete",
         }
-      ]
-    )
-  }
+      ];
+
+      this.data = this.needs;
+
+      this.fields = this.data.map(d => [
+          {
+            type: "Label",
+            value: d.nombre,
+            key: "nombre"
+          },
+          {
+            type: "NumberField",
+            value: d.cantidad,
+            key: "cantidad"
+          },
+          {
+            type: "FuzzySearch",
+            value: d.unidad,
+            options: [d.unidad],
+            key: "unidad"
+          },
+          {
+            type: "Button",
+            label: 'Mark complete',
+            onClick: 'markComplete',
+            key: "btn",
+            props: {
+              raised: true,
+              color: "primary"
+            }
+          },
+          {
+            type: "Delete",
+          }
+        ]
+      )
+    }
 
   // componentWillReceiveProps(nextProps, oldProps) {
   //   if(nextProps.length && (!oldProps || oldProps.length )) {
@@ -111,14 +127,28 @@ class MyNeeds extends Component {
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
   }
+  markComplete() {
+    alert("Not implemented yet");
+  }
   
   render() {
-    console.log(this.needs);
-    return <div className="table-div">
-    <Table>
+    return(
+    <div className="container MyNeeds">
+      <h1>Mis necesidades</h1>
+      <div className="tabcontainer" style={{marginBottom:40}}>
+        <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
+          <Tab label="Activas"></Tab>
+          <Tab label="En camino"></Tab>
+          <Tab label="Recibidas"></Tab>
+        </Tabs>
+        <hr/>
+      </div>
+      <Table>
         <TableBody>
           {
-            this.fields.map((n, index) => <CustomRow need={n} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
+            this.fields.map((n, index) => 
+              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed} markComplete={this.markComplete}/>
+            )
           }
         </TableBody>
       </Table>
@@ -128,10 +158,26 @@ class MyNeeds extends Component {
         color="primary"
         onClick={() => this.props.updateNeeds(this.props.userId, this.data)}>Guardar cambios
       </Button>
-      </div>
+    </div>)
   }
 }
 
+const confirmationDialog = () => {
+  return (
+    <Dialog
+      ignoreBackdropClick
+      ignoreEscapeKeyUp
+      maxWidth="xs"
+    >
+      <DialogTitle>Confirmaci&oacute;n</DialogTitle>
+      <DialogContent> Est&aacute;s seguro de que quieres borrar este recurso? </DialogContent>
+      <DialogActions>
+        <Button color="primary">S&iacute;</Button>
+        <Button color="error">No</Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
 const mapStateToProps = state => ({
   userId: state.user.userId,
   needs: state.needs.get.results,

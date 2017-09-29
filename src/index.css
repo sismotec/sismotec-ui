@@ -137,8 +137,13 @@ form, .dialog-title{
   color: white
 }
 
-th, td, span{
-  text-align: center !important;
-  padding: 0 !important;
-  border-width: 0;
+.MyNeeds .tabcontainer hr{
+  border: 0 none;
+  border-top: 1px solid #ccc;
+  margin-top: 0;
+  width: 70%;
+}
+
+form{
+  text-align: left;
 }

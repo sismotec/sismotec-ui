@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ResourcesActions from '../Data/Redux/ResourcesRedux';
+// import ResourcesActions from '../Data/Redux/ResourcesRedux';
 // import NeedsActions from '../Data/Redux/NeedsRedux';
 
 class Home extends Component {
