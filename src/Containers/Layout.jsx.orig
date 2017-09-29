@@ -34,6 +34,19 @@ class Layout extends Component {
     return (
       <div>
         <div>
+<<<<<<< Updated upstream
+          {userType === 'collectionCenter' && <CollectionCenter navigateTo={this.props.navigateTo}/>}
+          {userType === 'guest' && <div>
+            <Guest navigateTo={this.props.navigateTo} openLogin={this.handleOpenLogin}
+              openCenter={this.handleOpenCenter} openBeneficiary={this.handleOpenBeneficiary}/>
+            <Login open = {this.state.loginIsOpen} closeLogin={this.handleCloseLogin}/>
+            <Register open = {this.state.signUpBeneficiaryIsOpen}
+              closeLogin={this.handleCloseBeneficiary} registerType={'Beneficiary'}/>
+            <Register open = {this.state.signUpCenterIsOpen} closeLogin={this.handleCloseCenter}
+              registerType={'Center'}/>
+              </div>}
+          {userType === 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
+=======
           {
             userType == 'collectionCenter' && 
             <CollectionCenter navigateTo={this.props.navigateTo}/>}
@@ -61,6 +74,7 @@ class Layout extends Component {
             </div>
           }
           {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
+>>>>>>> Stashed changes
         </div>
         {needsAuth && userType === 'guest' && <div>
           No autorizado
