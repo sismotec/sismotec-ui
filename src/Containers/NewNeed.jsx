@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import NeedsActions from '../Data/Redux/NeedsRedux';
 import NewNeedView from '../Presentational/NewNeedView';
 import { GridList, GridListTile } from 'material-ui/GridList';
 
@@ -27,14 +25,14 @@ class NewNeed extends Component {
     }
 
     static propTypes = {
-        needs: PropTypes.array,
-        getNeeds: PropTypes.func,
+        resources: PropTypes.array,
+        getresources: PropTypes.func,
         createNeed: PropTypes.func,
-        updateNeeds: PropTypes.func,
+        updateresources: PropTypes.func,
     };
 
     static defaultProps = {
-        needs: [],
+        resources: [],
     };
 
     handleExpandClick(){
@@ -45,9 +43,9 @@ class NewNeed extends Component {
     return (
       <div>
         <GridList cols={3}>
-          <NewNeedView
-              item = {this.state.item}
-              handleExpandClick = {this.handleExpandClick}/>
+            {this.props.resources.map(item => <NewNeedView
+                item = {item}
+                handleExpandClick = {this.handleExpandClick}/>)}
         </GridList>
       </div>
     )
@@ -57,13 +55,10 @@ class NewNeed extends Component {
 
 const mapStateToProps = state => ({
     userId: state.user.userId,
-    needs: state.needs.get.results,
+    resources: state.resources.getOne.results,
 });
 
 const mapDispatchToProps = dispatch => ({
-    getNeeds: id => dispatch(NeedsActions.getRequest(id)),
-    createNeed: data => dispatch(NeedsActions.createRequest(data)),
-    updateNeeds: (id, data) => dispatch(NeedsActions.updateRequest(id, data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewNeed);
