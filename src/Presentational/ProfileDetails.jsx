@@ -127,14 +127,17 @@ export default class ProfileDetails extends Component {
   }
 
   handleAddNeed() {
+    console.log('ress',this.props.resources.map(r => r.nombre));
     this.setState({
       fields: [
           ...this.state.fields,
           [
             {
                 type: "FuzzySearch",
-                value: "Busque recurso",
-                key: "nombre"
+                label: "Busque recurso",
+                key: "nombre",
+                data: this.props.resources.map(r => r.nombre),
+                options: this.props.resources.map(r => r.nombre),
               },
               {
                 type: "Label",

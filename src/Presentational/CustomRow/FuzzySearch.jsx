@@ -27,7 +27,7 @@ export default class FuzzySearch extends Component {
     let items = "";
     if (this.props.data) {
       items = this.props.data.map(d => {
-        <option value={d}>{d}</option>
+        return <option value={d}>{d}</option>
       })
     }
 
