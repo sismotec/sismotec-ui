@@ -42,7 +42,7 @@ export default class CustomRow extends Component {
   render() {
     return <TableRow>
         {this.props.need.map(n => {
-          return <TableCell>
+          return <TableCell key={n.key}>
             {this.renderField(n)}
           </TableCell>
         })}
