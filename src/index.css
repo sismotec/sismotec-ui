@@ -20,6 +20,7 @@ form, .dialog-title{
   margin: 0 auto;
   margin-top: 4%;
 }
+
 .caption{
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
@@ -87,7 +88,31 @@ form, .dialog-title{
 	color: white;
 }
 
-.needCard {
+.MyNeeds .tabcontainer hr{
+  border: 0 none;
+  border-top: 1px solid #ccc;
+  margin-top: 0;
+  width: 70%;
+}
+
+form{
+  text-align: left;
+}
+
+.needCard-button{
+	background-color: #f3f4fa !important;
+	width: 100%;
+}
+
+.needCard-beneficiary{
+	font-size: 16px;
+}
+
+.searchBox{
+	margin-bottom: 2em !important;
+}
+
+/* .needCard {
   display: table-cell;
   width: 310px;
   height: auto;
@@ -136,15 +161,4 @@ form, .dialog-title{
   border: 2px solid white;
   border-radius: 15px;
   color: white
-}
-
-.MyNeeds .tabcontainer hr{
-  border: 0 none;
-  border-top: 1px solid #ccc;
-  margin-top: 0;
-  width: 70%;
-}
-
-form{
-  text-align: left;
-}
+} */
