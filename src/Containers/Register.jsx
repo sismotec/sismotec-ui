@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
 import TextField from 'material-ui/TextField';
+import Input from 'material-ui/Input';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import Checkbox from 'material-ui/Checkbox';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
@@ -11,6 +12,16 @@ import Button from 'material-ui/Button';
 import { compose, withProps, lifecycle } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
+import MaskedInput from 'react-text-mask';
+
+const TextMaskCustom = (props) => (
+  <MaskedInput
+    {...props}
+    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+    placeholderChar={'\u2000'}
+    showMask
+  />
+)
 
 const MapWithAMarker = compose( withScriptjs, withGoogleMap)(props =>
   <GoogleMap
@@ -225,13 +236,14 @@ class Register extends Component {
               />
             </div>
             }
-            <TextField
+            <Input
               required
               id="phone"
               label="Teléfono/celular"
               value={this.state.phone}
               onChange={this.handleChange('phone')}
               margin="normal"
+              inputComponent={TextMaskCustom}
             />
             <br/>
             <TextField
