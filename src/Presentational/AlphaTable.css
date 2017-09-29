@@ -1,0 +1,123 @@
+*{
+	box-sizing: border-box;
+  	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+.Collapsible
+.Collapsible__trigger.is-open:after {
+	transform: rotateZ(180deg);
+}
+.Collapsible__trigger {
+	display: block;
+	color: black;
+	padding: 10px;
+	position: relative;
+}
+.Collapsible__contentInner p{
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.CustomTriggerCSS {
+	background: light-coral;
+	transition: background-color 200ms ease;
+}
+.CustomTriggerCSS--open {
+  background-color: darkslateblue;
+}
+.Collapsible__custom-sibling {
+  padding: 5px;
+  font-size: 12px;
+  background-color: #CBB700;
+  color: black;
+}
+.Collapsible__contentInner{
+	padding: 10px;
+	border: 1px solid grey;
+	border-top: 0;
+}
+
+.Collapsible__trigger tr{
+	background-color: #00BCD4;
+	color: white;
+}
+
+.main-header{
+	background-color: #374046 !important;
+	color: white !important;
+	font-size: 100%;
+}
+
+.hello .Collapsible{
+	background: grey;
+	width: 100%;
+	max-width: 100%;
+}
+.AlphaTable table{
+	table-layout: fixed;
+	width: 100%;
+}
+.AlphaTable {
+	margin-bottom: 10%;
+}
+.AlphaTable *{
+	white-space: normal !important;
+}
+
+.innerTable .left, .innerTable .right {
+	display: inline-block;
+}
+.innerTable .left{
+	width: 70%;
+	margin-right: 2%;
+}
+.innerTable .right{
+	width: 20%;
+	position: relative;
+	top: -60px;
+}
+
+.to-name{
+	font-size: 200% !important;
+}
+
+.to-name td{
+	padding: 0 !important;
+	border-width: 0;
+}
+
+.cancel-button{
+	width: 80% !important;
+	border-radius: 100%;
+	background-color: #E03A3C !important;
+	color: white !important;
+}
+
+.pdf-button{
+	width: 80% !important;
+	border-radius: 100%;
+	background-color: #953D94 !important;
+	color: white !important;
+}
+
+.status{
+	background-color: #953D94;
+	line-height: 200%;
+	width: 40%;
+	margin: 0 auto;
+	border-radius: 20px;
+	color: white;
+}
+
+th, span, td{
+  text-align: center !important;
+  padding: 0 !important;
+  border-width: 0;
+}
