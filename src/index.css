@@ -21,7 +21,7 @@ form, .dialog-title{
   margin-top: 4%;
 }
 
-.container h1{
+.container > h1{
   color: #374046 !important;
   font-size: 40pt !important;
   font-weight: 400 !important;
@@ -96,7 +96,30 @@ form, .dialog-title{
 	color: white;
 }
 
-.needCard {
+.MyNeeds .tabcontainer hr{
+  border: 0 none;
+  border-top: 1px solid #ccc;
+  margin-top: 0;
+  width: 70%;
+}
+
+form{
+  text-align: left;
+}
+
+.needCard-button{
+	width: 100%;
+}
+
+.needCard-beneficiary{
+	font-size: 16px;
+}
+
+.searchBox{
+	margin-bottom: 2em !important;
+}
+
+/* .needCard {
   display: table-cell;
   width: 310px;
   height: auto;
@@ -164,3 +187,4 @@ form, .dialog-title{
 form{
   text-align: left;
 }
+} */

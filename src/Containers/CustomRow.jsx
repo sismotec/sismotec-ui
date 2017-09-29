@@ -29,7 +29,9 @@ export default class CustomRow extends Component {
                         label={item.value}
                         data={item.options}/>
       case 'Label':
-        return <Label value={item.value}/>
+        return <Label value={item.value}/>;
+      case 'Image':
+        return <img src={item.src} />
       case 'NumberField':
         return <NumberField onChange={(value) => this.handleChange(value, item.key)}
                         value={item.value}/>
