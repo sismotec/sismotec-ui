@@ -56,6 +56,12 @@ form, .dialog-title{
 	font-size: 14px;
 }
 
+.p-subcaption{
+	color: #424242 !important;
+	margin: 2px;
+	font-size: 12px;
+}
+
 .table-div{
 	padding: 3em 2em 3em 2em;
 }
