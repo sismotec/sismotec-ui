@@ -48,11 +48,85 @@ form, .dialog-title{
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 5px;
-
 }
 
 .p-caption{
 	color: #424242 !important;
 	margin: 2px;
 	font-size: 14px;
+}
+
+.p-subcaption{
+	color: #424242 !important;
+	margin: 2px;
+	font-size: 12px;
+}
+
+.table-div{
+	padding: 3em 2em 3em 2em;
+}
+
+.table-button{
+	background-color: #f4b624 !important;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	text-transform: none !important;
+	float: right;
+}
+
+.delete-button{
+	border-radius: 100%;
+	background-color: #F22613;
+	color: white;
+}
+
+.needCard {
+  display: table-cell;
+  width: 310px;
+  height: auto;
+  padding: 15px;
+  background-color: #84aeb9;
+}
+
+.needCard.title {
+  float: left;
+  color: #FFFFFF;
+  font-size: 24px;
+  padding: 0px;
+  margin: 5px 0px 15px 0px;
+}
+
+.needCard.content {
+  float: left;
+  color: #FFFFFF;
+  font-size: 14px;
+  padding: 0px;
+  margin: 10px 0px 10px 0px;
+}
+
+.needCard.content a{
+  float: left;
+  color: #FFFFFF;
+  font-size: 14px;
+}
+
+.needCard.btn {
+  background-color: #00798c;
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.needCard.labelbox {
+  width: auto;
+  background-color: #84aeb9;
+  border: 2px solid white;
+  border-radius: 15px;
+  color: white
 }

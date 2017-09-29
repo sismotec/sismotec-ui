@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, { TableBody } from 'material-ui/Table';
 // import { push } from 'react-router-redux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
+import Button from 'material-ui/Button';
 
 class MyNeeds extends Component {
   constructor(props) {
@@ -113,15 +114,20 @@ class MyNeeds extends Component {
   
   render() {
     console.log(this.needs);
-    return <div>
-    <Table >
+    return <div className="table-div">
+    <Table>
         <TableBody>
           {
             this.fields.map((n, index) => <CustomRow need={n} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
           }
         </TableBody>
       </Table>
-      <button onClick={() => this.props.updateNeeds(this.props.userId, this.data)}>Guardar cambios</button>
+      <Button 
+        className="table-button"
+        raised
+        color="primary"
+        onClick={() => this.props.updateNeeds(this.props.userId, this.data)}>Guardar cambios
+      </Button>
       </div>
   }
 }
