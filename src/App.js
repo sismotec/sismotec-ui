@@ -21,7 +21,7 @@ const Home = () => <Layout slot={<HomeView />} />;
 const Register = ({ match }) => <Layout slot={<RegisterView match={match} />} />;
 const Help = () => <Layout slot={<HelpView />} />;
 const NewNeeds = () => <Layout slot={<NewNeedView/>}/>
-const Orders = () => <Layout slot={<OrdersView />} needsAuth />;
+const Orders = () => <Layout slot={<OrdersView />}/>;
 const MyNeeds = () => <Layout slot={<MyNeedsView />} />;
 const INeed = () => <Layout slot={<NewNeedView/>} needsAuth />;
 

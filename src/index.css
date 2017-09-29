@@ -143,3 +143,7 @@ form, .dialog-title{
   margin-top: 0;
   width: 70%;
 }
+
+form{
+  text-align: left;
+}
