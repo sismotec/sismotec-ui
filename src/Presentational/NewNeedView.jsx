@@ -50,8 +50,7 @@ export default class NewNeedView extends Component {
     }
 
     addNeed() {
-        //add need
-        console.log('adde',this.data);
+        this.props.handleAdd(this.data);
     }
 
     render() {
