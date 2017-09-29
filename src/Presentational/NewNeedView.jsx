@@ -66,8 +66,8 @@ export default class NewNeedView extends Component {
                     </Card>
                 </div>
                 <br/>
-                {/*<Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit  >*/}
-                <div>
+                <Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit  >
+                {/*<div>*/}
                     <Card>
                         <CardContent>
                             <Table >
@@ -77,8 +77,8 @@ export default class NewNeedView extends Component {
                             </Table>
                         </CardContent>
                     </Card>
-                </div>
-                {/*</Collapse>*/}
+                {/*</div>*/}
+                </Collapse>
             </div>
         )
     }
