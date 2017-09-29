@@ -34,7 +34,7 @@ const request = state => state.merge({ fetching: true });
 const success = (state, { result }) => state.merge({ 
   fetching: false, 
   userId: result.id, 
-  userType: result.type === 'Centro de acopio' ? 'collectionCenter' : 'beneficiary',
+  userType: result.tipo === 'Centro de acopio' ? 'collectionCenter' : 'beneficiary',
   error: null 
 });
 const error = (state, { error }) => state.merge({ fetching: false, error });

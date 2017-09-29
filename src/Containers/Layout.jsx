@@ -33,8 +33,8 @@ class Layout extends Component {
     return (
       <div>
         <div>
-          {userType == 'collectionCenter' && <CollectionCenter navigateTo={this.props.navigateTo}/>}
-          {userType == 'guest' && <div>
+          {userType === 'collectionCenter' && <CollectionCenter navigateTo={this.props.navigateTo}/>}
+          {userType === 'guest' && <div>
             <Guest navigateTo={this.props.navigateTo} openLogin={this.handleOpenLogin}
               openCenter={this.handleOpenCenter} openBeneficiary={this.handleOpenBeneficiary}/>
             <Login open = {this.state.loginIsOpen} closeLogin={this.handleCloseLogin}/>
@@ -43,12 +43,12 @@ class Layout extends Component {
             <Register open = {this.state.signUpCenterIsOpen} closeLogin={this.handleCloseCenter}
               registerType={'Center'}/>
               </div>}
-          {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
+          {userType === 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
         </div>
-        {needsAuth && userType == 'guest' && <div>
+        {needsAuth && userType === 'guest' && <div>
           No autorizado
         </div>}
-        {(!needsAuth || (needsAuth && userType != 'guest')) && slot}
+        {(!needsAuth || (needsAuth && userType !== 'guest')) && slot}
       </div>
     )
   }

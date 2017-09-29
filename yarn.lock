@@ -5520,6 +5520,12 @@ react-scrollbar-size@^2.0.1:
     prop-types "^15.5.10"
     react-event-listener "^0.5.0"
 
+react-table@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.5.3.tgz#fd84371b97bcabed8308b766faeeaf4264b155c8"
+  dependencies:
+    classnames "^2.2.5"
+
 react-transition-group@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.2.0.tgz#793bf8cb15bfe91b3101b24bce1c1d2891659575"
@@ -5664,7 +5670,7 @@ reduce-function-call@^1.0.1:
 
 "redux-observable-crud@git+https://github.com/alexhenkel/redux-observable-crud.git":
   version "1.0.0"
-  resolved "git+https://github.com/alexhenkel/redux-observable-crud.git#42425364e3151118ccb2356a141a01f05cc1900f"
+  resolved "git+https://github.com/alexhenkel/redux-observable-crud.git#a7411608f4b3bdf6a8a34b01b63d26f9c259638b"
   dependencies:
     ramda "^0.24.1"
     redux "^3.7.2"

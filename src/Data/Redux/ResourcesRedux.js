@@ -2,30 +2,21 @@ import { createActions, createState, createReducer } from 'reduxsauce-crud';
 
 /* ------------- Types and Action Creators ------------- */
 
-export const OrdersRedux = createActions({}, {
-  prefix: 'ORDERS_',
+export const ResourcesRedux = createActions({}, {
+  prefix: 'RESOURCES_',
   defaultActions: {
     get: true,
-    getOne: true,
-    create: true,
-    update: true,
-    reset: true,
-    remove: true,
   },
 })
 
-const { Types, Creators } = OrdersRedux
-export const OrdersTypes = Types
+const { Types, Creators } = ResourcesRedux
+export const ResourcesTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = createState({}, {
   get: true,
-  getOne: true,
-  create: true,
-  update: true,
-  remove: true,
 })
 
 /* ------------- Reducers ------------- */
@@ -35,11 +26,6 @@ export const INITIAL_STATE = createState({}, {
 export const reducer = createReducer(INITIAL_STATE, {}, {
   defaultActions: {
     get: true,
-    getOne: true,
-    create: true,
-    update: true,
-    remove: true,
-    reset: true,
   },
   Types,
 })
