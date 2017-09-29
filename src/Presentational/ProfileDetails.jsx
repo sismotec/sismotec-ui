@@ -124,7 +124,6 @@ export default class ProfileDetails extends Component {
 
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
-    // this.props.handleChange(this.data, this.props.profile.id_propietario);
   }
 
   handleAddNeed() {
