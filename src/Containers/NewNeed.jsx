@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CatalogItem from '../Presentational/CatalogItem';
 import { GridList, GridListTile } from 'material-ui/GridList';
+import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid';
 import Search from '../Presentational/CustomRow/FuzzySearch';
 import ResourcesActions from '../Data/Redux/ResourcesRedux';
@@ -44,7 +45,8 @@ class NewNeed extends Component {
 		super(props);
 		this.data = {};
 		this.state = {
-			expanded: false
+			expanded: false,
+			filteredData: dats
 		};
 
 		this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -83,15 +85,38 @@ class NewNeed extends Component {
 		});
 	}
 
+	filterNeeds = (event) => {
+    let filterText = event.target.value;
+
+    if (filterText === "") {
+      this.setState({
+				filteredData: dats
+			});
+      return;
+    }
+    const filter = filterText.toLowerCase();
+    let newfilteredData = dats.filter((d) => {
+      return d.nombre.toLowerCase().indexOf(filter) > -1 || d.category.toLowerCase().indexOf(filter) > -1;
+    });
+    this.setState({filteredData: newfilteredData});
+  }
+
 	render() {
 		return (
 			<div className="container NewNeed">
 				<h1>Necesito</h1>
 				<h2>Selecciona los recursos que necesitas</h2>
-				<Search fullWidth onChange={_ => ''} value="" placeholder={"E.j. atun"} />
+				{/*<Search fullWidth onChange={_ => ''} value="" placeholder={"E.j. atun"} />*/}
+				<TextField
+            id="search"
+            label="Busca una necesidad"
+            type="search"
+            margin="normal"
+            onChange={ this.filterNeeds.bind(this) }
+          />
 				<div className="mainCatalog">
 					<GridList cols={5} spacing={20} cellHeight={200}>
-						{dats.map(item => (
+						{this.state.filteredData.map(item => (
 							<GridListTile
 								className="ResourceTile"
 								key={item.id}
