@@ -7,6 +7,7 @@ import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
+import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
 import '../index.css';
 
 class MyNeeds extends Component {
@@ -158,6 +159,22 @@ class MyNeeds extends Component {
   }
 }
 
+const confirmationDialog() {
+  return (
+    <Dialog
+      ignoreBackdropClick
+      ignoreEscapeKeyUp
+      maxWidth="xs"
+    >
+      <DialogTitle>Confirmaci&oacute;n</DialogTitle>
+      <DialogContent> Est&aacute;s seguro de que quieres borrar este recurso? </DialogContent>
+      <DialogActions>
+        <Button color="primary">S&iacute;</Button>
+        <Button color="error">No</Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
 const mapStateToProps = state => ({
   userId: state.user.userId,
   needs: state.needs.get.results,
