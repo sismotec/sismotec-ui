@@ -5,6 +5,12 @@ import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      type: props.match.params.type || 'beneficiary',
+    };
+  }
   static propTypes = {
     isAuth: PropTypes.bool,
     registerRequest: PropTypes.func,
@@ -15,7 +21,7 @@ class Register extends Component {
     // Redirect to dashboard
     if(this.props.isAuth) {
       this.props.navigateToDashboard();
-    }    
+    }
   }
   
 
