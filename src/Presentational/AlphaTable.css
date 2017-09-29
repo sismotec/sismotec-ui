@@ -100,6 +100,13 @@ body {
 	color: white !important;
 }
 
+.send-button{
+	width: 80% !important;
+	border-radius: 100%;
+	background-color: #bc9600 !important;
+	color: white !important;
+}
+
 .pdf-button{
 	width: 80% !important;
 	border-radius: 100%;

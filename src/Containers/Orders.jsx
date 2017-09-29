@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AlphaTable from "../Presentational/AlphaTable";
+import SavedForLaterTable from "../Presentational/SavedForLaterTable";
 import OrdersActions from '../Data/Redux/OrdersRedux';
 import PropTypes from 'prop-types';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
 import '../index.css';
 
 // let dummy = [
@@ -55,6 +57,12 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+const styles = theme => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+  },
+});
+
 class Orders extends React.Component {
   componentDidMount() {
     const { userId, ordersRequest } = this.props;
@@ -69,26 +77,33 @@ class Orders extends React.Component {
     this.setState({ value });
   };
 
+  handleChangeIndex = index => {
+    this.setState({ value: index });
+  };
+
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
 
     return (
       <div className="container">
         <h1>Donaciones</h1>
         <div className="tabcontainer">
-          <Tabs value={"0"} indicatorColor="primary" textColor="primary" fullWidth onChange={this.handleChange}>
-            <Tab value="0" label="Enviadas"></Tab>
-            <Tab value="1" label="Guardadas"></Tab>
+          <Tabs
+            value={this.state.value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
+          >
+            <Tab label="Enviadas" />
+            <Tab label="Guardadas" />
           </Tabs>
         </div>
-        {value === '0' && 
-            <TabContainer>{
-              <div>
-                <AlphaTable />
-              </div>}
-            </TabContainer>}
-        {value === '1' && <TabContainer>{'Item Two'}</TabContainer>}
+
+        <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
+          <TabContainer><AlphaTable /></TabContainer>
+          <TabContainer><SavedForLaterTable /></TabContainer>
+        </SwipeableViews>
       </div>
     )
   }
