@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
 import TextField from 'material-ui/TextField';
-import Input from 'material-ui/Input';
+import Input, { InputLabel } from 'material-ui/Input';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import Checkbox from 'material-ui/Checkbox';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
@@ -236,10 +236,12 @@ class Register extends Component {
               />
             </div>
             }
+            <br/>
+            <InputLabel className="MuiInput-input-113" htmlFor="phone-helper">Teléfono *</InputLabel>
             <Input
               required
               id="phone"
-              label="Teléfono/celular"
+              label="Teléfono"
               value={this.state.phone}
               onChange={this.handleChange('phone')}
               margin="normal"
