@@ -10,6 +10,8 @@ export default class NumberField extends Component {
   render() {
     return  <TextField
           id="name"
+          type="number"
+          min="0"
           defaultValue={this.props.value}
           onChange={this.handleChange}
         />

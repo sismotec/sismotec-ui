@@ -6,11 +6,22 @@ import LoginActions from '../Data/Redux/LoginRedux';
 import TextField from 'material-ui/TextField';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import Checkbox from 'material-ui/Checkbox';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import { FormControlLabel } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import { compose, withProps, lifecycle } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
+import MaskedInput from 'react-text-mask';
+
+const TextMaskCustom = (props) => (
+  <MaskedInput
+    {...props}
+    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+    placeholderChar={'\u2000'}
+    showMask
+  />
+)
 
 const MapWithAMarker = compose( withScriptjs, withGoogleMap)(props =>
   <GoogleMap
@@ -67,7 +78,7 @@ const PlacesWithStandaloneSearchBox = compose(
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
-          width: `240px`,
+          width: '100%',
           height: `32px`,
           padding: `0 12px`,
           borderRadius: `3px`,
@@ -164,6 +175,7 @@ class Register extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.password === this.state.passwordConfirmation) {
+      // eslint-disable-next-line
       var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (regex.test(this.state.email)) {
         this.props.registerRequest({
@@ -183,7 +195,7 @@ class Register extends Component {
   render() {
     return (
       <Dialog open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle>
+        <DialogTitle className="dialog-title">
           {this.props.registerType === 'Beneficiary' ? 'Registro de beneficiario' : 'Registro de Centro de Acopio'}
         </DialogTitle>
         <DialogContent style={{
@@ -192,6 +204,7 @@ class Register extends Component {
         }}>
           <form validate autoComplete="off">
             <TextField
+              fullWidth
               required
               id="name"
               label="Nombre"
@@ -225,16 +238,21 @@ class Register extends Component {
               />
             </div>
             }
-            <TextField
+            <br/>
+            <div><InputLabel className="phone-registry" htmlFor="phone-helper">Tel&eacute;fono *</InputLabel></div>
+            <Input
               required
+              fullWidth
               id="phone"
-              label="Teléfono/celular"
+              label="Teléfono"
               value={this.state.phone}
               onChange={this.handleChange('phone')}
               margin="normal"
+              inputComponent={TextMaskCustom}
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="email"
               label="Correo electrónico"
@@ -244,6 +262,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="password"
               label="Contraseña"
@@ -254,6 +273,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="passwordConfirmation"
               label="Confirmar contraseña"
@@ -263,7 +283,9 @@ class Register extends Component {
               margin="normal"
             />
             <br/>
-            <Button raised color="primary"
+            <Button raised 
+              type="submit"
+              className="dialog-button"
               onClick={this.handleSubmit}>
               Registrarme
             </Button>

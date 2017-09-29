@@ -15,8 +15,8 @@ const needsRequestEpic = (action$, store, { Api }) =>
 const needsCreateEpic = (action$, store, { Api }) =>
   action$
     .ofType(NeedsRedux.Types.createRequest)
-    .mergeMap(({ id, data }) => (
-      Api.needs.create(id, data)
+    .mergeMap(({ data }) => (
+      Api.needs.create(data)
         .then(response => response.data)
         .then(result => NeedsRedux.Creators.createSuccess(result))
         .catch(error => NeedsRedux.Creators.createError(error))
