@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import BeneficiaryCard from "../Presentational/BeneficiaryCard";
 import AlphaTable from "../Presentational/AlphaTable";
 import OrdersActions from '../Data/Redux/OrdersRedux';
 import Tabs, { Tab } from 'material-ui/Tabs';

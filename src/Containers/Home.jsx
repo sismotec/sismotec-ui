@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ResourcesActions from '../Data/Redux/ResourcesRedux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import ProfileDetails from '../Presentational/ProfileDetails';
-import BeneficiaryCard from '../Presentational/BeneficiaryCard';
+import ProfileCardsWrapper from '../Presentational/ProfileCardsWrapper';
 
 import GridList from 'material-ui/GridList';
 
@@ -61,18 +61,16 @@ class Home extends Component {
     console.log('n', needs);
     return (
       <div>
-        {needs && needs.map((b, index) => 
-          <BeneficiaryCard 
-            beneficiary={b} 
-            openProfileDetails={(id) => this.handleOpenProfileDetails(id)}
-            user={this.user}/>
-        )}
+        <ProfileCardsWrapper 
+          profiles = {needs}
+          openProfileDetails = {this.handleOpenProfileDetails}
+          user = {this.user} />
 
-      {needs && <ProfileDetails
-        open = {this.state.profileDetailsIsOpen}
-        user = {this.user}
-        close = {this.handleCloseProfileDetails}
-        profile = {needs.filter(b => (b.id === this.state.profileDetailsId)).lenght} />}
+        {needs && <ProfileDetails
+          open = {this.state.profileDetailsIsOpen}
+          user = {this.user}
+          close = {this.handleCloseProfileDetails}
+          profile = {needs.filter(b => (b.id == this.state.profileDetailsId))[0]} /> }
       </div>
     )
   }
