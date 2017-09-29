@@ -74,7 +74,8 @@ class NewNeed extends Component {
 		resources: [],
 	};
 
-	handleExpandClick(){
+	handleExpandClick(item){
+		console.log("Should expand for: " + item);
 		this.setState({ expanded: !this.state.expanded });
 	}
 
@@ -112,20 +113,12 @@ class NewNeed extends Component {
             label="Busca una necesidad"
             type="search"
             margin="normal"
-            onChange={ this.filterNeeds.bind(this) }
+            onTouchTap={ this.filterNeeds.bind(this) }
           />
 				<div className="mainCatalog">
 					<GridList cols={5} spacing={20} cellHeight={200}>
 						{this.state.filteredData.map(item => (
-							<GridListTile
-								className="ResourceTile"
-								key={item.id}
-								item = {item}
-							>
-								<p className="resourceName">{item.nombre}</p>
-								<img className="resourceImg" src={process.env.PUBLIC_URL + '/icons/airplane.svg'} alt=""/>
-								<p className="resourceCategory">{item.category}</p>
-							</GridListTile>
+								<CatalogItem item={item} />
 							)
 						)}
 					</GridList>

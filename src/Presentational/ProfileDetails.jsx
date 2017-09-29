@@ -23,6 +23,7 @@ export default class ProfileDetails extends Component {
     this.data = [];
     this.dialogActions = null;
     this.tableHeader = null;
+    this.tableFooter = null;
 
     this.state = {
       field: []
@@ -70,7 +71,7 @@ export default class ProfileDetails extends Component {
     }
 
     else if(nextProps.user.type == "collectionCenter") {
-      this.state.fields = this.data.map(d => [
+      this.state.fields = this.data && this.data.map(d => [
         {
           type: "Label",
           value: d.nombre,
@@ -110,11 +111,16 @@ export default class ProfileDetails extends Component {
             ENVIAR
           </Button>
         </DialogActions>;
+
+      this.tableFooter = <TableFooter>
+          <Button onClick={() => this.handleAddNeed()}>+</Button>
+        </TableFooter>
     }
   }
 
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
+    this.props.handleChange(updatedNeed, id);
   }
 
   handleAddNeed() {
@@ -148,10 +154,28 @@ export default class ProfileDetails extends Component {
         ]
       ]
     });
+    let newId = this.data[this.data.length-1].id + 1;
+    let newNeed = {
+      id: newId,
+      nombre: "",
+      categoria: "",
+      unidad: "",
+      cantidad: 0,
+      aportacion: 0
+    };
+    this.data = [
+      ...this.data,
+      newNeed,
+    ];
+    this.props.addNeed(newNeed, this.props.profile.id);
   }
 
   deleteNeed(index) {
-    //this.props.deleteNeed(this.data[index].id);
+    this.props.deleteNeed(this.data[index], this.props.profile.id);
+
+    var newFields = this.state.fields.slice(); //copy array
+    newFields.splice(index, 1); //remove element
+    this.setState({fields: newFields}); //update state
   }
 
   render() {
@@ -169,9 +193,7 @@ export default class ProfileDetails extends Component {
               this.state.fields.map((field, index) => <CustomRow need={field} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
             }
           </TableBody>
-          <TableFooter>
-            <Button onClick={() => this.handleAddNeed()}>+</Button>
-          </TableFooter>
+          {this.tableFooter}
         </Table>
         </DialogContent>
         {this.dialogActions}
