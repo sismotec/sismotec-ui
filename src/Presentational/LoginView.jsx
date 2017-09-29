@@ -80,65 +80,27 @@ export default class LoginView extends Component {
           <div>
             <p className="p-caption"> ¿Aún no tienes cuenta?</p>
             <p className="p-subcaption"> Regístrate como:</p>
-            <div>
-<<<<<<< HEAD
-                <TextField 
-                    className="dialog-textfield"
-                    name='username'
-                    ref='username'
-                    type='text'
-                    label='Correo'
-                    id='username'
-                    autoCorrect='off'
-                    autoCapitalize='off'
-                    spellCheck='false'
-                    defaultValue={this.props.username}
-                    onChange={() => this.props.handleChange}
-                    type="email"/>
-            </div>
-            <div>
-                <TextField
-                    className="dialog-textfield"
-                    name='password'
-                    ref='password'
-                    label='Contraseña'
-                    id='password'
-                    type='password'
-                    defaultValue={this.props.password}
-                    onChange={() => this.props.handleChange}/>
-            </div>
             <br></br>
             <div>
+              <div>
                 <Button
-                    className="dialog-button"
-                    raised
-                    type='submit'
-                    color="primary"
-                    onSubmit={() => this.props.handleSubmit}>
-                Entrar
+                  className="dialog-button"
+                  raised
+                  type='submit'
+                  color="primary"
+                  onSubmit={() => this.props.handleAyuda}>
+                  Beneficiario
+                      </Button>
+                <br></br>
+                <Button
+                  className="dialog-button"
+                  raised
+                  type='submit'
+                  color="primary"
+                  onSubmit={() => this.props.handleAcopio}>
+                  Centro de acopio            
                 </Button>
-            </div>
-            <br></br>
-            <div>
-                <p className="p-caption"> ¿Aún no tienes cuenta? </p>
-                <div>
-                  <Button
-                    className="dialog-button"
-                    raised
-                    type='submit'
-                    color="primary"
-                    onSubmit={() => this.props.handleAyuda}>
-                    Beneficiario
-                        </Button>
-                  <br></br>
-                  <Button
-                    className="dialog-button"
-                    raised
-                    type='submit'
-                    color="primary"
-                    onSubmit={() => this.props.handleAcopio}>
-                    Centro de acopio            
-                  </Button>
+              </div>
             </div>
           </div>
         </form>
