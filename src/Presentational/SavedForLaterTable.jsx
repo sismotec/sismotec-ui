@@ -9,66 +9,93 @@ import Button from 'material-ui/Button';
 import NumberField from '../Presentational/CustomRow/NumberField';
 import Label from '../Presentational/CustomRow/Label';
 
-
-let dummy = [
-	{
-		id: 23290309,
-		beneficiario: 'Lorem ipsum',
-		tiempos: {
-			estimado: '2 horas',
-			creado: Date.now(),
-		},
-		needs: [
-			{
-				id: 1,
-				nombre: "Agua",
-				cantidad: 3,
-				unidad: "Litros",
-			},
-			{
-				id: 2,
-				nombre: "Atun",
-				cantidad: 100,
-				unidad: "Gramos",
-			},
-			{
-				id: 3,
-				nombre: "Cobijas",
-				cantidad: 3,
-				unidad: "unidades",
-			}
-		]
-	}
-]
-
 export default class SavedForLater extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.deleteNeed = this.deleteNeed.bind(this);
+        this.data = [];
+        this.dialogActions = null;
+        this.tableHeader = null;
+        this.tableFooter = null;
 
+        this.dummy=
+            {
+                id: 23290309,
+                beneficiario: 'Lorem ipsum',
+                tiempos: {
+                    estimado: '2 horas',
+                    creado: Date.now(),
+                },
+                needs: [
+                    {
+                        id: 1,
+                        nombre: "Agua",
+                        cantidad: 3,
+                        unidad: "Litros",
+                    },
+                    {
+                        id: 2,
+                        nombre: "Atun",
+                        cantidad: 100,
+                        unidad: "Gramos",
+                    },
+                    {
+                        id: 3,
+                        nombre: "Cobijas",
+                        cantidad: 3,
+                        unidad: "unidades",
+                    }
+                ]
+            };
 
-	parseNeeds() {
-		let needs = dummy[0].needs;
-		return needs.map(d => [
-		        {
-		          type: "Label",
-		          value: d.nombre,
-		          key: "nombre"
-		        },
-		        {
-		          type: "NumberField",
-		          value: d.cantidad,
-		          key: "cantidad"
-		        },
-		        {
-		          type: "Label",
-		          value: d.unidad,
-		          options: [d.unidad],
-		          key: "unidad"
-		        },
-		        {
-        			type: "Delete"
-		        }
-		])
-	}
+        this.state = {
+            field: []
+        };
+
+        console.log(this.dummy);
+        console.log(this.dummy.needs);
+
+        this.data = this.dummy.needs.map(d => ({
+            ...d,
+        }));
+
+        this.state.fields = this.dummy.needs.map(d => [
+            {
+                type: "Label",
+                value: d.nombre,
+                key: "nombre"
+            },
+            {
+                type: "NumberField",
+                value: d.cantidad,
+                key: "cantidad"
+            },
+            {
+                type: "Label",
+                value: d.unidad,
+                options: [d.unidad],
+                key: "unidad"
+            },
+            {
+                type: "Delete"
+            }
+        ]);
+    }
+
+    handleChange(updatedNeed, id) {
+        this.data[id] = updatedNeed;
+        // this.props.handleChange(this.data, this.props.profile.id_propietario);
+    }
+
+    deleteNeed(index) {
+        this.props.deleteNeed(this.data[index], this.dummy.id);
+
+        var newFields = this.state.fields.slice(); //copy array
+        newFields.splice(index, 1); //remove element
+        this.setState({fields: newFields}); //update state
+    }
 
 	getTrigger() {
 		return (
@@ -119,7 +146,7 @@ export default class SavedForLater extends React.Component {
 														</TableRow>
 													</TableHead>
 													<TableBody>
-														{this.parseNeeds().map((n, index) => <CustomRow need={n} key={index} />)}
+														{this.state.fields.map((n, index) => <CustomRow data={this.data[index]} need={n} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)}
 													</TableBody>
 												</Table>
 											</div>
