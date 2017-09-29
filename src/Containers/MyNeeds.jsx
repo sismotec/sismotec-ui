@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Table, { TableBody } from 'material-ui/Table';
 // import { push } from 'react-router-redux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
@@ -12,6 +11,8 @@ import Way from "../Presentational/Way";
 import ReceivedTable from "../Presentational/ReceivedTable";
 import '../index.css';
 import SwipeableViews from 'react-swipeable-views';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+
 
 function TabContainer(props) {
   return <div style={{ padding: 20 }}>{props.children}</div>;
@@ -48,21 +49,21 @@ class MyNeeds extends Component {
     this.needs = [
       {
         id: 1,
-        nombre: "agua",
+        nombre: "Agua",
         cantidad: 3,
         unidad: "litros",
       },
       {
         id: 2,
-        nombre: "atun",
+        nombre: "Atun",
         cantidad: 100,
         unidad: "gramos",
       },
       {
         id: 3,
-        nombre: "cobijas",
+        nombre: "Cobijas",
         cantidad: 3,
-        unidad: "cobijas",
+        unidad: "unidades",
       },
       {
         type: "Delete",
@@ -113,16 +114,6 @@ class MyNeeds extends Component {
           value: d.unidad,
           options: [d.unidad],
           key: "unidad"
-        },
-        {
-          type: "Button",
-          label: 'Mark complete',
-          onClick: 'markComplete',
-          key: "btn",
-          props: {
-            raised: true,
-            color: "primary"
-          }
         },
         {
           type: "Delete",
@@ -197,23 +188,30 @@ class MyNeeds extends Component {
     return(
     <div className="container MyNeeds">
       <h1>Mis necesidades</h1>
-      <div className="tabcontainer" style={{marginBottom:40}}>
-        <Tabs
+        <div className="tabcontainer">
+          <Tabs
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
             fullWidth
           >
-          <Tab label="Activas"></Tab>
-          <Tab label="En camino"></Tab>
-          <Tab label="Recibidas"></Tab>
-        </Tabs>
-        <hr/>
+            <Tab label="Activas"></Tab>
+            <Tab label="En camino"></Tab>
+            <Tab label="Recibidas"></Tab>
+          </Tabs>
       </div>
       <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
           <TabContainer>
             <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Recursos</TableCell>
+                  <TableCell>Cantidad</TableCell>
+                  <TableCell>Unidad</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
               <TableBody>
                 {
                   this.fields.map((n, index) => 
