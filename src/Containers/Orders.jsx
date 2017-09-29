@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BeneficiaryCard from "../Presentational/BeneficiaryCard";
-import EnhancedTable from "../Presentational/OrdersTable";
+import AlphaTable from "../Presentational/AlphaTable";
 import OrdersActions from '../Data/Redux/OrdersRedux';
-
+import Tabs, { Tab } from 'material-ui/Tabs';
+import '../index.css';
 function getDummyData() {
   return [
         {
@@ -55,20 +56,19 @@ class Orders extends Component {
   }
   
   render() {
-    const { data } = this.state;
+    // const { data } = this.state;
 
     return (
-      <div>
-        <BeneficiaryCard 
-          name="Gaby Paez"
-          mapsurl="http://maps.google.com"
-          address="Valle de la Esperanza 543 Col. Roma, Monterrey, Nuevo León, México."
-          tags={["Alimentos", "Medicamentos", "Voluntariados"]}/>
+      <div className="container">
+        <h1>Mis donaciones</h1>
+        <div className="tabcontainer">
+          <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
+            <Tab label="Enviadas"></Tab>
+            <Tab label="Guardadas"></Tab>
+          </Tabs>
+        </div>
 
-        <br></br>
-
-        <EnhancedTable type="SENDER" data={getDummyData()} />
-        
+        <AlphaTable />
       </div>
     )
   }
