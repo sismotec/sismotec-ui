@@ -9,6 +9,7 @@ import Button from 'material-ui/Button';
 import NumberField from '../Presentational/CustomRow/NumberField';
 import Label from '../Presentational/CustomRow/Label';
 
+
 let dummy = [
 	{
 		id: 23290309,
@@ -20,27 +21,30 @@ let dummy = [
 		needs: [
 			{
 				id: 1,
-				nombre: "agua",
+				nombre: "Agua",
 				cantidad: 3,
-				unidad: "litros",
+				unidad: "Litros",
 			},
 			{
 				id: 2,
-				nombre: "atun",
+				nombre: "Atun",
 				cantidad: 100,
-				unidad: "gramos",
+				unidad: "Gramos",
 			},
 			{
 				id: 3,
-				nombre: "cobijas",
+				nombre: "Cobijas",
 				cantidad: 3,
-				unidad: "cobijas",
+				unidad: "unidades",
 			}
 		]
 	}
 ]
 
-export default class AlphaTable extends React.Component {
+export default class SavedForLater extends React.Component {
+
+
+
 	parseNeeds() {
 		let needs = dummy[0].needs;
 		return needs.map(d => [
@@ -50,7 +54,7 @@ export default class AlphaTable extends React.Component {
 		          key: "nombre"
 		        },
 		        {
-		          type: "Label",
+		          type: "NumberField",
 		          value: d.cantidad,
 		          key: "cantidad"
 		        },
@@ -59,9 +63,13 @@ export default class AlphaTable extends React.Component {
 		          value: d.unidad,
 		          options: [d.unidad],
 		          key: "unidad"
+		        },
+		        {
+        			type: "Delete"
 		        }
 		])
 	}
+
 	getTrigger() {
 		return (
 			<div>
@@ -70,16 +78,19 @@ export default class AlphaTable extends React.Component {
 						<TableRow>
 							<TableCell className="to-name">San Juan Bosco</TableCell>
 							<TableCell>
-								<div style={{marginBottom: 10}}>Tiempo estimado: 20 dias</div> 
-								<div>Fecha de env&iacute;o: 25/06/17</div> 
+								<div>10 art&iacute;culos</div> 
 							</TableCell>
-							<TableCell> <p className="status">Enviado</p> </TableCell>
+							<TableCell> 
+								<Button className="send-button" style={{width: '30%'}} raised>Enviar
+								</Button> 
+							</TableCell>
 						</TableRow>
 					</TableBody>
 				</Table>
 			</div>
 		)
 	}
+
 	render() {
 		return (
 			<div className="AlphaTable">
@@ -88,8 +99,8 @@ export default class AlphaTable extends React.Component {
 						<TableHead>
 							<TableRow className="main-header">
 								<TableCell>Beneficiario</TableCell>
-								<TableCell>Tiempos estimados</TableCell>
-								<TableCell>Estatus</TableCell>
+								<TableCell>Cantidad de art&iacute;culos</TableCell>
+								<TableCell></TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -104,6 +115,7 @@ export default class AlphaTable extends React.Component {
 															<TableCell>Recurso</TableCell>
 															<TableCell>Cantidad</TableCell>
 															<TableCell>Unidad</TableCell>
+															<TableCell>Borrar</TableCell>
 														</TableRow>
 													</TableHead>
 													<TableBody>
@@ -112,9 +124,7 @@ export default class AlphaTable extends React.Component {
 												</Table>
 											</div>
 											<div className="right">
-												<Button className="pdf-button" style={{width: '50%', marginBottom: 20}} raised>Ver PDF</Button>
-												<br/>
-												<Button className="cancel-button" style={{width: '50%'}} raised>Cancelar</Button>
+												<Button className="pdf-button" style={{width: '50%'}} raised>Guardar</Button>
 											</div>
 										</div>
 									</Collapsible>

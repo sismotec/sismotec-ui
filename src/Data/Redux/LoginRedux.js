@@ -34,11 +34,11 @@ const request = state => state.merge({ fetching: true });
 const success = (state, { result }) => state.merge({ 
   fetching: false, 
   userId: result.id, 
-  userType: result.tipo === 'Centro de acopio' ? 'collectionCenter' : 'beneficiary',
+  userType: result.isBen || result.tipo !== 'Centro de acopio' ? 'beneficiary' : 'collectionCenter',
   error: null 
 });
 const error = (state, { error }) => state.merge({ fetching: false, error });
-const logout = state => state.merge({ userId: null, });
+const logout = state => state.merge({ userId: null, userType: 'guest' });
 
 /* ------------- Hookup Reducers To Types ------------- */
 
