@@ -17,7 +17,7 @@ const registerRequestEpic = (action$, store, { Api }) =>
     .ofType(LoginRedux.Types.registerRequest)
     .mergeMap(({ data }) => (
       Api.login.registerRequest(data)
-        .then(response => response)
+        .then(response => response.data)
         .then(result => LoginRedux.Creators.registerSuccess(result))
         .catch(error => LoginRedux.Creators.registerError(error))
     ))

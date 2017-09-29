@@ -5,7 +5,6 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar'
 import '../../index.css';
 import Title from './Title';
-import Colors from 'material-ui/colors';
 
 export default class Guest extends Component {
   render() {

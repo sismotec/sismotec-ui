@@ -12,6 +12,13 @@ class Login extends Component {
     navigateToDashboard: PropTypes.func,
   };
 
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAyuda = this.handleAyuda.bind(this);
+    this.handleAcopio = this.handleAcopio.bind(this);
+  }
+
   componentWillMount() {
     // Redirect to dashboard
     if(this.props.isAuth) {
@@ -19,7 +26,6 @@ class Login extends Component {
     }    
   }
   
-
   componentWillReceiveProps(nextProps) {
     if(nextProps.isAuth) {
       // Redirect to dashboard
@@ -27,62 +33,31 @@ class Login extends Component {
     }    
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-        username: '',
-        password: ''
-      };
+  handleSubmit(username, password) {
+    this.props.loginRequest({
+        responsibleEmail: username,
+        password: password
+    })
+  }
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleAyuda = this.handleAyuda.bind(this);
-      this.handleAcopio = this.handleAcopio.bind(this);
-    }
+  handleAyuda(event) {
+      alert('Create new account');
+      event.preventDefault();
+      alert('Create new account');
+  }
 
-    handleChange(event) {
-      const targetName = event.target.name;
-
-      let newstate = {
-            username: this.state.username,
-            password: this.state.password
-        };
-
-      newstate[targetName]=event.target.value;
-      this.setState(newstate);
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.loginRequest({
-            responsibleEmail: this.state.username,
-            password: this.state.password
-        })
-    }
-
-    handleAyuda(event) {
-        alert('Create new account');
-        event.preventDefault();
-        alert('Create new account');
-    }
-
-    handleAcopio(event) {
-        alert('Create new account');
-        event.preventDefault();
-        alert('Create new account');
-    }
-
-
+  handleAcopio(event) {
+      alert('Create new account');
+      event.preventDefault();
+      alert('Create new account');
+  }
   
   render() {
     return (
-        <LoginView
-            handleChange={this.handleChange} 
+        <LoginView 
             handleSubmit={this.handleSubmit} 
             handleAcopio={this.handleAcopio} 
             handleAyuda={this.handleAyuda}
-            username={this.state.username}
-            password={this.state.password}
             open={this.props.open}
             closeLogin={this.props.closeLogin}/>
     )
