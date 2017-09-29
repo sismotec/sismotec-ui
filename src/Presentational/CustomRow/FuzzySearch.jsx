@@ -17,11 +17,12 @@ export default class FuzzySearch extends Component {
         <MenuItem value={d.value}>{d.value}</MenuItem>
       })
     }
-    
+
     return (
       <FormControl>
         <InputLabel htmlFor="age-helper">Age</InputLabel>
         <Select
+          native
           value={this.props.value}
           onChange={this.handleChange}
           input={<Input id="fuzzy-input" />}>
