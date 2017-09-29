@@ -16,7 +16,7 @@ export default class NewNeedView extends Component {
     };
 
     handleChange(updatedNeed, id) {
-        this.data[id] = updatedNeed;
+        this.data = updatedNeed;
     }
 
     addNeed(){
@@ -28,7 +28,8 @@ export default class NewNeedView extends Component {
         // getNeeds(userId)
         console.log(this.props);
 
-        this.data = {...this.props.item};
+        // this.data = {...this.props.item};
+        this.data = Object.assign({}, this.props.item)
         console.log('hhhh', this.data)
         this.fields = [
                 {
@@ -62,17 +63,17 @@ export default class NewNeedView extends Component {
                     </Typography>
                 </CardContent>
             </Card>
-            <Collapse in={this.state.expanded}>
-                
-                    <CardContent>
-                        <Table >
-                            <TableBody>
-                                <CustomRow need={this.fields} id={0} handleChange={this.handleChange} addAction={this.addNeed}/>
-                            </TableBody>
-                        </Table>
-                    </CardContent>
-
-            </Collapse>
+            {/*<Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit  >*/}
+            <div>
+                <CardContent>
+                    <Table >
+                        <TableBody>
+                            <CustomRow need={this.fields} id={0} handleChange={this.handleChange} addAction={this.addNeed}/>
+                        </TableBody>
+                    </Table>
+                </CardContent>
+            </div>
+            {/*</Collapse>*/}
         </div>
     )
   }
