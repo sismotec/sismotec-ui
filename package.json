@@ -22,7 +22,8 @@
     "redux-persist": "^4.10.1",
     "reduxsauce": "^0.7.0",
     "reduxsauce-crud": "git+https://github.com/alexhenkel/reduxsauce-crud.git",
-    "rxjs": "^5.4.3"
+    "rxjs": "^5.4.3",
+    "tab-container-component": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

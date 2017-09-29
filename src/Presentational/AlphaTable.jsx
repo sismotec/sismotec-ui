@@ -70,7 +70,7 @@ export default class AlphaTable extends React.Component {
 						<TableRow>
 							<TableCell className="to-name">San Juan Bosco</TableCell>
 							<TableCell>
-								<div>Tiempo estimado: 20 dias</div> 
+								<div style={{marginBottom: 10}}>Tiempo estimado: 20 dias</div> 
 								<div>Fecha de env&iacute;o: 25/06/17</div> 
 							</TableCell>
 							<TableCell> <p className="status">Enviado</p> </TableCell>
@@ -112,9 +112,9 @@ export default class AlphaTable extends React.Component {
 												</Table>
 											</div>
 											<div className="right">
-												<Button className="cancel-button" style={{width: '50%', marginBottom: 20}} raised>Cancelar</Button>
+												<Button className="pdf-button" style={{width: '50%', marginBottom: 20}} raised>Ver PDF</Button>
 												<br/>
-												<Button className="pdf-button" style={{width: '50%'}} raised>Ver PDF</Button>
+												<Button className="cancel-button" style={{width: '50%'}} raised>Cancelar</Button>
 											</div>
 										</div>
 									</Collapsible>

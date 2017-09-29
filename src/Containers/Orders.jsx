@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AlphaTable from "../Presentational/AlphaTable";
 import OrdersActions from '../Data/Redux/OrdersRedux';
+import PropTypes from 'prop-types';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import '../index.css';
+
 // let dummy = [
 //     {
 //       id: '823648',
@@ -45,25 +47,48 @@ import '../index.css';
 //       }]
 //       }
 // ];
+function TabContainer(props) {
+  return <div style={{ padding: 20 }}>{props.children}</div>;
+}
 
-class Orders extends Component {
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+class Orders extends React.Component {
   componentDidMount() {
     const { userId, ordersRequest } = this.props;
     ordersRequest(userId);
   }
-  
+
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
+    const { classes } = this.props;
+    const { value } = this.state;
+
     return (
       <div className="container">
-        <h1>Mis donaciones</h1>
+        <h1>Donaciones</h1>
         <div className="tabcontainer">
-          <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
-            <Tab label="Enviadas"></Tab>
-            <Tab label="Guardadas"></Tab>
+          <Tabs value={"0"} indicatorColor="primary" textColor="primary" fullWidth onChange={this.handleChange}>
+            <Tab value="0" label="Enviadas"></Tab>
+            <Tab value="1" label="Guardadas"></Tab>
           </Tabs>
         </div>
-
-        <AlphaTable />
+        {value === '0' && 
+            <TabContainer>{
+              <div>
+                <AlphaTable />
+              </div>}
+            </TabContainer>}
+        {value === '1' && <TabContainer>{'Item Two'}</TabContainer>}
       </div>
     )
   }

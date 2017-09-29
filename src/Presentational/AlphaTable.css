@@ -1,6 +1,5 @@
 *{
 	box-sizing: border-box;
-  	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
 }
 
 body {
@@ -44,15 +43,15 @@ body {
 	border-top: 0;
 }
 
-.Collapsible__trigger tr{
-	background-color: #00BCD4;
+.Collapsible__trigger.is-open tr{
+	background-color: #472e63;
 	color: white;
 }
 
 .main-header{
 	background-color: #374046 !important;
 	color: white !important;
-	font-size: 100%;
+	font-size: 120%;
 }
 
 .hello .Collapsible{
@@ -86,6 +85,7 @@ body {
 
 .to-name{
 	font-size: 200% !important;
+	padding: 2% !important;
 }
 
 .to-name td{
@@ -103,12 +103,12 @@ body {
 .pdf-button{
 	width: 80% !important;
 	border-radius: 100%;
-	background-color: #953D94 !important;
+	background-color: #0099BC !important;
 	color: white !important;
 }
 
 .status{
-	background-color: #953D94;
+	background-color: #0099BC;
 	line-height: 200%;
 	width: 40%;
 	margin: 0 auto;
