@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { clone } from 'ramda';
 
 import Dialog, {
     DialogActions,
@@ -39,7 +40,10 @@ export default class ProfileDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.data = nextProps.profile && nextProps.profile.recursos;
+    this.data = nextProps.profile && clone(nextProps.profile.recursos.map(d => ({
+      ...d,
+      aportacion: d.cantidad,
+    })));
 
     if(nextProps.user.type == "guest") {
         this.state.fields = this.data && this.data.map(d => [
@@ -89,7 +93,7 @@ export default class ProfileDetails extends Component {
         },
         {
           type: "NumberField",
-          value: 0,
+          value: d.aportacion,
           key: "aportacion"
         },
       ]);
@@ -107,7 +111,7 @@ export default class ProfileDetails extends Component {
           <Button onClick={() => nextProps.handleViewLater(this.data)}>
             VER MÁS TARDE
           </Button>
-          <Button onClick={() => nextProps.handleSend(this.data)}>
+          <Button onClick={() => nextProps.handleSend(this.data, this.props.profile)}>
             ENVIAR
           </Button>
         </DialogActions>;
@@ -120,7 +124,7 @@ export default class ProfileDetails extends Component {
 
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
-    this.props.handleChange(updatedNeed, id);
+    // this.props.handleChange(this.data, this.props.profile.id_propietario);
   }
 
   handleAddNeed() {
@@ -190,7 +194,7 @@ export default class ProfileDetails extends Component {
           <TableBody>
             {
               this.props.profile &&
-              this.state.fields.map((field, index) => <CustomRow need={field} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
+              this.state.fields.map((field, index) => <CustomRow data={this.data[index]} need={field} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
             }
           </TableBody>
           {this.tableFooter}

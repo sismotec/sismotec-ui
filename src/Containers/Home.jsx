@@ -14,7 +14,6 @@ class Home extends Component {
     }
     this.handleCloseProfileDetails = this.handleCloseProfileDetails.bind(this);
     this.handleOpenProfileDetails = this.handleOpenProfileDetails.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleAddNeedToOrder = this.handleAddNeedToOrder.bind(this);
     this.handleDeleteNeedFromOrder = this.handleDeleteNeedFromOrder.bind(this);
     this.user = {};
@@ -34,28 +33,6 @@ class Home extends Component {
         type: nextProps.userType
       }
     }
-  }
-
-  handleChange(updatedNeed, id_need, id_profile) {
-    /*A change has to do with your order */
-    let profile = this.props.needs && this.props.needs.map(b => {
-      if(b.id_propietario == id_profile) {
-        return b
-      }
-    })[0];
-    profile.recursos.map(r => r = r.id == id_need? updatedNeed : r);
-
-    this.orders = (this.orders && this.orders.length>0) ? this.orders.map((o) => {
-      if(o.destinatario && o.destinatario == id_profile) {
-        if(o.recursos){
-          o.recursos.map((r) => {
-            if(r.id && r.id == id_need) {
-              r = updatedNeed;
-            }
-          })
-        }
-      }
-    }) : this.orders;
   }
 
   handleAddNeedToOrder(newNeed, id_profile) {
@@ -86,9 +63,14 @@ class Home extends Component {
     console.log(data);
   }
 
-  handleSend = (data) => {
-    //TODO: dispatch redux action
-    console.log(data);
+  handleSend = (data, { id_propietario, latitud, longitud }) => {
+    this.props.createNeed({
+      id_centro_de_acopio: this.props.userId,
+      id_propietario,
+      latitud,
+      longitud,
+      recursos: data,
+    });
   }
 
   handleDeleteNeedFromOrder = (id_need, id_profile) => {
@@ -112,7 +94,6 @@ class Home extends Component {
 
   render() {
     const { needs } = this.props;
-    console.log('n', needs);
     return (
       <div>
         <ProfileCardsWrapper 
@@ -126,7 +107,8 @@ class Home extends Component {
           close = {this.handleCloseProfileDetails}
           profile = {needs.filter(b => (b.id_propietario == this.state.profileDetailsId))[0]} 
           deleteNeed = {this.handleDeleteNeedFromOrder}
-          addNeed = {this.handleAddNeedToOrder}/> }
+          addNeed = {this.handleAddNeedToOrder}
+          handleSend={this.handleSend}/> }
       </div>
     )
   }
@@ -139,7 +121,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   getResources: () => dispatch(ResourcesActions.getRequest()),
-  getNeeds: data => dispatch(NeedsActions.getOneRequest(data))
+  getNeeds: data => dispatch(NeedsActions.getOneRequest(data)),
+  createNeed: data => dispatch(NeedsActions.createRequest(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
