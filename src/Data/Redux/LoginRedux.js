@@ -38,7 +38,7 @@ const success = (state, { result }) => state.merge({
   error: null 
 });
 const error = (state, { error }) => state.merge({ fetching: false, error });
-const logout = state => state.merge({ userId: null, });
+const logout = state => state.merge({ userId: null, userType: 'guest' });
 
 /* ------------- Hookup Reducers To Types ------------- */
 

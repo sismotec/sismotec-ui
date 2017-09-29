@@ -8,6 +8,7 @@ import Guest from '../Presentational/Headers/Guest';
 import Beneficiary from '../Presentational/Headers/Beneficiary';
 import CollectionCenter from '../Presentational/Headers/CollectionCenter';
 import ProfileDetails from '../Presentational/ProfileDetails';
+import LoginActions from '../Data/Redux/LoginRedux';
 
 class Layout extends Component {
   static propTypes = {
@@ -36,7 +37,7 @@ class Layout extends Component {
         <div>
           {
             userType == 'collectionCenter' && 
-            <CollectionCenter navigateTo={this.props.navigateTo}/>}
+            <CollectionCenter navigateTo={this.props.navigateTo} logout={this.props.logout} />}
           {
             userType == 'guest' && <div>
             <Guest 
@@ -60,7 +61,7 @@ class Layout extends Component {
               registerType={'Center'}/>
             </div>
           }
-          {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
+          {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo} logout={this.props.logout} />}
         </div>
         {needsAuth && userType === 'guest' && <div>
           No autorizado
@@ -112,6 +113,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  logout: data => dispatch(LoginActions.logout()),
   navigateTo: route => dispatch(push(route))
 });
 
