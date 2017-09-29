@@ -71,12 +71,12 @@ export default class AlphaTable extends React.Component {
 				<Table>
 					<TableBody>
 						<TableRow>
-							<TableCell>San Juan Bosco</TableCell>
+							<TableCell className="to-name">San Juan Bosco</TableCell>
 							<TableCell>
-								Tiempo estimado: 20 dias <br/>
-								Fecha de env&iacute;o: 25/06/17
+								<div>Tiempo estimado: 20 dias</div> 
+								<div>Fecha de env&iacute;o: 25/06/17</div> 
 							</TableCell>
-							<TableCell> Enviado </TableCell>
+							<TableCell> <p className="status">Enviado</p> </TableCell>
 						</TableRow>
 					</TableBody>
 				</Table>
@@ -89,7 +89,7 @@ export default class AlphaTable extends React.Component {
 				<Paper>
 					<Table>
 						<TableHead>
-							<TableRow>
+							<TableRow className="main-header">
 								<TableCell>Beneficiario</TableCell>
 								<TableCell>Tiempos estimados</TableCell>
 								<TableCell>Estatus</TableCell>
@@ -115,9 +115,9 @@ export default class AlphaTable extends React.Component {
 												</Table>
 											</div>
 											<div className="right">
-												<Button style={{width: '50%', marginBottom: 20, marginLeft: '40%'}} raised color="error">Cancelar</Button>
+												<Button className="cancel-button" style={{width: '50%', marginBottom: 20}} raised>Cancelar</Button>
 												<br/>
-												<Button style={{width: '50%', marginLeft: '40%'}} raised color="secondary">Ver PDF</Button>
+												<Button className="pdf-button" style={{width: '50%'}} raised>Ver PDF</Button>
 											</div>
 										</div>
 									</Collapsible>
