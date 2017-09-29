@@ -64,6 +64,18 @@ const styles = theme => ({
 });
 
 class Orders extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            profileDetailsIsOpen: false,
+            profileDetailsId: 0
+        }
+        this.handleDeleteNeedFromOrder = this.handleDeleteNeedFromOrder.bind(this);
+        this.user = {};
+        this.orders = [];
+    }
+
   componentDidMount() {
     const { userId, ordersRequest } = this.props;
     ordersRequest(userId);
@@ -80,6 +92,25 @@ class Orders extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
+    handleDeleteNeedFromOrder = (id_need, id_profile) => {
+        let {order_index, need_index} = (this.orders && this.orders.length>0) ? this.orders.map((o, o_i) => {
+            if(o.destinatario && o.destinatario == id_profile){
+                if(o.recursos){
+                    let n_i = o.recursos.map((r, index) => {
+                        if(r == id_need) {
+                            return index
+                        }
+                    })
+                    return {o_i, n_i};
+                }
+            }
+        }) : this.orders;
+
+
+        if (this.orders && this.orders.length>0)
+            this.orders[order_index].recursos.splice(need_index, 1);
+    }
 
   render() {
     const { classes } = this.props;
@@ -102,7 +133,7 @@ class Orders extends React.Component {
 
         <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
           <TabContainer><AlphaTable /></TabContainer>
-          <TabContainer><SavedForLaterTable /></TabContainer>
+          <TabContainer><SavedForLaterTable deleteNeed = {this.handleDeleteNeedFromOrder}/></TabContainer>
         </SwipeableViews>
       </div>
     )

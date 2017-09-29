@@ -33,11 +33,11 @@ export default class ProfileDetails extends Component {
   static propTypes = {
     needs: PropTypes.array,
     getNeeds: PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     needs: [],
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     this.data = nextProps.profile && clone(nextProps.profile.recursos.map(d => ({
