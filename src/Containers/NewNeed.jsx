@@ -16,42 +16,37 @@ import './NewNeed.css';
 
 
 let dummydata = [
-	["Atún", "Alimentos"],
-	["Agua", "Alimentos"],
-	["Azúcar", "Alimentos"],
-	["Sal", "Alimentos"],
-	["Pala", "Herramientas"],
-	["Jeringas", "Medicamentos"],
-	["Baterías", "Otros"],
-	["Empaquetado", "Voluntariado"],
-	["Camión", "Transporte"],
-	["Cargar", "Voluntariado"],
-	["Atún", "Alimentos"],
-	["Agua", "Alimentos"],
-	["Agua", "Alimentos", 1],
-	["Azúcar", "Alimentos"],
-	["Sal", "Alimentos"],
-	["Pala", "Herramientas"],
-	["Jeringas", "Medicamentos"],
-	["Baterías", "Otros"],
-	["Empaquetado", "Voluntariado"],
-	["Camión", "Transporte"],
-	["Cargar", "Voluntariado"]
-
+	["Atún", "Alimentos", "latas"],
+	["Agua", "Alimentos", "litros"],
+	["Azúcar", "Alimentos", "kilos"],
+	["Sal", "Alimentos", "kilos"],
+	["Pala", "Herramientas", "unidades"],
+	["Jeringas", "Medicamentos", "unidades"],
+	["Baterías", "Otros", "unidades"],
+	["Empaquetado", "Voluntariado", "personas"],
+	["Camión", "Transporte", "toneladas"],
+	["Cargar", "Voluntariado", "personas"],
+	["Atún", "Alimentos", "latas"],
+	["Agua", "Alimentos", "litros"],
+	["Azúcar", "Alimentos", "kilos"],
+	["Sal", "Alimentos", "kilos"],
+	["Pala", "Herramientas", "unidades"],
+	["Jeringas", "Medicamentos", "unidades"],
+	["Baterías", "Otros", "unidades"],
+	["Empaquetado", "Voluntariado", "personas"],
+	["Camión", "Transporte", "toneladas"],
+	["Cargar", "Voluntariado", "personas"],
 ];
 let dats = dummydata.map((e, index) => {
-	let tmp =  {
+	return  {
 		id: index,
+		key: index,
 		nombre: e[0],
-		cantidad: 3,
-		unidad: 'bolsas',
+		cantidad: "3",
+		unidad: e[2],
 		category: e[1],
 		expanded: false
 	}
-	if(index == 10){
-		tmp['special'] = true;
-	}
-	return tmp;
 })
 class NewNeed extends Component {
 
@@ -89,7 +84,11 @@ class NewNeed extends Component {
 	static defaultProps = {
 		resources: [],
 	};
-
+	handleUpdateValue(value, id) {
+		let dats = this.state.filteredData;
+		dats[id].cantidad = value;
+		this.setState({filteredData: dats});
+	}
 	handleExpandClick(index){
 		// this.setState({ expanded: !this.state.expanded });
 		if(this.state.active) {
@@ -137,7 +136,7 @@ class NewNeed extends Component {
 		        },
 		        {
 		          type: "NumberField",
-		          value: 10, // default value
+		          value: item.cantidad, // default value
 		          key: "cantidad"
 		        },
 		        {
@@ -177,19 +176,17 @@ class NewNeed extends Component {
 								if(active && index%5 == 0) {
 									active = false;
 									let activeItemObj = this.state.filteredData[activeitem];
-									return (<GridListTile cols={5} className="ResourceTile special">
+									return (<GridListTile key={'special'+activeitem} cols={5} className="ResourceTile special">
 										<h1>{activeItemObj.nombre}</h1>
 										<Table>
 											<TableBody>
-												<CustomRow need={this.parseItemToNeed(activeItemObj)}></CustomRow>
+												<CustomRow handleChange={(value, key) => this.handleUpdateValue(value, activeitem)} need={this.parseItemToNeed(activeItemObj)}></CustomRow>
 											</TableBody>
 										</Table>
 									</GridListTile>)
 								}
-								// if(item['special']){
-								// }
 								else{
-									return (<GridListTile onClick={() => {this.handleExpandClick(index)}} className="ResourceTile">
+									return (<GridListTile key={index} onClick={() => {this.handleExpandClick(index)}} className="ResourceTile">
 										<CatalogItem item={item} />
 									</GridListTile>)
 								}
