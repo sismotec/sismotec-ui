@@ -5,6 +5,7 @@ import Table, { TableBody } from 'material-ui/Table';
 // import { push } from 'react-router-redux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
+import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
 import '../index.css';
 
@@ -74,6 +75,16 @@ class MyNeeds extends Component {
           key: "unidad"
         },
         {
+          type: "Button",
+          label: 'Mark complete',
+          onClick: 'markComplete',
+          key: "btn",
+          props: {
+            raised: true,
+            color: "primary"
+          }
+        },
+        {
           type: "Delete",
         }
       ]
@@ -112,16 +123,27 @@ class MyNeeds extends Component {
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
   }
+  markComplete() {
+    alert("Not implemented yet");
+  }
   
   render() {
     return(
-    <div className="container">
+    <div className="container MyNeeds">
       <h1>Mis necesidades</h1>
+      <div className="tabcontainer" style={{marginBottom:40}}>
+        <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
+          <Tab label="Activas"></Tab>
+          <Tab label="En camino"></Tab>
+          <Tab label="Recibidas"></Tab>
+        </Tabs>
+        <hr/>
+      </div>
       <Table>
         <TableBody>
           {
             this.fields.map((n, index) => 
-              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>
+              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed} markComplete={this.markComplete}/>
             )
           }
         </TableBody>
