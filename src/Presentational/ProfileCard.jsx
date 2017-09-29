@@ -17,22 +17,29 @@ const Tag = ({tags}) => (
 export default class ProfileCard extends Component {
   render() {
     const {profile} = this.props;   
-    return (<Card>
+    return (
+      <Card>
         <CardContent>
-          <Typography type="body1">
+          <Typography className="needCard-beneficiary" type="headline" >
             {profile.nombre_propietario}
+          </Typography>
+          <Typography className="needCard-location" component="p">
+            {profile.latitud}, {profile.longitud} <br />
+          </Typography>
+          <Typography className="needCard-needs" component="p">
+            Recursos <br />
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={() => this.props.openProfileDetails(profile.id_propietario)}>DETALLES</Button>
+          <Button raised color={"primary"} className="needCard-button" onClick={() => this.props.openProfileDetails(profile.id_propietario)}>Ver detalles</Button>
         </CardActions>
       </Card>)
       /*<div className="needCard"> 
         <label className="needCard title">{this.props.name}</label>
         <label className="needCard content">¿Dónde?</label>
         <label className="needCard content">
-          <a href="{this.props.mapsurl}">{this.props.address}</a>
-        </label>
+            <a href="{this.props.mapsurl}">{this.props.address}</a>
+          </label>
         <label className="needCard content">¿Qué necesita?</label>
 
         <Tag tags={["Alimentos", "Medicamentos", "Voluntarios"]} />
