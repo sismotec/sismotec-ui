@@ -5,12 +5,12 @@ import Dialog, { DialogTitle } from 'material-ui/Dialog';
 import Avatar from 'material-ui/Avatar';
 import CheckIcon from 'material-ui-icons/Check';
 
-export default class CollectionCenter extends Component {
+export default class SentSuccessDialog extends Component {
   render() {
     return (
       <Dialog open={this.props.open} onRequestClose={this.props.close}>
 				<DialogTitle>Gracias por su donativo</DialogTitle>
-				<div>
+				<div style={{margin: 'auto'}}>
 					<Avatar> <CheckIcon /></Avatar>
 				</div>
 			  <Button onClick={() => this.props.close()}>GUARDAR ENVÍO</Button>

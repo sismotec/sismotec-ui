@@ -48,7 +48,7 @@ class Home extends Component {
       }
     }) : this.orders;
   }
-  
+
   handleCloseProfileDetails = () => {
     this.setState({
       profileSteps: 0,
@@ -96,6 +96,12 @@ class Home extends Component {
     });
   }
 
+  handleChangeETA = (value) => {
+    this.currentOrder = {
+      tiempo_estimado: value
+    }
+  }
+
   handleDeleteNeedFromOrder = (id_need, id_profile) => {
     let {order_index, need_index} = (this.orders && this.orders.length>0) ? this.orders.map((o, o_i) => {
       if(o.destinatario && o.destinatario == id_profile){
@@ -110,7 +116,7 @@ class Home extends Component {
       }
     }) : this.orders;
 
-    
+
     if (this.orders && this.orders.length>0)
       this.orders[order_index].recursos.splice(need_index, 1);
   }
@@ -119,7 +125,7 @@ class Home extends Component {
     const { needs } = this.props;
     return (
       <div>
-        <ProfileCardsWrapper 
+        <ProfileCardsWrapper
           profiles = {needs}
           openProfileDetails = {this.handleOpenProfileDetails}
           user = {this.user} />
@@ -128,7 +134,7 @@ class Home extends Component {
           open = {this.state.profileSteps === 1}
           user = {this.user}
           close = {this.handleCloseProfileDetails}
-          profile = {needs.filter(b => (b.id_propietario == this.state.profileDetailsId))[0]} 
+          profile = {needs.filter(b => (b.id_propietario == this.state.profileDetailsId))[0]}
           deleteNeed = {this.handleDeleteNeedFromOrder}
           addNeed = {this.handleAddNeedToOrder}
           handleSend={this.handleSend}
@@ -138,9 +144,10 @@ class Home extends Component {
           open={this.state.profileSteps === 2}
           close = {this.handleCloseProfileDetails}
           submitETA={this.handleSendWithETA}
+          changeETA={this.handleChangeETA}
         />
 
-        <SentSuccessDialog 
+        <SentSuccessDialog
           open={this.state.profileSteps === 3}
           close = {this.handleCloseProfileDetails}
         />
