@@ -26,7 +26,8 @@ export default class CustomRow extends Component {
     switch (item.type) {
       case 'FuzzySearch':
           return <FuzzySearch onChange={(value) => this.handleChange(value, item.key)}
-                        value={item.value}/>
+                        label={item.value}
+                        data={item.options}/>
       case 'Label':
         return <Label value={item.value}/>
       case 'NumberField':
