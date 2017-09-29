@@ -17,7 +17,6 @@ const Tag = ({tags}) => (
 export default class ProfileCard extends Component {
   render() {
     const {profile} = this.props;   
-    console.log(profile); 
     return (<Card>
         <CardContent>
           <Typography type="body1">
