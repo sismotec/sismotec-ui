@@ -5,7 +5,7 @@ import NewNeedView from '../Presentational/NewNeedView';
 import { GridList, GridListTile } from 'material-ui/GridList';
 import Grid from 'material-ui/Grid';
 import ResourcesActions from '../Data/Redux/ResourcesRedux';
-
+import NeedsActions from '../Data/Redux/NeedsRedux';
 
 class NewNeed extends Component {
 
@@ -27,6 +27,7 @@ class NewNeed extends Component {
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     static propTypes = {
@@ -43,15 +44,23 @@ class NewNeed extends Component {
     handleExpandClick(){
         this.setState({ expanded: !this.state.expanded });
     };
+
+    handleAdd(resource) {
+        this.props.createNeed({
+            id_beneficiario: this.props.userId,
+            recursos: [resource],
+        });
+    }
   
   render() {
-      console.log(this.props);
     return (
       <div>
         <GridList>
             {this.props.resources.map(item => <NewNeedView
+                key={item.id}
                 item = {item}
-                handleExpandClick = {this.handleExpandClick}/>)}
+                handleExpandClick={this.handleExpandClick}
+                handleAdd={this.handleAdd} />)}
         </GridList>
       </div>
     )
@@ -65,6 +74,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getResources: () => dispatch(ResourcesActions.getRequest())});
+    getResources: () => dispatch(ResourcesActions.getRequest()),
+    createNeed: data => dispatch(NeedsActions.createRequest(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewNeed);
