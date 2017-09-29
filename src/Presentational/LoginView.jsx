@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Dialog, {
-  DialogTitle,
-} from 'material-ui/Dialog';
+import Dialog, {DialogTitle} from 'material-ui/Dialog';
+import Divider from 'material-ui/Divider';
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -77,6 +76,7 @@ export default class LoginView extends Component {
             </Button>
           </div>
           <br></br>
+          <Divider light />
           <div>
             <p className="p-caption"> ¿Aún no tienes cuenta?</p>
             <p className="p-subcaption"> Regístrate como:</p>

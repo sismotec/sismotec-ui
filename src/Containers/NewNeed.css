@@ -1,0 +1,32 @@
+* {
+	box-sizing: border-box;
+}
+.NewNeed{
+	margin-bottom: 5%;
+}
+.mainCatalog{
+	margin-top: 4%;
+}
+.ResourceTile > div{
+	background: #66AFBA;
+	color: white;
+	padding: 20px;
+}
+.ResourceTile p{
+	margin: 0;
+}
+.ResourceTile .resourceName {
+	font-size: 28px;
+}
+.ResourceTile .resourceCategory {}
+.ResourceTile .resourceImg {
+	width: 100px;
+	height: 100px;
+	transform: none;
+	position: static;
+	display: block;
+	margin-left: 14%;
+	/*margin-top: -10px;*/
+}
+
+

@@ -8,10 +8,6 @@ export default class FuzzySearch extends Component {
   };
 
   render() {
-    return  <TextField
-          id="name"
-          defaultValue={this.props.value}
-          onChange={this.handleChange}
-        />
+    return  (<TextField id="name" {...this.props} defaultValue={this.props.value} onChange={this.handleChange} />)
   }
 }
