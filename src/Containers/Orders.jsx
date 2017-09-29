@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BeneficiaryCard from "../Presentational/BeneficiaryCard";
-import OrdersTable from "../Presentational/OrdersTable";
+import AlphaTable from "../Presentational/AlphaTable";
 import OrdersActions from '../Data/Redux/OrdersRedux';
-
-function ViewOrdersBtn() {
-    return <button>Mis ordenes</button>
-}
-
-class Orders extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [
+import Tabs, { Tab } from 'material-ui/Tabs';
+import '../index.css';
+function getDummyData() {
+  return [
         {
           id: '823648',
           date: '19/07/17', 
@@ -52,31 +46,29 @@ class Orders extends Component {
             name: "Agua", qty: "150", unit: "L"
           }]
         }
-      ],
+      ]
+}
 
-    };
-  }
-  
+class Orders extends Component {
   componentDidMount() {
     const { userId, ordersRequest } = this.props;
     ordersRequest(userId);
   }
   
   render() {
-    const { data } = this.state;
+    // const { data } = this.state;
 
     return (
-      <div>
-        <BeneficiaryCard 
-          name="Gaby Paez"
-          mapsurl="http://maps.google.com"
-          address="Valle de la Esperanza 543 Col. Roma, Monterrey, Nuevo León, México."
-          tags={["Alimentos", "Medicamentos", "Voluntariados"]}/>
+      <div className="container">
+        <h1>Mis donaciones</h1>
+        <div className="tabcontainer">
+          <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
+            <Tab label="Enviadas"></Tab>
+            <Tab label="Guardadas"></Tab>
+          </Tabs>
+        </div>
 
-        <OrdersTable type="SENDER" data={data} />
-          
-        <ViewOrdersBtn />
-        
+        <AlphaTable />
       </div>
     )
   }

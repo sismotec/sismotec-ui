@@ -12,7 +12,7 @@ import Add from "../Presentational/CustomRow/Add";
 export default class CustomRow extends Component {
   constructor(props) {
     super(props);
-    this.data = {};
+    this.data = {...props.data};
   }
 
   handleChange(value, key) {
@@ -42,7 +42,7 @@ export default class CustomRow extends Component {
   render() {
     return <TableRow>
         {this.props.need.map(n => {
-          return <TableCell>
+          return <TableCell key={n.key}>
             {this.renderField(n)}
           </TableCell>
         })}

@@ -53,7 +53,7 @@ const App = _ => (
         <Route exact path="/" component={Home} />
         <Route path="/registro/:type" component={Register} />
         <Route path="/ayuda" component={Help} />
-        <Route path="/donaciones" component={Orders} needsAuth />
+        <Route path="/donaciones" component={Orders}  />
         <Route path="/misNecesidades" component={MyNeeds} />
         <Route path="/newNeed" component={NewNeeds}/>
         {/* <Route exact path="/dashboard" component={Dashboard} />
