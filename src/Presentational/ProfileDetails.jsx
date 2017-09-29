@@ -119,8 +119,9 @@ export default class CollapsedDetails extends Component {
   }
 
   render() {
+    const { profile = {} } = this.props;
     return <Dialog className="dialog" open={this.props.open} onRequestClose={this.props.close}>
-        <DialogTitle className="dialog-title">{this.props.profile.nombre}</DialogTitle>
+        <DialogTitle className="dialog-title">{profile.nombre}</DialogTitle>
          <Table >
           <TableBody>
             {

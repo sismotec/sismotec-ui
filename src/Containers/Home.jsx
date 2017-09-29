@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import ResourcesActions from '../Data/Redux/ResourcesRedux';
+import ResourcesActions from '../Data/Redux/ResourcesRedux';
+import NeedsActions from '../Data/Redux/NeedsRedux';
 import ProfileDetails from '../Presentational/ProfileDetails';
 import BeneficiaryCard from '../Presentational/BeneficiaryCard';
 
@@ -15,96 +16,20 @@ class Home extends Component {
     }
     this.handleCloseProfileDetails = this.handleCloseProfileDetails.bind(this);
     this.handleOpenProfileDetails = this.handleOpenProfileDetails.bind(this);
+    this.user = {};
   }
 
   componentDidMount() {
-    // this.props.getResources();
+    this.props.getResources();
+    this.props.getNeeds();
   }
 
-  componentWillMount() {
-    // const { userId, getNeeds } = this.props
-    // getNeeds(userId)
-    this.beneficiaries = [
-      {
-        id: 0,
-        nombre: "Caritas",
-        ubicacion: {lat: '123.5', lon: '131.8'},
-        recursos: [
-          {
-            id: 1,
-            nombre: "agua",
-            cantidad: 3,
-            unidad: "litros",
-          },
-          {
-            id: 2,
-            nombre: "atun",
-            cantidad: 100,
-            unidad: "gramos",
-          },
-          {
-            id: 3,
-            nombre: "cobijas",
-            cantidad: 3,
-            unidad: "cobijas",
-          }
-        ]
-      },
-      {
-        id: 1,
-        nombre: "Cruz Roja",
-        ubicacion: {lat: '23', lon: '31'},
-        recursos: [
-          {
-            id: 1,
-            nombre: "agua",
-            cantidad: 3,
-            unidad: "litros",
-          },
-          {
-            id: 2,
-            nombre: "atun",
-            cantidad: 100,
-            unidad: "gramos",
-          },
-          {
-            id: 3,
-            nombre: "cobijas",
-            cantidad: 3,
-            unidad: "cobijas",
-          }
-        ]
-      },
-      {
-        id: 2,
-        nombre: "Mely",
-        ubicacion: {lat: '3', lon: '311'},
-        recursos: [
-          {
-            id: 1,
-            nombre: "agua",
-            cantidad: 3,
-            unidad: "litros",
-          },
-          {
-            id: 2,
-            nombre: "atun",
-            cantidad: 100,
-            unidad: "gramos",
-          },
-          {
-            id: 3,
-            nombre: "cobijas",
-            cantidad: 3,
-            unidad: "cobijas",
-          }
-        ]
-      },
-    ];
-
-    this.user = {
-      name: "Admin",
-      type: "collectionCenter"
+  componentWillReceiveProps(nextProps, oldProps) {
+    if(nextProps.userId || nextProps.userType) {
+      this.user = {
+        userId: nextProps.userId,
+        type: nextProps.userType
+      }
     }
   }
   
@@ -132,29 +57,35 @@ class Home extends Component {
   }
 
   render() {
+    const { needs } = this.props;
+    console.log('n', needs);
     return (
       <div>
-        {this.beneficiaries.map((b, index) => 
+        {needs && needs.map((b, index) => 
           <BeneficiaryCard 
             beneficiary={b} 
             openProfileDetails={(id) => this.handleOpenProfileDetails(id)}
             user={this.user}/>
         )}
 
-      <ProfileDetails
+      {needs && <ProfileDetails
         open = {this.state.profileDetailsIsOpen}
         user = {this.user}
         close = {this.handleCloseProfileDetails}
-        profile = {this.beneficiaries.filter(b => (b.id == this.state.profileDetailsId))[0]} />
+        profile = {needs.filter(b => (b.id === this.state.profileDetailsId)).lenght} />}
       </div>
     )
   }
 }
-const mapStateToProps = (state, ownProps) => ({})
+const mapStateToProps = (state, ownProps) => ({
+  userId: state.user.userId,
+  userType: state.user.userType,
+  needs: state.needs.getOne.result,
+})
 
 const mapDispatchToProps = dispatch => ({
-  // TODO: get needs, get beneficiaries
-  // getResources: () => dispatch(ResourcesActions.getRequest()),
+  getResources: () => dispatch(ResourcesActions.getRequest()),
+  getNeeds: data => dispatch(NeedsActions.getOneRequest(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
