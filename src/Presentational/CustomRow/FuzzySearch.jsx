@@ -1,5 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
+import Select from 'material-ui/Select';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
 
 export default class FuzzySearch extends Component {
 
@@ -8,10 +11,22 @@ export default class FuzzySearch extends Component {
   };
 
   render() {
-    return  <TextField
-          id="name"
-          defaultValue={this.props.value}
+    let items = "";
+    if (this.props.data) {
+      items = this.props.data.map(d => {
+        <MenuItem value={d.value}>{d.value}</MenuItem>
+      })
+    }
+    
+    return (
+      <FormControl>
+        <InputLabel htmlFor="age-helper">Age</InputLabel>
+        <Select
+          value={this.props.value}
           onChange={this.handleChange}
-        />
+          input={<Input id="fuzzy-input" />}>
+          {items}
+        </Select>
+      </FormControl>);
   }
 }
