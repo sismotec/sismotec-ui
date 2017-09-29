@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import Checkbox from 'material-ui/Checkbox';
 import { FormControlLabel } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import { compose, withProps, lifecycle } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
@@ -238,9 +239,10 @@ class Register extends Component {
             </div>
             }
             <br/>
-            <TextField
-              fullWidth
+            <div><InputLabel className="phone-registry" htmlFor="phone-helper">Tel&eacute;fono *</InputLabel></div>
+            <Input
               required
+              fullWidth
               id="phone"
               label="Teléfono"
               value={this.state.phone}
