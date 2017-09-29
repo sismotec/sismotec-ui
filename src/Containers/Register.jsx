@@ -239,9 +239,10 @@ class Register extends Component {
             </div>
             }
             <br/>
-            <div><InputLabel className="MuiInput-input-113" htmlFor="phone-helper">Tel&eacute;fono *</InputLabel></div>
+            <div><InputLabel className="phone-registry" htmlFor="phone-helper">Tel&eacute;fono *</InputLabel></div>
             <Input
               required
+              fullWidth
               id="phone"
               label="Teléfono"
               value={this.state.phone}
