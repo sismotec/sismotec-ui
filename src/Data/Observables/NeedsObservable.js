@@ -8,7 +8,7 @@ const needsRequestEpic = (action$, store, { Api }) =>
     .mergeMap(({ id }) => (
       Api.needs.getOne(id)
         .then(response => response.data)
-        .then(result => NeedsRedux.Creators.getOneSuccess(id, result))
+        .then(result => NeedsRedux.Creators.getOneSuccess(result))
         .catch(error => NeedsRedux.Creators.getOneError(error))
     ))
 

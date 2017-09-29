@@ -22,7 +22,6 @@ const Help = () => <Layout slot={<HelpView />} />;
 const Orders = () => <Layout slot={<OrdersView />}/>;
 const NewNeeds = () => <Layout slot={<NewNeedView/>}/>
 const MyNeeds = () => <Layout slot={<MyNeedsView />} />;
-const IHave = () => <Layout slot={<HomeView />} />;
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -56,7 +55,6 @@ const App = _ => (
         <Route path="/donaciones" component={Orders}  />
         <Route path="/misNecesidades" component={MyNeeds} />
         <Route path="/necesito" component={NewNeeds}/>
-        <Route path="/tengo" component={IHave}/>
         {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
         <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}
