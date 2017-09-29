@@ -65,36 +65,7 @@ class MyNeeds extends Component {
         cantidad: 3,
         unidad: "unidades",
       },
-      {
-        type: "Delete",
-      }
     ];
-
-    this.data = this.needs;
-
-    this.fields = this.data.map(d => [
-      {
-        id: 1,
-        nombre: "agua",
-        cantidad: 3,
-        unidad: "litros",
-      },
-      {
-        id: 2,
-        nombre: "atun",
-        cantidad: 100,
-        unidad: "gramos",
-      },
-      {
-        id: 3,
-        nombre: "cobijas",
-        cantidad: 3,
-        unidad: "cobijas",
-      },
-      {
-        type: "Delete",
-      }
-    ]);
 
     this.data = this.needs;
 
@@ -121,35 +92,6 @@ class MyNeeds extends Component {
       ]
     )
   }
-
-  // componentWillReceiveProps(nextProps, oldProps) {
-  //   if(nextProps.length && (!oldProps || oldProps.length )) {
-  //     this.data = nextProps.needs;
-  //     this.fields = this.data.map(d => [
-  //         {
-  //           type: "Label",
-  //           value: d.nombre,
-  //           key: "nombre"
-  //         },
-  //         {
-  //           type: "Quantity",
-  //           value: d.cantidad,
-  //           key: "cantidad"
-  //         },
-  //         {
-  //           type: "FuzzySearch",
-  //           value: d.unidad,
-  //           options: [d.unidad],
-  //           key: "unidad"
-  //         },
-  //         {
-  //           type: "Delete",
-  //           delete: (index) => this.props.deleteNeed(this.data[index].id)
-  //         }
-  //       ]
-  //     )
-  //   }
-  // }
 
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
@@ -187,43 +129,15 @@ class MyNeeds extends Component {
     let ConfirmationDialog = this.ConfirmationDialog;
     return(
     <div className="container MyNeeds">
-      <h1>Mis necesidades</h1>
-        <div className="tabcontainer">
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth
-          >
-            <Tab label="Activas"></Tab>
-            <Tab label="En camino"></Tab>
-            <Tab label="Recibidas"></Tab>
-          </Tabs>
-      </div>
-      <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
-          <TabContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Recursos</TableCell>
-                  <TableCell>Cantidad</TableCell>
-                  <TableCell>Unidad</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {
-                  this.fields.map((n, index) => 
-                    <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>
-                  )
-                }
-              </TableBody>
-            </Table>
-          </TabContainer>
-          <TabContainer><Way /></TabContainer>
-          <TabContainer><ReceivedTable /></TabContainer>
-        </SwipeableViews>
+      <Table>
+        <TableBody>
+          {
+            this.fields.map((n, index) => 
+              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.handleDeleteClick} markComplete={this.markComplete}/>
+            )
+          }
+        </TableBody>
+      </Table>
       <Button 
         className="table-button"
         raised

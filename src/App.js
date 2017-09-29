@@ -57,6 +57,7 @@ const App = _ => (
         <Route path="/misNecesidades" component={MyNeeds} />
         <Route path="/necesito" component={NewNeeds}/>
         <Route path="/tengo" component={IHave}/>
+        <Route path="/misPedidos" component={Orders} />
         {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
         <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}

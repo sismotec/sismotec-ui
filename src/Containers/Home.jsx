@@ -131,6 +131,7 @@ class Home extends Component {
           user = {this.user} />
 
         {needs && <ProfileDetails
+          resources={this.props.resources}
           open = {this.state.profileSteps === 1}
           user = {this.user}
           close = {this.handleCloseProfileDetails}
@@ -159,6 +160,7 @@ const mapStateToProps = (state, ownProps) => ({
   userId: state.user.userId,
   userType: state.user.userType,
   needs: state.needs.getOne.result,
+  resources: state.resources.get.results,
 })
 
 const mapDispatchToProps = dispatch => ({
