@@ -18,7 +18,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // this.props.getResources();
+    // this.props.getResources(); 
+    // this.props.getNeeds();
   }
 
   componentWillMount() {
@@ -153,8 +154,8 @@ class Home extends Component {
 const mapStateToProps = (state, ownProps) => ({})
 
 const mapDispatchToProps = dispatch => ({
-  // TODO: get needs, get beneficiaries
   // getResources: () => dispatch(ResourcesActions.getRequest()),
+  // getNeeds: data => dispatch(NeedsActions.getOneRequest(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,53 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import BeneficiaryCard from "../Presentational/BeneficiaryCard";
 import AlphaTable from "../Presentational/AlphaTable";
 import OrdersActions from '../Data/Redux/OrdersRedux';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import '../index.css';
-function getDummyData() {
-  return [
-        {
-          id: '823648',
-          date: '19/07/17', 
-          status: 'Recibido',
-          origin: "Tec de Monterrey",
-          destination: "Luis Miguel",
-          pdf: "PDF",
-          check: "Marcar recibido",
-          items: [{
-            name: "Agua", qty: "150", unit: "litros"
-          },
-          {
-            name: "Atún", qty: "300", unit: "latas"
-          }]
-        },
-        {
-          id: '213245', 
-          date: '22/07/17', 
-          status: 'No recibido',
-          origin: "Centro de acopio San Juan Bosco",
-          destination: "Jimena Garza",
-          pdf: "PDF",
-          check: "Marcar recibido",
-          items: [{
-            name: "Agua", qty: "150", unit: "L"
-          }]
-        },
-        {
-          id: '673244', 
-          date: '11/07/17',  
-          status: 'Recibido',
-          origin: "Centro de acopio San Juan Bosco",
-          destination: "Esteba Garza",
-          pdf: "PDF",
-          check: "Marcar recibido",
-          items: [{
-            name: "Agua", qty: "150", unit: "L"
-          }]
-        }
-      ]
-}
+// let dummy = [
+//     {
+//       id: '823648',
+//       date: '19/07/17', 
+//       status: 'Recibido',
+//       origin: "Tec de Monterrey",
+//       destination: "Luis Miguel",
+//       pdf: "PDF",
+//       check: "Marcar recibido",
+//       items: [{
+//         name: "Agua", qty: "150", unit: "litros"
+//       },
+//       {
+//         name: "Atún", qty: "300", unit: "latas"
+//       }]
+//     },
+//     {
+//       id: '213245', 
+//       date: '22/07/17', 
+//       status: 'No recibido',
+//       origin: "Centro de acopio San Juan Bosco",
+//       destination: "Jimena Garza",
+//       pdf: "PDF",
+//       check: "Marcar recibido",
+//       items: [{
+//         name: "Agua", qty: "150", unit: "L"
+//       }]
+//     },
+//     {
+//       id: '673244', 
+//       date: '11/07/17',  
+//       status: 'Recibido',
+//       origin: "Centro de acopio San Juan Bosco",
+//       destination: "Esteba Garza",
+//       pdf: "PDF",
+//       check: "Marcar recibido",
+//       items: [{
+//         name: "Agua", qty: "150", unit: "L"
+//       }]
+//       }
+// ];
 
 class Orders extends Component {
   componentDidMount() {
@@ -56,8 +53,6 @@ class Orders extends Component {
   }
   
   render() {
-    // const { data } = this.state;
-
     return (
       <div className="container">
         <h1>Mis donaciones</h1>

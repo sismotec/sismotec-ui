@@ -78,7 +78,8 @@ export default class LoginView extends Component {
           </div>
           <br></br>
           <div>
-            <p className="p-caption"> ¿Aún no tienes cuenta? </p>
+            <p className="p-caption"> ¿Aún no tienes cuenta?</p>
+            <p className="p-subcaption"> Regístrate como:</p>
             <div>
               <Button
                 className="dialog-button"
@@ -86,7 +87,7 @@ export default class LoginView extends Component {
                 type='submit'
                 color="primary"
                 onSubmit={() => this.props.handleAyuda}>
-                SOLICITAR AYUDA
+                Beneficiario
                     </Button>
               <br></br>
               <Button
@@ -95,7 +96,7 @@ export default class LoginView extends Component {
                 type='submit'
                 color="primary"
                 onSubmit={() => this.props.handleAcopio}>
-                SOY CENTRO DE ACOPIO
+                Centro de acopio            
                     </Button>
             </div>
           </div>
