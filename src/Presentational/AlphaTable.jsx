@@ -41,9 +41,6 @@ let dummy = [
 ]
 
 export default class AlphaTable extends React.Component {
-	constructor() {
-		super()
-	}
 	parseNeeds() {
 		let needs = dummy[0].needs;
 		return needs.map(d => [

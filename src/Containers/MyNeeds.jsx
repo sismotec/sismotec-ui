@@ -6,6 +6,7 @@ import Table, { TableBody } from 'material-ui/Table';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
 import Button from 'material-ui/Button';
+import '../index.css';
 
 class MyNeeds extends Component {
   constructor(props) {
@@ -113,12 +114,15 @@ class MyNeeds extends Component {
   }
   
   render() {
-    console.log(this.needs);
-    return <div className="table-div">
-    <Table>
+    return(
+    <div className="container">
+      <h1>Mis necesidades</h1>
+      <Table>
         <TableBody>
           {
-            this.fields.map((n, index) => <CustomRow need={n} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
+            this.fields.map((n, index) => 
+              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>
+            )
           }
         </TableBody>
       </Table>
@@ -128,7 +132,7 @@ class MyNeeds extends Component {
         color="primary"
         onClick={() => this.props.updateNeeds(this.props.userId, this.data)}>Guardar cambios
       </Button>
-      </div>
+    </div>)
   }
 }
 

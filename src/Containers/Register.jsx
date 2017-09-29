@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
 import TextField from 'material-ui/TextField';
-import Input, { InputLabel } from 'material-ui/Input';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import Checkbox from 'material-ui/Checkbox';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import { FormControlLabel } from 'material-ui/Form';
 import Button from 'material-ui/Button';
 import { compose, withProps, lifecycle } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
@@ -175,6 +174,7 @@ class Register extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.password === this.state.passwordConfirmation) {
+      // eslint-disable-next-line
       var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (regex.test(this.state.email)) {
         this.props.registerRequest({
