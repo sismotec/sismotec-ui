@@ -67,7 +67,7 @@ const PlacesWithStandaloneSearchBox = compose(
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
-          width: `240px`,
+          width: '100%',
           height: `32px`,
           padding: `0 12px`,
           borderRadius: `3px`,
@@ -183,7 +183,7 @@ class Register extends Component {
   render() {
     return (
       <Dialog open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle>
+        <DialogTitle className="dialog-title">
           {this.props.registerType === 'Beneficiary' ? 'Registro de beneficiario' : 'Registro de Centro de Acopio'}
         </DialogTitle>
         <DialogContent style={{
@@ -192,6 +192,7 @@ class Register extends Component {
         }}>
           <form validate autoComplete="off">
             <TextField
+              fullWidth
               required
               id="name"
               label="Nombre"
@@ -226,6 +227,7 @@ class Register extends Component {
             </div>
             }
             <TextField
+              fullWidth
               required
               id="phone"
               label="Teléfono/celular"
@@ -235,6 +237,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="email"
               label="Correo electrónico"
@@ -244,6 +247,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="password"
               label="Contraseña"
@@ -254,6 +258,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="passwordConfirmation"
               label="Confirmar contraseña"
@@ -263,7 +268,9 @@ class Register extends Component {
               margin="normal"
             />
             <br/>
-            <Button raised color="primary"
+            <Button raised 
+              type="submit"
+              className="dialog-button"
               onClick={this.handleSubmit}>
               Registrarme
             </Button>
