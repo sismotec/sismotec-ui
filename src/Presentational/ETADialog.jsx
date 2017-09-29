@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import Button from 'material-ui/Button';
-import Dialog from 'material-ui/Dialog';
+import Dialog, { DialogTitle } from 'material-ui/Dialog';
 
-import TimePicker from 'CustomRow/TimePicker'
+import TimePicker from './CustomRow/TimePicker'
 
 export default class CollectionCenter extends Component {
   render() {
@@ -13,7 +13,7 @@ export default class CollectionCenter extends Component {
         <div>
 					<TimePicker onChange={(value) => this.props.changeETA(value)}/>
 				</div>
-				<Button onClick={() => this.props.submitETA}>Continuar</Button>
+				<Button onClick={() => this.props.submitETA()}>Continuar</Button>
 			</Dialog>
     )
   }

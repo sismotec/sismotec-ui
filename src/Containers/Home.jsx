@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ResourcesActions from '../Data/Redux/ResourcesRedux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
+import OrdersActions from '../Data/Redux/OrdersRedux';
 import ProfileDetails from '../Presentational/ProfileDetails';
 import ProfileCardsWrapper from '../Presentational/ProfileCardsWrapper';
+import ETADialog from '../Presentational/ETADialog';
+import SentSuccessDialog from '../Presentational/SentSuccessDialog';
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      profileDetailsIsOpen: false,
-      profileDetailsId: 0
+      profileDetailsId: 0,
+      profileSteps: 0,
     }
     this.handleCloseProfileDetails = this.handleCloseProfileDetails.bind(this);
     this.handleOpenProfileDetails = this.handleOpenProfileDetails.bind(this);
@@ -18,6 +21,7 @@ class Home extends Component {
     this.handleDeleteNeedFromOrder = this.handleDeleteNeedFromOrder.bind(this);
     this.user = {};
     this.orders = [];
+    this.currentOrder = {};
   }
 
   componentDidMount() {
@@ -47,29 +51,48 @@ class Home extends Component {
   
   handleCloseProfileDetails = () => {
     this.setState({
-      profileDetailsIsOpen: false
+      profileSteps: 0,
     });
+    this.currentOrder = {};
   }
 
   handleOpenProfileDetails = (id) => {
     this.setState({
-      profileDetailsIsOpen: true,
-      profileDetailsId: id
+      profileDetailsId: id,
+      profileSteps: 1,
     });
   }
 
   handleViewLater = (data) => {
-    //TODO: dispatch redux action
-    console.log(data);
+    // this.props.saveForLater({
+    //   id_centro_de_acopio: this.props.userId,
+    //   id_necesidad,
+    //   destino_latitud: latitud,
+    //   destino_longitud: longitud,
+    //   recursos: data,
+    // });
+    // this.setState({
+    //   profileSteps: 0,
+    // });
   }
 
-  handleSend = (data, { id_propietario, latitud, longitud }) => {
-    this.props.createNeed({
+  handleSend = (data, { id_necesidad, latitud, longitud }) => {
+    this.currentOrder = {
       id_centro_de_acopio: this.props.userId,
-      id_propietario,
-      latitud,
-      longitud,
+      id_necesidad,
+      destino_latitud: latitud,
+      destino_longitud: longitud,
       recursos: data,
+    }
+    this.setState({
+      profileSteps: 2,
+    });
+  }
+
+  handleSendWithETA = () => {
+    this.props.createOrder(this.currentOrder);
+    this.setState({
+      profileSteps: 3,
     });
   }
 
@@ -102,13 +125,25 @@ class Home extends Component {
           user = {this.user} />
 
         {needs && <ProfileDetails
-          open = {this.state.profileDetailsIsOpen}
+          open = {this.state.profileSteps === 1}
           user = {this.user}
           close = {this.handleCloseProfileDetails}
           profile = {needs.filter(b => (b.id_propietario == this.state.profileDetailsId))[0]} 
           deleteNeed = {this.handleDeleteNeedFromOrder}
           addNeed = {this.handleAddNeedToOrder}
-          handleSend={this.handleSend}/> }
+          handleSend={this.handleSend}
+          handleViewLater={this.handleViewLater} /> }
+
+        <ETADialog
+          open={this.state.profileSteps === 2}
+          close = {this.handleCloseProfileDetails}
+          submitETA={this.handleSendWithETA}
+        />
+
+        <SentSuccessDialog 
+          open={this.state.profileSteps === 3}
+          close = {this.handleCloseProfileDetails}
+        />
       </div>
     )
   }
@@ -122,7 +157,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
   getResources: () => dispatch(ResourcesActions.getRequest()),
   getNeeds: data => dispatch(NeedsActions.getOneRequest(data)),
-  createNeed: data => dispatch(NeedsActions.createRequest(data)),
+  createOrder: data => dispatch(OrdersActions.createRequest(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
