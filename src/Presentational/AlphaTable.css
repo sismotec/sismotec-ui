@@ -1,0 +1,65 @@
+*{
+	box-sizing: border-box;
+}
+.Collapsible
+.Collapsible__trigger.is-open:after {
+	transform: rotateZ(180deg);
+}
+.Collapsible__trigger {
+	display: block;
+	color: black;
+	padding: 10px;
+	position: relative;
+}
+.Collapsible__contentInner p{
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.CustomTriggerCSS {
+	background: light-coral;
+	transition: background-color 200ms ease;
+}
+.CustomTriggerCSS--open {
+  background-color: darkslateblue;
+}
+.Collapsible__custom-sibling {
+  padding: 5px;
+  font-size: 12px;
+  background-color: #CBB700;
+  color: black;
+}
+.Collapsible__contentInner{
+	padding: 10px;
+	border: 1px solid grey;
+	border-top: 0;
+}
+.hello .Collapsible{
+	background: grey;
+	width: 100%;
+	max-width: 100%;
+}
+.AlphaTable table{
+	table-layout: fixed;
+	width: 100%;
+}
+.AlphaTable {
+	margin-bottom: 10%;
+}
+.AlphaTable *{
+	white-space: normal !important;
+}
+
+.innerTable .left, .innerTable .right {
+	display: inline-block;
+}
+.innerTable .left{
+	width: 60%;
+	margin-right: 2%;
+}
+.innerTable .right{
+	width: 30%;
+	position: relative;
+	top: -60px;
+}
