@@ -18,11 +18,13 @@ const api = create({
 const loginRequest = data => api.post('iniciar-sesion', data)
 const registerRequest = data => api.post('crear-cuenta', data)
 
-const getNeeds = id => api.get(`needs/${id}`)
-const createNeed = (id, data) => api.post(`beneficiarios/necesidades`, {
-  id_beneficiarios: id,
-  recursos: data,
-})
+const getOneNeeds = data => {
+  if(data) {
+    return api.get(`necesidades?lat=${data.lat}&lon=${data.lon}`);
+  }
+  return api.get('necesidades');
+}
+const createNeed = data => api.post(`beneficiarios/necesidades`, {...data})
 const updateNeed = (id, data) => api.put(`beneficiarios/necesidades`, {
   id_beneficiarios: id,
   recursos: data,
@@ -45,7 +47,7 @@ export default {
     registerRequest,
   },
   needs: {
-    get: getNeeds,
+    getOne: getOneNeeds,
     create: createNeed,
     update: updateNeed,
   },

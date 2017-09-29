@@ -24,6 +24,9 @@ export default class FuzzySearch extends Component {
   };
 
   render() {
+<<<<<<< HEAD
+    return  (<TextField id="name" {...this.props} defaultValue={this.props.value} onChange={this.handleChange} />)
+=======
     let items = "";
     if (this.props.data) {
       items = this.props.data.map(d => {
@@ -42,5 +45,6 @@ export default class FuzzySearch extends Component {
           {items}
         </Select>
       </FormControl>);
+>>>>>>> 9d28a7447feab8ed3d3c7f85c308bc5e37e0fad7
   }
 }

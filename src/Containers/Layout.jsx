@@ -7,6 +7,7 @@ import Register from './Register'
 import Guest from '../Presentational/Headers/Guest';
 import Beneficiary from '../Presentational/Headers/Beneficiary';
 import CollectionCenter from '../Presentational/Headers/CollectionCenter';
+import ProfileDetails from '../Presentational/ProfileDetails';
 
 class Layout extends Component {
   static propTypes = {
@@ -33,22 +34,38 @@ class Layout extends Component {
     return (
       <div>
         <div>
-          {userType == 'collectionCenter' && <CollectionCenter navigateTo={this.props.navigateTo}/>}
-          {userType == 'guest' && <div>
-            <Guest navigateTo={this.props.navigateTo} openLogin={this.handleOpenLogin}
-              openCenter={this.handleOpenCenter} openBeneficiary={this.handleOpenBeneficiary}/>
-            <Login open = {this.state.loginIsOpen} closeLogin={this.handleCloseLogin}/>
-            <Register open = {this.state.signUpBeneficiaryIsOpen}
-              closeLogin={this.handleCloseBeneficiary} registerType={'Beneficiary'}/>
-            <Register open = {this.state.signUpCenterIsOpen} closeLogin={this.handleCloseCenter}
+          {
+            userType == 'collectionCenter' && 
+            <CollectionCenter navigateTo={this.props.navigateTo}/>}
+          {
+            userType == 'guest' && <div>
+            <Guest 
+              navigateTo={this.props.navigateTo} 
+              openLogin={this.handleOpenLogin}
+              openCenter={this.handleOpenCenter} 
+              openBeneficiary={this.handleOpenBeneficiary}/>
+
+            <Login 
+              open = {this.state.loginIsOpen} 
+              closeLogin={this.handleCloseLogin}/>
+
+            <Register 
+              open = {this.state.signUpBeneficiaryIsOpen}
+              closeLogin={this.handleCloseBeneficiary} 
+              registerType={'Beneficiary'}/>
+
+            <Register 
+              open = {this.state.signUpCenterIsOpen} 
+              closeLogin={this.handleCloseCenter}
               registerType={'Center'}/>
-              </div>}
+            </div>
+          }
           {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo}/>}
         </div>
-        {needsAuth && userType == 'guest' && <div>
+        {needsAuth && userType === 'guest' && <div>
           No autorizado
         </div>}
-        {(!needsAuth || (needsAuth && userType != 'guest')) && slot}
+        {(!needsAuth || (needsAuth && userType !== 'guest')) && slot}
       </div>
     )
   }
@@ -96,6 +113,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   navigateTo: route => dispatch(push(route))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

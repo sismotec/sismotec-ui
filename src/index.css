@@ -12,7 +12,20 @@ form, .dialog-title{
 }
 
 .dialog-title h2{
-	color: #00BCD4 !important;
+	color: #0099BC !important;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 4%;
+}
+
+.container h1{
+  color: #374046 !important;
+  font-size: 40pt !important;
+  font-weight: 400 !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 .caption{
@@ -29,7 +42,7 @@ form, .dialog-title{
 }
 
 .header-color {
-	background-color: #00BCD4 !important;
+	background-color: #0099BC !important;
 }
 
 .header-button{
@@ -45,17 +58,42 @@ form, .dialog-title{
 }
 
 .dialog-button{
-	background-color: #00BCD4 !important;
+	background-color: #0099BC !important;
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 5px;
   text-transform: none !important;
+  color: #fff !important;
 }
 
 .p-caption{
 	color: #424242 !important;
 	margin: 2px;
 	font-size: 14px;
+}
+
+.p-subcaption{
+	color: #424242 !important;
+	margin: 2px;
+	font-size: 12px;
+}
+
+.table-div{
+	padding: 3em 2em 3em 2em;
+}
+
+.table-button{
+	background-color: #f4b624 !important;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	text-transform: none !important;
+	float: right;
+}
+
+.delete-button{
+	border-radius: 100%;
+	background-color: #F22613;
+	color: white;
 }
 
 .needCard {
@@ -109,10 +147,20 @@ form, .dialog-title{
   color: white
 }
 
-
 .logout{
   position: absolute;
   top: 0px;
   right: 15px;
   cursor: pointer;
+}
+
+.MyNeeds .tabcontainer hr{
+  border: 0 none;
+  border-top: 1px solid #ccc;
+  margin-top: 0;
+  width: 70%;
+}
+
+form{
+  text-align: left;
 }

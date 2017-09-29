@@ -8,15 +8,15 @@ const needsRequestEpic = (action$, store, { Api }) =>
     .mergeMap(({ id }) => (
       Api.needs.getOne(id)
         .then(response => response.data)
-        .then(result => NeedsRedux.Creators.getOneSuccess(result))
+        .then(result => NeedsRedux.Creators.getOneSuccess(id, result))
         .catch(error => NeedsRedux.Creators.getOneError(error))
     ))
 
 const needsCreateEpic = (action$, store, { Api }) =>
   action$
     .ofType(NeedsRedux.Types.createRequest)
-    .mergeMap(({ id, data }) => (
-      Api.needs.create(id, data)
+    .mergeMap(({ data }) => (
+      Api.needs.create(data)
         .then(response => response.data)
         .then(result => NeedsRedux.Creators.createSuccess(result))
         .catch(error => NeedsRedux.Creators.createError(error))
