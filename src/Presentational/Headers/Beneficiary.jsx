@@ -11,6 +11,8 @@ export default class Beneficiary extends Component {
     return (
       <AppBar position="static" className="header-color">
         <Title />
+        <p className="logout" color="contrast" onClick={this.props.logout}>Salir</p>
+        
         <Toolbar className="header-div">
           <Button flat className="header-button" onClick={() => this.props.navigateTo('/necesito')}>Necesito</Button>
           <Button flat className="header-button" onClick={() => this.props.navigateTo('/misPedidos')}>Mis Pedidos</Button>

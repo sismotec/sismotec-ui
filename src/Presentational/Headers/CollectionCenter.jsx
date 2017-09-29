@@ -11,6 +11,8 @@ export default class CollectionCenter extends Component {
     return (
       <AppBar position="static" className="header-color">
         <Title />
+        <p flat className="logout" color="contrast" onClick={this.props.logout}>Salir</p>
+        
         <Toolbar className="header-div">
           <Button flat className="header-button" onClick={() => this.props.navigateTo('/tengo')}>Tengo</Button>
           <Button flat className="header-button" onClick={() => this.props.navigateTo('/donaciones')}>Donaciones</Button>

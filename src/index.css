@@ -108,3 +108,11 @@ form, .dialog-title{
   border-radius: 15px;
   color: white
 }
+
+
+.logout{
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  cursor: pointer;
+}
