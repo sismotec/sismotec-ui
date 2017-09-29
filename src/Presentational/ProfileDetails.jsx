@@ -20,7 +20,7 @@ export default class ProfileDetails extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleAddNeed = this.handleAddNeed.bind(this);
     this.deleteNeed = this.deleteNeed.bind(this);
-    this.data = {};
+    this.data = [];
     this.dialogActions = null;
     this.tableHeader = null;
 
@@ -38,42 +38,10 @@ export default class ProfileDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.user.type == "collectionCenter") {
-      this.dialogActions = <DialogActions>
-          <Button onClick={() => this.props.handleViewLater(this.data)}>
-            VER MÁS TARDE
-          </Button>
-          <Button onClick={() => this.props.handleSend(this.data)}>
-            ENVIAR
-          </Button>
-        </DialogActions>
-    }
+    this.data = nextProps.profile && nextProps.profile.recursos;
 
-    this.needs = [
-      {
-        id: 1,
-        nombre: "agua",
-        cantidad: 3,
-        unidad: "litros",
-      },
-      {
-        id: 2,
-        nombre: "atun",
-        cantidad: 100,
-        unidad: "gramos",
-      },
-      {
-        id: 3,
-        nombre: "cobijas",
-        cantidad: 3,
-        unidad: "cobijas",
-      }
-    ];
-
-    this.data = this.needs;
-
-    if(this.props.user.type == "guest") {
-        this.state.fields = this.data.map(d => [
+    if(nextProps.user.type == "guest") {
+        this.state.fields = this.data && this.data.map(d => [
           {
             type: "Label",
             value: d.nombre,
@@ -101,7 +69,7 @@ export default class ProfileDetails extends Component {
         </TableHead>;
     }
 
-    else if(this.props.user.type == "collectionCenter") {
+    else if(nextProps.user.type == "collectionCenter") {
       this.state.fields = this.data.map(d => [
         {
           type: "Label",
@@ -133,105 +101,15 @@ export default class ProfileDetails extends Component {
             <TableCell>Aportación</TableCell>
           </TableRow>
         </TableHead>;
-    }
-  }
-
-  componentWillMount() {
-    if(this.props.user.type == "collectionCenter") {
+      
       this.dialogActions = <DialogActions>
-          <Button onClick={() => this.props.handleViewLater(this.data)}>
+          <Button onClick={() => nextProps.handleViewLater(this.data)}>
             VER MÁS TARDE
           </Button>
-          <Button onClick={() => this.props.handleSend(this.data)}>
+          <Button onClick={() => nextProps.handleSend(this.data)}>
             ENVIAR
           </Button>
-        </DialogActions>
-    }
-
-    this.needs = [
-      {
-        id: 1,
-        nombre: "agua",
-        cantidad: 3,
-        unidad: "litros",
-      },
-      {
-        id: 2,
-        nombre: "atun",
-        cantidad: 100,
-        unidad: "gramos",
-      },
-      {
-        id: 3,
-        nombre: "cobijas",
-        cantidad: 3,
-        unidad: "cobijas",
-      }
-    ];
-
-    this.data = this.needs;
-
-    if(this.props.user.type == "guest") {
-        this.state.fields = this.data.map(d => [
-          {
-            type: "Label",
-            value: d.nombre,
-            key: "nombre"
-          },
-          {
-            type: "Label",
-            value: d.cantidad,
-            key: "cantidad"
-          },
-          {
-            type: "Label",
-            value: d.unidad,
-            key: "unidad"
-          }
-        ]
-      )
-
-      this.tableHeader = <TableHead>
-          <TableRow>
-            <TableCell>Recurso</TableCell>
-            <TableCell>Cantidad</TableCell>
-            <TableCell>Unidad</TableCell>
-          </TableRow>
-        </TableHead>;
-    }
-
-    else if(this.props.user.type == "collectionCenter") {
-      this.state.fields = this.data.map(d => [
-        {
-          type: "Label",
-          value: d.nombre,
-          key: "nombre"
-        },
-        {
-          type: "Label",
-          value: d.cantidad,
-          key: "cantidad"
-        },
-        {
-          type: "Label",
-          value: d.unidad,
-          key: "unidad"
-        },
-        {
-          type: "NumberField",
-          value: 0,
-          key: "aportacion"
-        },
-      ]);
-
-      this.tableHeader = <TableHead>
-          <TableRow>
-            <TableCell>Recurso</TableCell>
-            <TableCell>Cantidad</TableCell>
-            <TableCell>Unidad</TableCell>
-            <TableCell>Aportación</TableCell>
-          </TableRow>
-        </TableHead>;
+        </DialogActions>;
     }
   }
 
@@ -277,15 +155,17 @@ export default class ProfileDetails extends Component {
   }
 
   render() {
+    const { profile = {} } = this.props;
     return (<Dialog className="dialog" open={this.props.open} onRequestClose={this.props.close}>
-        <DialogTitle className="dialog-title">{this.props.profile.nombre}</DialogTitle>
-        <DialogContent style={{
-          overflow: 'auto'
-        }}>
+        <DialogTitle className="dialog-title">{profile.nombre}</DialogTitle>
+          <DialogContent style={{
+            overflow: 'auto'
+          }}>
          <Table >
            {this.tableHeader}
           <TableBody>
             {
+              this.props.profile &&
               this.state.fields.map((field, index) => <CustomRow need={field} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
             }
           </TableBody>

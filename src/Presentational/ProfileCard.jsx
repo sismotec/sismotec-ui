@@ -14,18 +14,20 @@ const Tag = ({tags}) => (
   </div>
 );
 
-export default class BeneficiaryCard extends Component {
+export default class ProfileCard extends Component {
   render() {
-    return <Card>
+    const {profile} = this.props;   
+    console.log(profile); 
+    return (<Card>
         <CardContent>
           <Typography type="body1">
-            {this.props.beneficiary.nombre}
+            {profile.nombre_propietario}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={() => this.props.openProfileDetails(this.props.beneficiary.id)}>DETALLES</Button>
+          <Button onClick={() => this.props.openProfileDetails(profile.id_propietario)}>DETALLES</Button>
         </CardActions>
-      </Card>
+      </Card>)
       /*<div className="needCard"> 
         <label className="needCard title">{this.props.name}</label>
         <label className="needCard content">¿Dónde?</label>
