@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
-import { persistStore } from 'redux-persist';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createStore from './Data/Redux';
 import { withStyles } from 'material-ui/styles';
@@ -28,8 +27,6 @@ const historyMiddleware = routerMiddleware(history);
 
 // create our store, with middlewares
 const store = createStore([historyMiddleware]);
-
-// persistStore(store)
 
 // Apply some reset
 const styles = theme => ({
