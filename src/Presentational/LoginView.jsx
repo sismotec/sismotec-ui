@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Dialog, {
-  DialogTitle,
-} from 'material-ui/Dialog';
+import Dialog, {DialogTitle} from 'material-ui/Dialog';
+import Divider from 'material-ui/Divider';
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -38,7 +37,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <Dialog className="dialog" open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle className="dialog-title">ENTRAR A MI CUENTA</DialogTitle>
+        <DialogTitle className="dialog-title">Iniciar sesión</DialogTitle>
         <form>
           <div>
             <TextField
@@ -77,26 +76,31 @@ export default class LoginView extends Component {
             </Button>
           </div>
           <br></br>
+          <Divider light />
           <div>
-            <p className="p-caption"> ¿Aún no tienes cuenta? </p>
+            <p className="p-caption"> ¿Aún no tienes cuenta?</p>
+            <p className="p-subcaption"> Regístrate como:</p>
+            <br></br>
             <div>
-              <Button
-                className="dialog-button"
-                raised
-                type='submit'
-                color="primary"
-                onSubmit={() => this.props.handleAyuda}>
-                SOLICITAR AYUDA
-                    </Button>
-              <br></br>
-              <Button
-                className="dialog-button"
-                raised
-                type='submit'
-                color="primary"
-                onSubmit={() => this.props.handleAcopio}>
-                SOY CENTRO DE ACOPIO
-                    </Button>
+              <div>
+                <Button
+                  className="dialog-button"
+                  raised
+                  type='submit'
+                  color="primary"
+                  onSubmit={() => this.props.handleAyuda}>
+                  Beneficiario
+                      </Button>
+                <br></br>
+                <Button
+                  className="dialog-button"
+                  raised
+                  type='submit'
+                  color="primary"
+                  onSubmit={() => this.props.handleAcopio}>
+                  Centro de acopio            
+                </Button>
+              </div>
             </div>
           </div>
         </form>

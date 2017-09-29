@@ -5,13 +5,20 @@ import Table, { TableBody } from 'material-ui/Table';
 // import { push } from 'react-router-redux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import CustomRow from './CustomRow'
+import Tabs, { Tab } from 'material-ui/Tabs';
+import Button from 'material-ui/Button';
+import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
+import '../index.css';
 
 class MyNeeds extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.deleteNeed = this.deleteNeed.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleOkay = this.handleOkay.bind(this);
     this.data = {};
+    this.state = {open: false};
   }
   static propTypes = {
     needs: PropTypes.array,
@@ -22,10 +29,6 @@ class MyNeeds extends Component {
 
   static defaultProps = {
     needs: [],
-  }
-
-  deleteNeed(index) {
-    //this.props.deleteNeed(this.data[index].id);
   }
 
   componentWillMount() {
@@ -49,8 +52,37 @@ class MyNeeds extends Component {
         nombre: "cobijas",
         cantidad: 3,
         unidad: "cobijas",
+      },
+      {
+        type: "Delete",
       }
     ];
+
+    this.data = this.needs;
+
+    this.fields = this.data.map(d => [
+      {
+        id: 1,
+        nombre: "agua",
+        cantidad: 3,
+        unidad: "litros",
+      },
+      {
+        id: 2,
+        nombre: "atun",
+        cantidad: 100,
+        unidad: "gramos",
+      },
+      {
+        id: 3,
+        nombre: "cobijas",
+        cantidad: 3,
+        unidad: "cobijas",
+      },
+      {
+        type: "Delete",
+      }
+    ]);
 
     this.data = this.needs;
 
@@ -70,6 +102,16 @@ class MyNeeds extends Component {
           value: d.unidad,
           options: [d.unidad],
           key: "unidad"
+        },
+        {
+          type: "Button",
+          label: 'Mark complete',
+          onClick: 'markComplete',
+          key: "btn",
+          props: {
+            raised: true,
+            color: "primary"
+          }
         },
         {
           type: "Delete",
@@ -110,22 +152,71 @@ class MyNeeds extends Component {
   handleChange(updatedNeed, id) {
     this.data[id] = updatedNeed;
   }
+  markComplete() {
+    alert("Not implemented yet");
+  }
+  handleOkay() {
+    // TODO: Implement this
+    alert("Handle deletion. Not yet implemented");
+    // Close it anyway
+    this.setState({open: false});
+  }
+  handleCancel() {
+    this.setState({open: false});
+  }
+  handleDeleteClick() {
+    this.setState({open: true});
+  }
   
   render() {
-    console.log(this.needs);
-    return <div>
-    <Table >
+    let ConfirmationDialog = this.ConfirmationDialog;
+    return(
+    <div className="container MyNeeds">
+      <h1>Mis necesidades</h1>
+      <div className="tabcontainer" style={{marginBottom:40}}>
+        <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
+          <Tab label="Activas"></Tab>
+          <Tab label="En camino"></Tab>
+          <Tab label="Recibidas"></Tab>
+        </Tabs>
+        <hr/>
+      </div>
+      <Table>
         <TableBody>
           {
-            this.fields.map((n, index) => <CustomRow need={n} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>)
+            this.fields.map((n, index) => 
+              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.handleDeleteClick} markComplete={this.markComplete}/>
+            )
           }
         </TableBody>
       </Table>
-      <button onClick={() => this.props.updateNeeds(this.props.userId, this.data)}>Guardar cambios</button>
-      </div>
+      <Button 
+        className="table-button"
+        raised
+        color="primary"
+        onClick={() => this.props.updateNeeds(this.props.userId, this.data)}>Guardar cambios
+      </Button>
+      <ConfirmationDialog open={this.state.open} orc={this.handleCancel} />
+    </div>)
+  }
+  ConfirmationDialog = (props) => {
+    let open = props.open;
+    return (
+      <Dialog
+        maxWidth="xs"
+        open={open}
+        onRequestClose={props.orc}
+      >
+        <DialogTitle>Confirmaci&oacute;n</DialogTitle>
+        <DialogContent>&iquest;Est&aacute;s seguro de que quieres borrar este recurso? </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleOkay} color="primary">S&iacute;</Button>
+          <Button onClick={this.handleCancel} color="error">No</Button>
+        </DialogActions>
+      </Dialog>
+    )
   }
 }
-
 const mapStateToProps = state => ({
   userId: state.user.userId,
   needs: state.needs.get.results,
