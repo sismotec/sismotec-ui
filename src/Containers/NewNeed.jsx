@@ -46,8 +46,8 @@ class NewNeed extends Component {
       <div>
         <GridList cols={3}>
           <NewNeedView
-              handleExpandClick = {this.handleExpandClick}
-              expanded = {this.state.expanded}/>
+              item = {this.state.item}
+              handleExpandClick = {this.handleExpandClick}/>
         </GridList>
       </div>
     )
