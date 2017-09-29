@@ -5,8 +5,6 @@ import NeedsActions from '../Data/Redux/NeedsRedux';
 import ProfileDetails from '../Presentational/ProfileDetails';
 import ProfileCardsWrapper from '../Presentational/ProfileCardsWrapper';
 
-import GridList from 'material-ui/GridList';
-
 class Home extends Component {
   constructor() {
     super();
