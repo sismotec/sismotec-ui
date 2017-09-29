@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NewNeedView from '../Presentational/NewNeedView';
 import { GridList, GridListTile } from 'material-ui/GridList';
+import ResourcesActions from '../Data/Redux/ResourcesRedux';
+
 
 class NewNeed extends Component {
+
+    componentDidMount() {
+        this.props.getResources();
+    }
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.isAuth) {
@@ -14,8 +20,6 @@ class NewNeed extends Component {
   }
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.deleteNeed = this.deleteNeed.bind(this);
         this.data = {};
         this.state = {
             expanded: false
@@ -40,6 +44,7 @@ class NewNeed extends Component {
     };
   
   render() {
+      console.log(this.props);
     return (
       <div>
         <GridList cols={3}>
@@ -55,10 +60,10 @@ class NewNeed extends Component {
 
 const mapStateToProps = state => ({
     userId: state.user.userId,
-    resources: state.resources.getOne.results,
+    resources: state.resources.get.results,
 });
 
 const mapDispatchToProps = dispatch => ({
-});
+    getResources: () => dispatch(ResourcesActions.getRequest())});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewNeed);

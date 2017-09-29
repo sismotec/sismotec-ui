@@ -26,39 +26,31 @@ export default class NewNeedView extends Component {
     componentWillMount() {
         // const { userId, getNeeds } = this.props
         // getNeeds(userId)
-        this.needs = [
-            {
-                id: 1,
-                nombre: "Benis",
-                cantidad: 0,
-                unidad: "Muchos",
-            }
-        ];
+        console.log(this.props);
 
-        this.data = this.needs;
-
-        this.fields = this.data.map(d => [
+        this.data = {...this.props.item};
+        console.log('hhhh', this.data)
+        this.fields = [
                 {
                     type: "Label",
-                    value: d.nombre,
+                    value: this.props.item.nombre,
                     key: "nombre"
                 },
                 {
                     type: "NumberField",
-                    value: d.cantidad,
+                    value: this.props.item.cantidad,
                     key: "cantidad"
                 },
                 {
                     type: "FuzzySearch",
-                    value: d.unidad,
-                    options: [d.unidad],
+                    value: this.props.item.unidad,
+                    options: [this.props.item.unidad],
                     key: "unidad"
                 },
                 {
                     type: "Add",
                 }
             ]
-        )
     }
   render() {
     return (
@@ -66,22 +58,20 @@ export default class NewNeedView extends Component {
             <Card onClick={this.handleExpandClick}>
                 <CardContent>
                     <Typography type='headline'>
-                        BENIS
+                        {this.props.item.nombre}
                     </Typography>
                 </CardContent>
             </Card>
             <Collapse in={this.state.expanded}>
-                <Card>
+                
                     <CardContent>
                         <Table >
                             <TableBody>
-                                {
-                                    this.fields.map((n, index) => <CustomRow need={n} id={index} handleChange={this.handleChange} addAction={this.addNeed}/>)
-                                }
+                                <CustomRow need={this.fields} id={0} handleChange={this.handleChange} addAction={this.addNeed}/>
                             </TableBody>
                         </Table>
                     </CardContent>
-                </Card>
+
             </Collapse>
         </div>
     )

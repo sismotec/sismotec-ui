@@ -14,7 +14,7 @@ import HelpView from './Containers/Help';
 import OrdersView from './Containers/Orders';
 import MyNeedsView from './Containers/MyNeeds';
 import NewNeed from "./Containers/NewNeed";
-import NewNeedView from "./Presentational/NewNeedView";
+import NewNeedView from "./Containers/NewNeed";
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
