@@ -30,6 +30,11 @@ class Layout extends Component {
     }
   }
 
+  toLogout = () => {
+    this.props.logout();
+    this.props.navigateTo('/');
+  }
+
   render() {
     const { slot, userType, needsAuth } = this.props;
     return (
@@ -37,7 +42,7 @@ class Layout extends Component {
         <div>
           {
             userType == 'collectionCenter' && 
-            <CollectionCenter navigateTo={this.props.navigateTo} logout={this.props.logout} />}
+            <CollectionCenter navigateTo={this.props.navigateTo} logout={this.toLogout} />}
           {
             userType == 'guest' && <div>
             <Guest 
@@ -61,7 +66,7 @@ class Layout extends Component {
               registerType={'Center'}/>
             </div>
           }
-          {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo} logout={this.props.logout} />}
+          {userType == 'beneficiary' && <Beneficiary navigateTo={this.props.navigateTo} logout={this.toLogout} />}
         </div>
         {needsAuth && userType === 'guest' && <div>
           No autorizado
