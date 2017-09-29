@@ -33,7 +33,7 @@ export default class FuzzySearch extends Component {
 
     return (
       <FormControl>
-        <InputLabel htmlFor="fuzzy-input">this.props.label</InputLabel>
+        <InputLabel htmlFor="fuzzy-input">{this.props.label}</InputLabel>
         <Select
           native
           value={this.state.selectedValue}
