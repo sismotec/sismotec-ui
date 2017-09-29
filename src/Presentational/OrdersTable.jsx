@@ -52,7 +52,7 @@ export default class OrdersTable extends Component {
   render() {
     return <ReactTable
           data={this.props.data}
-          columns={this.props.type == "SENDER" ? senderCols : receiverCols}
+          columns={this.props.type === "SENDER" ? senderCols : receiverCols}
           defaultPageSize={10}
           className="-striped -highlight"
           SubComponent={row => {

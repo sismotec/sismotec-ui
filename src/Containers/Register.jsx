@@ -5,6 +5,8 @@ import { push } from 'react-router-redux';
 import LoginActions from '../Data/Redux/LoginRedux';
 import TextField from 'material-ui/TextField';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
+import Checkbox from 'material-ui/Checkbox';
+import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Button from 'material-ui/Button';
 import { compose, withProps, lifecycle } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
@@ -22,7 +24,6 @@ const MapWithAMarker = compose( withScriptjs, withGoogleMap)(props =>
       position={props.position}
       onDragEnd={props.handleDrag}
     />
-    {props.handleLoading()}
   </GoogleMap>
 );
 
@@ -66,7 +67,7 @@ const PlacesWithStandaloneSearchBox = compose(
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
-          width: `240px`,
+          width: '100%',
           height: `32px`,
           padding: `0 12px`,
           borderRadius: `3px`,
@@ -100,7 +101,6 @@ class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handlePlaces = this.handlePlaces.bind(this);
-    this.handleLoading = this.handleLoading.bind(this);
   }
 
   static propTypes = {
@@ -114,6 +114,8 @@ class Register extends Component {
     if(this.props.isAuth) {
       this.props.navigateToDashboard();
     }
+
+    this.getLocation();
   }
 
 
@@ -124,69 +126,64 @@ class Register extends Component {
     }
   }
 
-    handleChange = name => event => {
-      this.setState({
-        [name]: event.target.value,
-      });
-    };
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
 
-    handlePlaces(places) {
-      let firstPlace = places[0];
-      if (firstPlace) {
+  handlePlaces(places) {
+    let firstPlace = places[0];
+    if (firstPlace) {
+      this.setState({
+        position: { lat: firstPlace.geometry.location.lat(), lng: firstPlace.geometry.location.lng()},
+      });
+    }
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
-          position: { lat: firstPlace.geometry.location.lat(), lng: firstPlace.geometry.location.lng()},
+          position: { lat: position.coords.latitude, lng: position.coords.longitude},
         });
-      }
-    }
-
-    handleDrag(event) {
-      this.setState({
-        position: { lat: event.latLng.lat(), lng: event.latLng.lng()},
+      }, function() {
+        console.log("Error");
       });
+    } else {
+      console.log("Error");
     }
+  }
 
-    handleLoading() {
-      if(this.state.shouldGetLocation) {
-        this.setState ({
-          shouldGetLocation: false,
+  handleDrag(event) {
+    this.setState({
+      position: { lat: event.latLng.lat(), lng: event.latLng.lng()},
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.password === this.state.passwordConfirmation) {
+      var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (regex.test(this.state.email)) {
+        this.props.registerRequest({
+          nombre_organizacion : this.state.name,
+          nombre_responsable: this.state.name,
+          email: this.state.email,
+          phone: this.state.phone,
+          latitud: this.state.position.lat,
+          longitud: this.state.position.lng,
+          password: this.state.password,
+          tipo: this.props.registerType === 'Beneficiary' ? 'Beneficiario' : 'Centro de acopio',
         });
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({
-              position: { lat: position.coords.latitude, lng: position.coords.longitude},
-            });
-          }, function() {
-            console.log("Error");
-          });
-        } else {
-          console.log("Error");
-        }
       }
     }
-
-    handleSubmit(event) {
-      event.preventDefault();
-      if (this.state.password === this.state.passwordConfirmation) {
-        var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (regex.test(this.state.email)) {
-          this.props.registerRequest({
-            nombre_organizacion : this.state.name,
-            nombre_responsable: this.state.name,
-            email: this.state.email,
-            phone: this.state.phone,
-            latitud: this.state.position.lat,
-            longitud: this.state.position.lng,
-            password: this.state.password,
-            tipo: this.props.registerType === 'Beneficiary' ? 'Beneficiario' : 'Centro de acopio',
-          });
-        }
-      }
-    }
+  }
 
   render() {
     return (
       <Dialog open={this.props.open} onRequestClose={this.props.closeLogin}>
-        <DialogTitle>
+        <DialogTitle className="dialog-title">
           {this.props.registerType === 'Beneficiary' ? 'Registro de beneficiario' : 'Registro de Centro de Acopio'}
         </DialogTitle>
         <DialogContent style={{
@@ -195,6 +192,7 @@ class Register extends Component {
         }}>
           <form validate autoComplete="off">
             <TextField
+              fullWidth
               required
               id="name"
               label="Nombre"
@@ -203,28 +201,33 @@ class Register extends Component {
               margin="normal"
             />
             <br/>
-            <PlacesWithStandaloneSearchBox handlePlaces={this.handlePlaces}/>
-            <Button raised color="default"
-              onClick={()=> {
-                this.setState ({
-                  shouldGetLocation: true,
-                });
-                this.handleLoading();
-              }}>
-              Usar mi ubicación actual
-            </Button>
-            <MapWithAMarker
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW0VmPFBIrIhKCz8ELvMIqkXLH0D9s0Fg&v=3.exp&libraries=geometry,drawing,places"
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `400px` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-              handleDrag={this.handleDrag}
-              position={this.state.position}
-              handleLoading={this.handleLoading}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.shouldGetLocation}
+                  onChange={() => {
+                    if(!this.state.shouldGetLocation) this.getLocation();
+                    this.setState({ shouldGetLocation: !this.state.shouldGetLocation })
+                  }}
+                />
+              }
+              label="Usar mi ubicación actual"
             />
-            <br/>
-
+            {!this.state.shouldGetLocation && <div>
+              <PlacesWithStandaloneSearchBox handlePlaces={this.handlePlaces}/>
+              <br/>
+              <MapWithAMarker
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW0VmPFBIrIhKCz8ELvMIqkXLH0D9s0Fg&v=3.exp&libraries=geometry,drawing,places"
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `400px` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+                handleDrag={this.handleDrag}
+                position={this.state.position}
+              />
+            </div>
+            }
             <TextField
+              fullWidth
               required
               id="phone"
               label="Teléfono/celular"
@@ -234,6 +237,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="email"
               label="Correo electrónico"
@@ -243,6 +247,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="password"
               label="Contraseña"
@@ -253,6 +258,7 @@ class Register extends Component {
             />
             <br/>
             <TextField
+              fullWidth
               required
               id="passwordConfirmation"
               label="Confirmar contraseña"
@@ -262,7 +268,9 @@ class Register extends Component {
               margin="normal"
             />
             <br/>
-            <Button raised color="primary"
+            <Button raised 
+              type="submit"
+              className="dialog-button"
               onClick={this.handleSubmit}>
               Registrarme
             </Button>
