@@ -8,7 +8,7 @@
 	margin-top: 4%;
 }
 .ResourceTile > div{
-	background: #66AFBA;
+	background: #0099BC;
 	color: white;
 	padding: 20px;
 }
@@ -26,7 +26,24 @@
 	position: static;
 	display: block;
 	margin-left: 14%;
-	/*margin-top: -10px;*/
+}
+.ResourceTile.special *{
+	color: white;
+}
+.ResourceTile.special td{
+	border: 0 none;
+	font-size: 20px;
+}
+.ResourceTile.special img{
+	width: 100px;
+	height: 100px;
+}
+.ResourceTile.special h1{
+	margin: 0;
+}
+/*.ResourceTile.special .four{
+	width: 25%;
+	display: inline-block;
 }
 
-
+*/

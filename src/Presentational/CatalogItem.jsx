@@ -6,6 +6,7 @@ import Collapse from 'material-ui/transitions/Collapse';
 import Typography from 'material-ui/Typography';
 import CustomRow from "../Containers/CustomRow";
 import Table, { TableBody } from 'material-ui/Table';
+import '../Containers/NewNeed.css';
 
 import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
 
@@ -55,38 +56,13 @@ export default class CatalogItem extends Component {
 	}
 
 	render() {
+		let item = this.props.item;
 		return (
-			<GridListTile>
-				<div>
-					<div>
-						<GridListTile className="ResourceTile">
-						<Card onClick={this.handleExpandClick}>
-							<CardContent>
-								<Typography type='headline'>
-									{this.props.item.nombre}
-								</Typography>
-							</CardContent>
-						</Card>
-						</GridListTile>
-					</div>
-					<Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit>
-					<GridListTile
-								className="ResourceTile"
-								cols={5}
-							>
-						<Card>
-							<CardContent>
-								<Table>
-									<TableBody>
-										<CustomRow data={this.data} need={this.fields} id={0} handleChange={this.handleChange} addAction={this.addNeed} />
-									</TableBody>
-								</Table>
-							</CardContent>
-						</Card>
-						</GridListTile>
-					</Collapse>
-				</div>
-			</GridListTile>
+			<div>
+				<p className="resourceName">{item.nombre}</p>
+				<img className="resourceImg" src={process.env.PUBLIC_URL + '/icons/airplane.svg'} alt=""/>
+				<p className="resourceCategory">{item.category}</p>
+			</div>
 		)
 	}
 }

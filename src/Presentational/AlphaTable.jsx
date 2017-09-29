@@ -44,22 +44,22 @@ export default class AlphaTable extends React.Component {
 	parseNeeds() {
 		let needs = dummy[0].needs;
 		return needs.map(d => [
-		        {
-		          type: "Label",
-		          value: d.nombre,
-		          key: "nombre"
-		        },
-		        {
-		          type: "Label",
-		          value: d.cantidad,
-		          key: "cantidad"
-		        },
-		        {
-		          type: "Label",
-		          value: d.unidad,
-		          options: [d.unidad],
-		          key: "unidad"
-		        }
+				{
+				  type: "Label",
+				  value: d.nombre,
+				  key: "nombre"
+				},
+				{
+				  type: "Label",
+				  value: d.cantidad,
+				  key: "cantidad"
+				},
+				{
+				  type: "Label",
+				  value: d.unidad,
+				  options: [d.unidad],
+				  key: "unidad"
+				}
 		])
 	}
 	getTrigger() {

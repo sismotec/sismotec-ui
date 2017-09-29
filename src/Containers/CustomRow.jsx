@@ -28,7 +28,9 @@ export default class CustomRow extends Component {
           return <FuzzySearch onChange={(value) => this.handleChange(value, item.key)}
                         value={item.value}/>
       case 'Label':
-        return <Label value={item.value}/>
+        return <Label value={item.value}/>;
+      case 'Image':
+        return <img src={item.src} />
       case 'NumberField':
         return <NumberField onChange={(value) => this.handleChange(value, item.key)}
                         value={item.value}/>
