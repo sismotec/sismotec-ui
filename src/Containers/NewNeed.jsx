@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NewNeedView from '../Presentational/NewNeedView';
 import { GridList, GridListTile } from 'material-ui/GridList';
+import Grid from 'material-ui/Grid';
 import ResourcesActions from '../Data/Redux/ResourcesRedux';
 
 
@@ -47,7 +48,7 @@ class NewNeed extends Component {
       console.log(this.props);
     return (
       <div>
-        <GridList cols={3}>
+        <GridList>
             {this.props.resources.map(item => <NewNeedView
                 item = {item}
                 handleExpandClick = {this.handleExpandClick}/>)}

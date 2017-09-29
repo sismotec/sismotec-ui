@@ -57,22 +57,27 @@ export default class NewNeedView extends Component {
     render() {
         return (
             <div>
-                <Card onClick={this.handleExpandClick}>
-                    <CardContent>
-                        <Typography type='headline'>
-                            {this.props.item.nombre}
-                        </Typography>
-                    </CardContent>
-                </Card>
+                <div>
+                    <Card onClick={this.handleExpandClick}>
+                        <CardContent>
+                            <Typography type='headline'>
+                                {this.props.item.nombre}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </div>
+                <br/>
                 {/*<Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit  >*/}
                 <div>
-                    <CardContent>
-                        <Table >
-                            <TableBody>
-                                <CustomRow data={this.data} need={this.fields} id={0} handleChange={this.handleChange} addAction={this.addNeed} />
-                            </TableBody>
-                        </Table>
-                    </CardContent>
+                    <Card>
+                        <CardContent>
+                            <Table >
+                                <TableBody>
+                                    <CustomRow data={this.data} need={this.fields} id={0} handleChange={this.handleChange} addAction={this.addNeed} />
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
                 </div>
                 {/*</Collapse>*/}
             </div>
