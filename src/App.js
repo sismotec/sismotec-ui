@@ -13,17 +13,16 @@ import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
 import OrdersView from './Containers/Orders';
 import MyNeedsView from './Containers/MyNeeds';
-import NewNeed from "./Containers/NewNeed";
 import NewNeedView from "./Containers/NewNeed";
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
 const Register = ({ match }) => <Layout slot={<RegisterView match={match} />} />;
 const Help = () => <Layout slot={<HelpView />} />;
-const NewNeeds = () => <Layout slot={<NewNeedView/>}/>
 const Orders = () => <Layout slot={<OrdersView />}/>;
+const NewNeeds = () => <Layout slot={<NewNeedView/>}/>
 const MyNeeds = () => <Layout slot={<MyNeedsView />} />;
-const INeed = () => <Layout slot={<NewNeedView/>} needsAuth />;
+const IHave = () => <Layout slot={<HomeView />} />;
 
 // Create a browser history, and it's middleware
 const history = createHistory();
@@ -56,8 +55,8 @@ const App = _ => (
         <Route path="/ayuda" component={Help} />
         <Route path="/donaciones" component={Orders}  />
         <Route path="/misNecesidades" component={MyNeeds} />
-        <Route path="/newNeed" component={NewNeeds}/>
-        <Route path="/necesito" component={INeed}/>
+        <Route path="/necesito" component={NewNeeds}/>
+        <Route path="/tengo" component={IHave}/>
         {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
         <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}

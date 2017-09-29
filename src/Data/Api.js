@@ -24,10 +24,7 @@ const getOneNeeds = data => {
   }
   return api.get('necesidades');
 }
-const createNeed = ({ id, recursos }) => api.post(`beneficiarios/necesidades`, {
-  id_beneficiarios: id,
-  recursos,
-})
+const createNeed = data => api.post(`beneficiarios/necesidades`, {...data})
 const updateNeed = (id, data) => api.put(`beneficiarios/necesidades`, {
   id_beneficiarios: id,
   recursos: data,
