@@ -8,6 +8,7 @@ form, .dialog-title{
 	padding-left: 2em !important;
 	padding-right: 2em !important;
 	padding-bottom: 2em !important;
+  text-align: center;
 }
 
 .dialog-title h2{
@@ -52,13 +53,37 @@ form, .dialog-title{
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 5px;
-
+  color: #fff !important;
 }
 
 .p-caption{
 	color: #424242 !important;
 	margin: 2px;
 	font-size: 14px;
+}
+
+.p-subcaption{
+	color: #424242 !important;
+	margin: 2px;
+	font-size: 12px;
+}
+
+.table-div{
+	padding: 3em 2em 3em 2em;
+}
+
+.table-button{
+	background-color: #f4b624 !important;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	text-transform: none !important;
+	float: right;
+}
+
+.delete-button{
+	border-radius: 100%;
+	background-color: #F22613;
+	color: white;
 }
 
 .needCard {

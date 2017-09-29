@@ -11,7 +11,7 @@ import Layout from './Containers/Layout';
 import HomeView from './Containers/Home';
 import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
-import OrdersView from './Containers/Orders';
+//import OrdersView from './Containers/Orders';
 import MyNeedsView from './Containers/MyNeeds';
 
 // Build layout components for router
