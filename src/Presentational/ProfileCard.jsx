@@ -32,7 +32,7 @@ export default class ProfileCard extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button className="needCard-button" onClick={() => this.props.openProfileDetails(profile.id_propietario)}>Ver detalles</Button>
+          <Button raised color={"primary"} className="needCard-button" onClick={() => this.props.openProfileDetails(profile.id_propietario)}>Ver detalles</Button>
         </CardActions>
       </Card>)
       /*<div className="needCard"> 
