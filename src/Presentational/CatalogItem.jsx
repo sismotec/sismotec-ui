@@ -59,6 +59,7 @@ export default class CatalogItem extends Component {
 			<GridListTile>
 				<div>
 					<div>
+						<GridListTile className="ResourceTile">
 						<Card onClick={this.handleExpandClick}>
 							<CardContent>
 								<Typography type='headline'>
@@ -66,8 +67,13 @@ export default class CatalogItem extends Component {
 								</Typography>
 							</CardContent>
 						</Card>
+						</GridListTile>
 					</div>
 					<Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit>
+					<GridListTile
+								className="ResourceTile"
+								cols={5}
+							>
 						<Card>
 							<CardContent>
 								<Table>
@@ -77,6 +83,7 @@ export default class CatalogItem extends Component {
 								</Table>
 							</CardContent>
 						</Card>
+						</GridListTile>
 					</Collapse>
 				</div>
 			</GridListTile>

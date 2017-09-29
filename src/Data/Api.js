@@ -24,17 +24,11 @@ const getOneNeeds = data => {
   }
   return api.get('necesidades');
 }
-const createNeed = ({ id, recursos }) => api.post(`beneficiarios/necesidades`, {
-  id_beneficiarios: id,
-  recursos,
-})
-const updateNeed = (id, data) => api.put(`beneficiarios/necesidades`, {
-  id_beneficiarios: id,
-  recursos: data,
-})
+const createNeed = data => api.post(`beneficiarios/necesidades/`, {...data})
+const updateNeed = (id, data) => api.put(`beneficiarios/necesidades/`, {...data})
 
 const getOneOrders = id => api.get(`centros-acopio/ordenes-envio/${id}`)
-const createOrder = (id, data) => api.post(`centros-acopio/ordenes-envio`, data)
+const createOrder = data => api.post(`centros-acopio/ordenes-envio/`, {...data})
 const removeOrder = id => api.delete(`centros-acopio/ordenes-envio/`, {
   id_orden: id,
 })
