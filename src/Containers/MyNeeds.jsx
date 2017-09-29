@@ -28,55 +28,55 @@ class MyNeeds extends Component {
     //this.props.deleteNeed(this.data[index].id);
   }
 
-  componentWillMount() {
-    // const { userId, getNeeds } = this.props
-    // getNeeds(userId)
-    this.needs = [
-      {
-        id: 1,
-        nombre: "agua",
-        cantidad: 3,
-        unidad: "litros",
-      },
-      {
-        id: 2,
-        nombre: "atun",
-        cantidad: 100,
-        unidad: "gramos",
-      },
-      {
-        id: 3,
-        nombre: "cobijas",
-        cantidad: 3,
-        unidad: "cobijas",
-      }
-    ];
-
-    this.data = this.needs;
-
-    this.fields = this.data.map(d => [
+    componentWillMount() {
+      // const { userId, getNeeds } = this.props
+      // getNeeds(userId)
+      this.needs = [
         {
-          type: "Label",
-          value: d.nombre,
-          key: "nombre"
+          id: 1,
+          nombre: "agua",
+          cantidad: 3,
+          unidad: "litros",
         },
         {
-          type: "NumberField",
-          value: d.cantidad,
-          key: "cantidad"
+          id: 2,
+          nombre: "atun",
+          cantidad: 100,
+          unidad: "gramos",
         },
         {
-          type: "FuzzySearch",
-          value: d.unidad,
-          options: [d.unidad],
-          key: "unidad"
-        },
-        {
-          type: "Delete",
+          id: 3,
+          nombre: "cobijas",
+          cantidad: 3,
+          unidad: "cobijas",
         }
-      ]
-    )
-  }
+      ];
+
+      this.data = this.needs;
+
+      this.fields = this.data.map(d => [
+          {
+            type: "Label",
+            value: d.nombre,
+            key: "nombre"
+          },
+          {
+            type: "NumberField",
+            value: d.cantidad,
+            key: "cantidad"
+          },
+          {
+            type: "FuzzySearch",
+            value: d.unidad,
+            options: [d.unidad],
+            key: "unidad"
+          },
+          {
+            type: "Delete",
+          }
+        ]
+      )
+    }
 
   // componentWillReceiveProps(nextProps, oldProps) {
   //   if(nextProps.length && (!oldProps || oldProps.length )) {

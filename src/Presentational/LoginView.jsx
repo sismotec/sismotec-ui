@@ -21,7 +21,6 @@ export default class LoginView extends Component {
                     className="dialog-textfield"
                     name='username'
                     ref='username'
-                    type='text'
                     label='Correo'
                     id='username'
                     autoCorrect='off'

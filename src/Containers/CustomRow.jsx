@@ -6,6 +6,7 @@ import FuzzySearch from '../Presentational/CustomRow/FuzzySearch';
 import Label from '../Presentational/CustomRow/Label';
 import NumberField from '../Presentational/CustomRow/NumberField';
 import Delete from '../Presentational/CustomRow/Delete';
+import Add from "../Presentational/CustomRow/Add";
 
 
 export default class CustomRow extends Component {
@@ -34,6 +35,8 @@ export default class CustomRow extends Component {
                         value={item.value}/>
       case 'Delete':
           return <Delete onClick={() => this.props.deleteAction(this.props.id)}/>
+      case 'Add':
+          return <Add onClick={() => this.props.addAction(this.props.id)}/>
       default:
         break;
     }

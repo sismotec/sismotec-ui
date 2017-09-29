@@ -14,11 +14,14 @@ import RegisterView from './Containers/Register';
 import HelpView from './Containers/Help';
 import OrdersView from './Containers/Orders';
 import MyNeedsView from './Containers/MyNeeds';
+import NewNeed from "./Containers/NewNeed";
+import NewNeedView from "./Presentational/NewNeedView";
 
 // Build layout components for router
 const Home = () => <Layout slot={<HomeView />} />;
 const Register = ({ match }) => <Layout slot={<RegisterView match={match} />} />;
 const Help = () => <Layout slot={<HelpView />} />;
+const NewNeeds = () => <Layout slot={<NewNeedView/>}/>
 const Orders = () => <Layout slot={<OrdersView />} needsAuth />;
 const MyNeeds = () => <Layout slot={<MyNeedsView />} />;
 
@@ -55,6 +58,7 @@ const App = _ => (
         <Route path="/ayuda" component={Help} />
         <Route path="/donaciones" component={Orders} needsAuth />
         <Route path="/misNecesidades" component={MyNeeds} />
+        <Route path="/newNeed" component={NewNeeds}/>
         {/* <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/agregar" component={NeedCreate} />
         <Route exact path="/dashboard/agregarOrden" component={OrderCreate} /> */}

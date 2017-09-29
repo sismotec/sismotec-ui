@@ -76,7 +76,7 @@ class Login extends Component {
   
   render() {
     return (
-        <LoginView 
+        <LoginView
             handleChange={this.handleChange} 
             handleSubmit={this.handleSubmit} 
             handleAcopio={this.handleAcopio} 
