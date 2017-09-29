@@ -239,7 +239,7 @@ class Register extends Component {
             </div>
             }
             <br/>
-            <div><InputLabel className="MuiInput-input-113" htmlFor="phone-helper">Tel&aceute;fono *</InputLabel></div>
+            <div><InputLabel className="MuiInput-input-113" htmlFor="phone-helper">Tel&eacute;fono *</InputLabel></div>
             <Input
               required
               id="phone"

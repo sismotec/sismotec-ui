@@ -162,7 +162,7 @@ class MyNeeds extends Component {
   }
 }
 
-const confirmationDialog() {
+const confirmationDialog = () => {
   return (
     <Dialog
       ignoreBackdropClick
