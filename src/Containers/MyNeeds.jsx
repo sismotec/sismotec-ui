@@ -61,64 +61,64 @@ class MyNeeds extends Component {
     this.data = this.needs;
 
     this.fields = this.data.map(d => [
+      {
+        id: 1,
+        nombre: "agua",
+        cantidad: 3,
+        unidad: "litros",
+      },
+      {
+        id: 2,
+        nombre: "atun",
+        cantidad: 100,
+        unidad: "gramos",
+      },
+      {
+        id: 3,
+        nombre: "cobijas",
+        cantidad: 3,
+        unidad: "cobijas",
+      },
+      {
+        type: "Delete",
+      }
+    ]);
+
+    this.data = this.needs;
+
+    this.fields = this.data.map(d => [
         {
-          id: 1,
-          nombre: "agua",
-          cantidad: 3,
-          unidad: "litros",
+          type: "Label",
+          value: d.nombre,
+          key: "nombre"
         },
         {
-          id: 2,
-          nombre: "atun",
-          cantidad: 100,
-          unidad: "gramos",
+          type: "NumberField",
+          value: d.cantidad,
+          key: "cantidad"
         },
         {
-          id: 3,
-          nombre: "cobijas",
-          cantidad: 3,
-          unidad: "cobijas",
+          type: "FuzzySearch",
+          value: d.unidad,
+          options: [d.unidad],
+          key: "unidad"
+        },
+        {
+          type: "Button",
+          label: 'Mark complete',
+          onClick: 'markComplete',
+          key: "btn",
+          props: {
+            raised: true,
+            color: "primary"
+          }
         },
         {
           type: "Delete",
         }
-      ];
-
-      this.data = this.needs;
-
-      this.fields = this.data.map(d => [
-          {
-            type: "Label",
-            value: d.nombre,
-            key: "nombre"
-          },
-          {
-            type: "NumberField",
-            value: d.cantidad,
-            key: "cantidad"
-          },
-          {
-            type: "FuzzySearch",
-            value: d.unidad,
-            options: [d.unidad],
-            key: "unidad"
-          },
-          {
-            type: "Button",
-            label: 'Mark complete',
-            onClick: 'markComplete',
-            key: "btn",
-            props: {
-              raised: true,
-              color: "primary"
-            }
-          },
-          {
-            type: "Delete",
-          }
-        ]
-      )
-    }
+      ]
+    )
+  }
 
   // componentWillReceiveProps(nextProps, oldProps) {
   //   if(nextProps.length && (!oldProps || oldProps.length )) {
