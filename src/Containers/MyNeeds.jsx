@@ -8,7 +8,18 @@ import CustomRow from './CustomRow'
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
+import Way from "../Presentational/Way";
+import ReceivedTable from "../Presentational/ReceivedTable";
 import '../index.css';
+import SwipeableViews from 'react-swipeable-views';
+
+function TabContainer(props) {
+  return <div style={{ padding: 20 }}>{props.children}</div>;
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 class MyNeeds extends Component {
   constructor(props) {
@@ -167,29 +178,54 @@ class MyNeeds extends Component {
   handleDeleteClick() {
     this.setState({open: true});
   }
+
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  handleChangeIndex = index => {
+    this.setState({ value: index });
+  };
   
+
   render() {
     let ConfirmationDialog = this.ConfirmationDialog;
     return(
     <div className="container MyNeeds">
       <h1>Mis necesidades</h1>
       <div className="tabcontainer" style={{marginBottom:40}}>
-        <Tabs value={0} indicatorColor="primary" textColor="primary" fullWidth>
+        <Tabs
+            value={this.state.value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
+          >
           <Tab label="Activas"></Tab>
           <Tab label="En camino"></Tab>
           <Tab label="Recibidas"></Tab>
         </Tabs>
         <hr/>
       </div>
-      <Table>
-        <TableBody>
-          {
-            this.fields.map((n, index) => 
-              <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.handleDeleteClick} markComplete={this.markComplete}/>
-            )
-          }
-        </TableBody>
-      </Table>
+      <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
+          <TabContainer>
+            <Table>
+              <TableBody>
+                {
+                  this.fields.map((n, index) => 
+                    <CustomRow need={n} key={index} id={index} handleChange={this.handleChange} deleteAction={this.deleteNeed}/>
+                  )
+                }
+              </TableBody>
+            </Table>
+          </TabContainer>
+          <TabContainer><Way /></TabContainer>
+          <TabContainer><ReceivedTable /></TabContainer>
+        </SwipeableViews>
       <Button 
         className="table-button"
         raised
