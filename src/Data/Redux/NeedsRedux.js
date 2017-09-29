@@ -6,6 +6,7 @@ export const NeedsRedux = createActions({}, {
   prefix: 'NEEDS_',
   defaultActions: {
     get: true,
+    getOne: true,
     create: true,
     update: true,
     reset: true,
@@ -21,6 +22,7 @@ export default Creators
 
 export const INITIAL_STATE = createState({}, {
   get: true,
+  getOne: true,
   create: true,
   update: true,
   remove: true,
@@ -33,6 +35,7 @@ export const INITIAL_STATE = createState({}, {
 export const reducer = createReducer(INITIAL_STATE, {}, {
   defaultActions: {
     get: true,
+    getOne: true,
     create: true,
     update: true,
     remove: true,
