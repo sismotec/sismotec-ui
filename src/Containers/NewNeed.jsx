@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CatalogItem from '../Presentational/CatalogItem';
 import { GridList, GridListTile } from 'material-ui/GridList';
 import Grid from 'material-ui/Grid';
-import Search from '../Presentational/CustomRow/FuzzySearch';
+import Search from '../Presentational/CustomRow/FuzzySearch'; //Fuzzy search
 import ResourcesActions from '../Data/Redux/ResourcesRedux';
 import NeedsActions from '../Data/Redux/NeedsRedux';
 import '../index.css';
